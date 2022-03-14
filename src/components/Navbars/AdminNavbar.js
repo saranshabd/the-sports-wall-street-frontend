@@ -120,7 +120,7 @@ export default function AdminNavbar(props) {
           md: "row",
         }}
         alignItems={{ xl: "center" }}>
-        <Box mb={{ sm: "8px", md: "0px" }}>
+        {/* <Box mb={{ sm: "8px", md: "0px" }}>
           <Breadcrumb>
             <BreadcrumbItem color='#A0AEC0'>
               <BreadcrumbLink href='#' color='#A0AEC0'>
@@ -134,7 +134,7 @@ export default function AdminNavbar(props) {
               </BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
-          {/* Here we create navbar brand, based on route name */}
+          Here we create navbar brand, based on route name
           <Link
             color={mainText}
             href='#'
@@ -152,7 +152,7 @@ export default function AdminNavbar(props) {
             }}>
             {brandText}
           </Link>
-        </Box>
+        </Box> */}
         <Box ms='auto' w={{ sm: "100%", md: "unset" }}>
           <AdminNavbarLinks
             onOpen={props.onOpen}

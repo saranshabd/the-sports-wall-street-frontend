@@ -47,9 +47,9 @@ import { AiFillCheckCircle } from "react-icons/ai";
 
 function Tables() {
   return (
-    <Flex direction='column' pt={{ base: "120px", md: "75px" }}>
+    <Flex direction='column' pt={{ base: "20px", md: "0px" }}>
       {/* Authors Table */}
-      <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
+      {/* <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
         <CardHeader p='6px 0px 22px 0px'>
           <Text fontSize='lg' color='#fff' fontWeight='bold'>
             Authors Table
@@ -105,15 +105,15 @@ function Tables() {
             </Tbody>
           </Table>
         </CardBody>
-      </Card>
+      </Card> */}
       {/* Projects Table */}
       <Card my='22px' overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
         <CardHeader p='6px 0px 22px 0px'>
           <Flex direction='column'>
             <Text fontSize='lg' color='#fff' fontWeight='bold' mb='.5rem'>
-              Projects Table
+              League Table
             </Text>
-            <Flex align='center'>
+            {/* <Flex align='center'>
               <Icon
                 as={AiFillCheckCircle}
                 color='green.500'
@@ -127,7 +127,7 @@ function Tables() {
                 </Text>{" "}
                 this month
               </Text>
-            </Flex>
+            </Flex> */}
           </Flex>
         </CardHeader>
         <CardBody>
@@ -139,27 +139,39 @@ function Tables() {
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Companies
+                  Clubs
                 </Th>
                 <Th
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Budget
+                  Avg. Performance
                 </Th>
                 <Th
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Status
+                  Stock Price
                 </Th>
                 <Th
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Completion
+                  Latest Results
                 </Th>
-                <Th borderBottomColor='#56577A'></Th>
+                <Th
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
+                  Upcoming Fixtures
+                </Th>
+                <Th
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
+                  Points
+                </Th>
+                {/* <Th borderBottomColor='#56577A'></Th> */}
               </Tr>
             </Thead>
             <Tbody>

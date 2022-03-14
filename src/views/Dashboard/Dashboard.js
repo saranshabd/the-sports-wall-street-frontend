@@ -42,7 +42,7 @@ import {
 
 // Styles for the circular progressbar
 import "react-circular-progressbar/dist/styles.css";
-import medusa from "assets/img/cardimgfree.png";
+import medusa from "assets/img/background-body-admin.png";
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
@@ -82,8 +82,8 @@ import { dashboardTableData, timelineData } from "variables/general";
 
 export default function Dashboard() {
   return (
-    <Flex flexDirection='column' pt={{ base: "120px", md: "75px" }}>
-      <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing='24px'>
+    <Flex flexDirection='column' pt={{ base: "40px", md: "0px" }}>
+      <SimpleGrid columns={{ sm: 1, md: 2, xl: 2 }} spacing='24px'>
         {/* MiniStatistics Card */}
         <Card>
           <CardBody>
@@ -94,11 +94,11 @@ export default function Dashboard() {
                   color='gray.400'
                   fontWeight='bold'
                   pb='2px'>
-                  Today's Money
+                  Net worth
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize='lg' color='#fff'>
-                    $53,000
+                    €53,000
                   </StatNumber>
                   <StatHelpText
                     alignSelf='flex-end'
@@ -113,7 +113,7 @@ export default function Dashboard() {
                 </Flex>
               </Stat>
               <IconBox as='box' h={"45px"} w={"45px"} bg='brand.200'>
-                <WalletIcon h={"24px"} w={"24px"} color='#fff' />
+                <GlobeIcon h={"24px"} w={"24px"} color='#fff' />
               </IconBox>
             </Flex>
           </CardBody>
@@ -128,13 +128,13 @@ export default function Dashboard() {
                   color='gray.400'
                   fontWeight='bold'
                   pb='2px'>
-                  Today's Users
+                  Cash
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize='lg' color='#fff'>
-                    2,300
+                    €2,300
                   </StatNumber>
-                  <StatHelpText
+                  {/* <StatHelpText
                     alignSelf='flex-end'
                     justifySelf='flex-end'
                     m='0px'
@@ -143,17 +143,17 @@ export default function Dashboard() {
                     ps='3px'
                     fontSize='md'>
                     +5%
-                  </StatHelpText>
+                  </StatHelpText> */}
                 </Flex>
               </Stat>
               <IconBox as='box' h={"45px"} w={"45px"} bg='brand.200'>
-                <GlobeIcon h={"24px"} w={"24px"} color='#fff' />
+                <WalletIcon h={"24px"} w={"24px"} color='#fff' />
               </IconBox>
             </Flex>
           </CardBody>
         </Card>
         {/* MiniStatistics Card */}
-        <Card>
+        {/* <Card>
           <CardBody>
             <Flex flexDirection='row' align='center' justify='center' w='100%'>
               <Stat>
@@ -186,9 +186,9 @@ export default function Dashboard() {
               </IconBox>
             </Flex>
           </CardBody>
-        </Card>
+        </Card> */}
         {/* MiniStatistics Card */}
-        <Card>
+        {/* <Card>
           <CardBody>
             <Flex flexDirection='row' align='center' justify='center' w='100%'>
               <Stat me='auto'>
@@ -220,7 +220,7 @@ export default function Dashboard() {
               </IconBox>
             </Flex>
           </CardBody>
-        </Card>
+        </Card> */}
       </SimpleGrid>
       <Grid
         templateColumns={{ sm: "1fr", md: "1fr 1fr", "2xl": "2fr 1.2fr 1.5fr" }}
@@ -245,17 +245,16 @@ export default function Dashboard() {
                   Welcome back,
                 </Text>
                 <Text fontSize='28px' color='#fff' fontWeight='bold' mb='18px'>
-                  Mark Johnson
+                  Harsh Vardhan
                 </Text>
                 <Text
                   fontSize='md'
                   color='gray.400'
                   fontWeight='normal'
                   mb='auto'>
-                  Glad to see you again! <br />
-                  Ask me anything.
+                  Glad to see you again!
                 </Text>
-                <Spacer />
+                {/* <Spacer />
                 <Flex align='center'>
                   <Button
                     p='0px'
@@ -285,12 +284,12 @@ export default function Dashboard() {
                       _hover={{ transform: "translateX(20%)" }}
                     />
                   </Button>
-                </Flex>
+                </Flex> */}
               </Flex>
             </Flex>
           </CardBody>
         </Card>
-        {/* Satisfaction Rate */}
+        {/* Satisfaction Rate
         <Card gridArea={{ md: "2 / 1 / 3 / 2", "2xl": "auto" }}>
           <CardHeader mb='24px'>
             <Flex direction='column'>
@@ -355,9 +354,9 @@ export default function Dashboard() {
               </Text>
             </Stack>
           </Flex>
-        </Card>
+        </Card> */}
         {/* Referral Tracking */}
-        <Card gridArea={{ md: "2 / 2 / 3 / 3", "2xl": "auto" }}>
+        {/* <Card gridArea={{ md: "2 / 2 / 3 / 3", "2xl": "auto" }}>
           <Flex direction='column'>
             <Flex justify='space-between' align='center' mb='40px'>
               <Text color='#fff' fontSize='lg' fontWeight='bold'>
@@ -445,14 +444,14 @@ export default function Dashboard() {
               </Box>
             </Flex>
           </Flex>
-        </Card>
+        </Card> */}
       </Grid>
-      <Grid
+      {/* <Grid
         templateColumns={{ sm: "1fr", lg: "1.7fr 1.3fr" }}
         maxW={{ sm: "100%", md: "100%" }}
         gap='24px'
         mb='24px'>
-        {/* Sales Overview */}
+        Sales Overview
         <Card p='28px 0px 0px 0px'>
           <CardHeader mb='20px' ps='22px'>
             <Flex direction='column' alignSelf='flex-start'>
@@ -474,7 +473,7 @@ export default function Dashboard() {
             />
           </Box>
         </Card>
-        {/* Active Users */}
+        Active Users
         <Card p='16px'>
           <CardBody>
             <Flex direction='column' w='100%'>
@@ -631,7 +630,7 @@ export default function Dashboard() {
             </Flex>
           </CardBody>
         </Card>
-      </Grid>
+      </Grid> */}
       <Grid
         templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "2fr 1fr" }}
         gap='24px'>
@@ -640,9 +639,9 @@ export default function Dashboard() {
           <CardHeader p='12px 0px 28px 0px'>
             <Flex direction='column'>
               <Text fontSize='lg' color='#fff' fontWeight='bold' pb='8px'>
-                Projects
+                League Table
               </Text>
-              <Flex align='center'>
+              {/* <Flex align='center'>
                 <Icon
                   as={IoCheckmarkDoneCircleSharp}
                   color='teal.300'
@@ -656,7 +655,7 @@ export default function Dashboard() {
                   </Text>{" "}
                   this month.
                 </Text>
-              </Flex>
+              </Flex> */}
             </Flex>
           </CardHeader>
           <Table variant='simple' color='#fff'>
@@ -667,25 +666,25 @@ export default function Dashboard() {
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Companies
+                  Clubs
                 </Th>
                 <Th
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Members
+                  Avg. Performance
                 </Th>
                 <Th
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Budget
+                  Stock Price
                 </Th>
                 <Th
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Completion
+                  Points
                 </Th>
               </Tr>
             </Thead>
@@ -710,9 +709,9 @@ export default function Dashboard() {
           <CardHeader mb='32px'>
             <Flex direction='column'>
               <Text fontSize='lg' color='#fff' fontWeight='bold' mb='6px'>
-                Orders overview
+                Upcoming Fixtures
               </Text>
-              <Flex align='center'>
+              {/* <Flex align='center'>
                 <Icon
                   as={AiFillCheckCircle}
                   color='green.500'
@@ -726,7 +725,7 @@ export default function Dashboard() {
                   </Text>{" "}
                   this month
                 </Text>
-              </Flex>
+              </Flex> */}
             </Flex>
           </CardHeader>
           <CardBody>
