@@ -28,18 +28,31 @@ import {
   Th,
   Thead,
   Tr,
+  Box,
+  Grid,
+  Button,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 
 // Custom components
 import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
+import LineChart from "components/Charts/LineChart";
 
 // Table Components
 import TablesProjectRow from "components/Tables/TablesProjectRow";
 import TablesTableRow from "components/Tables/TablesTableRow";
 
 // Data
+import {
+  lineChartDataDashboard,
+  lineChartOptionsDashboard,
+} from "variables/charts";
 import { tablesProjectData, tablesTableData } from "variables/general";
 
 // Icons
@@ -47,7 +60,106 @@ import { AiFillCheckCircle } from "react-icons/ai";
 
 function Tables() {
   return (
-    <Flex direction='column' pt={{ base: "20px", md: "0px" }}>
+    <Flex direction='column' pt={{ base: "40px", md: "0px" }}>
+      <Card>
+        <CardHeader py='12px'>
+          <Text fontSize='lg' color='#fff' fontWeight='bold'>
+            Manchester City
+          </Text>
+        </CardHeader>
+        <CardBody pt='12px'>
+          <Flex direction='column' w='100%'>
+            <Grid templateColumns={{ sm: '1fr 1fr', md: '1fr 1fr 1fr 1fr' }}>
+              <Flex
+                justify='space-between'
+                p='22px'
+                mb='18px'
+                bg='linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)'
+                borderRadius='18px'>
+                <Flex direction='column'>
+                  <Text color='#E9EDF7' fontSize='12px'>
+                    Points
+                  </Text>
+                  <Text color='#fff' fontWeight='bold' fontSize='24px'>
+                    70
+                  </Text>
+                </Flex>
+              </Flex>
+              <Flex
+                justify='space-between'
+                p='22px'
+                mb='18px'
+                bg='linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)'
+                borderRadius='18px'>
+                <Flex direction='column'>
+                  <Text color='#E9EDF7' fontSize='12px'>
+                    Games Played
+                  </Text>
+                  <Text color='#fff' fontWeight='bold' fontSize='24px'>
+                    29
+                  </Text>
+                </Flex>
+              </Flex>
+              <Flex
+                justify='space-between'
+                p='22px'
+                mb='18px'
+                bg='linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)'
+                borderRadius='18px'>
+                <Flex direction='column'>
+                  <Text color='#E9EDF7' fontSize='12px'>
+                    Standing
+                  </Text>
+                  <Text color='#fff' fontWeight='bold' fontSize='24px'>
+                    1
+                  </Text>
+                </Flex>
+              </Flex>
+              <Flex
+                justify='space-between'
+                p='22px'
+                mb='18px'
+                bg='linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)'
+                borderRadius='18px'>
+                <Flex direction='column'>
+                  <Text color='#E9EDF7' fontSize='12px'>
+                    Goal Difference
+                  </Text>
+                  <Text color='#fff' fontWeight='bold' fontSize='24px'>
+                    30
+                  </Text>
+                </Flex>
+              </Flex>
+            </Grid>
+            <Box w='100%' minH={{ sm: "300px" }}>
+              <LineChart
+                lineChartData={lineChartDataDashboard}
+                lineChartOptions={lineChartOptionsDashboard}
+              />
+            </Box>
+            <Flex direction='column' py='12px'>
+              <Flex align='center' gap='12px'>
+                <Text color='#E9EDF7' fontSize='sm' fontWeight='bold'>
+                  Buy
+                </Text>
+                <NumberInput maxW='100px' defaultValue={15} min={1} max={20} color='white'>
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+                <Text color='#E9EDF7' fontSize='sm' fontWeight='bold'>
+                  at €70 per stock.
+                </Text>
+              </Flex>
+              <Button my='1rem' borderRadius="12px" colorScheme="blue">
+                Buy
+              </Button>
+            </Flex>
+          </Flex>
+        </CardBody>
+      </Card>
       {/* Authors Table */}
       {/* <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
         <CardHeader p='6px 0px 22px 0px'>
