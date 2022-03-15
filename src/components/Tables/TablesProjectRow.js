@@ -73,11 +73,11 @@ function DashboardTableRow(props) {
           />
         </Flex>
       </Td>
-      {/* <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
+      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
         <Button p='0px' bg='transparent' _hover='none' _active='none'>
           <Icon as={FaEllipsisV} color='gray.400' cursor='pointer' />
         </Button>
-      </Td> */}
+      </Td>
     </Tr>
   );
 }
