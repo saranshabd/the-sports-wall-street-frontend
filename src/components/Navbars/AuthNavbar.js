@@ -75,7 +75,8 @@ export default function AuthNavbar(props) {
       alignItems='center'
       color={mainText}>
       <Box
-        bg='linear-gradient(97.89deg, #FFFFFF 70.67%, rgba(117, 122, 140, 0) 108.55%)'
+        // bg='linear-gradient(97.89deg, #FFFFFF 70.67%, rgba(117, 122, 140, 0) 108.55%)'
+        bg='white'
         bgClip='text'>
         <Text fontSize='sm' letterSpacing='3px' mt='3px' color='transparent'>
           {logoText}
@@ -165,7 +166,7 @@ export default function AuthNavbar(props) {
       alignItems='center'>
       <Flex w='100%' justifyContent={{ sm: "start", lg: "space-between" }}>
         {brand}
-        <Box
+        {/* <Box
           ms={{ base: "auto", lg: "0px" }}
           display={{ base: "flex", lg: "none" }}>
           <SidebarResponsive
@@ -175,8 +176,8 @@ export default function AuthNavbar(props) {
             routes={routes}
             {...rest}
           />
-        </Box>
-        {linksAuth}
+        </Box> */}
+        {/* {linksAuth}
         <Link href='https://creative-tim.com/product/vision-ui-dashboard-chakra'>
           <Button
             fontSize='xs'
@@ -189,7 +190,7 @@ export default function AuthNavbar(props) {
             }}>
             Free Download
           </Button>
-        </Link>
+        </Link> */}
       </Flex>
     </Flex>
   );
