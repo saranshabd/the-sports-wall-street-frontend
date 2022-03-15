@@ -69,7 +69,7 @@ function SignIn() {
             mt={{ base: "50px", md: "150px", lg: "160px", xl: "245px" }}
             mb={{ base: "60px", lg: "95px" }}>
             <Heading color={titleColor} fontSize='32px' mb='10px'>
-              Nice to see you!
+              Ready to trade?
             </Heading>
             <Text
               mb='36px'
@@ -77,9 +77,9 @@ function SignIn() {
               color={textColor}
               fontWeight='bold'
               fontSize='14px'>
-              Enter your email and password to sign in
+              Use virtual currency like a sports pro trader
             </Text>
-            <FormControl>
+            {/* <FormControl>
               <FormLabel
                 ms='4px'
                 fontSize='sm'
@@ -130,8 +130,8 @@ function SignIn() {
                   placeholder='Your password'
                 />
               </GradientBorder>
-            </FormControl>
-            <FormControl display='flex' alignItems='center'>
+            </FormControl> */}
+            {/* <FormControl display='flex' alignItems='center'>
               <DarkMode>
                 <Switch id='remember-login' colorScheme='brand' me='10px' />
               </DarkMode>
@@ -143,7 +143,7 @@ function SignIn() {
                 color='white'>
                 Remember me
               </FormLabel>
-            </FormControl>
+            </FormControl> */}
             <Button
               variant='brand'
               fontSize='10px'
@@ -153,10 +153,10 @@ function SignIn() {
               h='45'
               mb='20px'
               mt='20px'>
-              SIGN IN
+              SIGN IN WITH GOOGLE
             </Button>
 
-            <Flex
+            {/* <Flex
               flexDirection='column'
               justifyContent='center'
               alignItems='center'
@@ -168,7 +168,7 @@ function SignIn() {
                   Sign Up
                 </Link>
               </Text>
-            </Flex>
+            </Flex> */}
           </Flex>
         </Flex>
         <Box
@@ -205,7 +205,7 @@ function SignIn() {
               letterSpacing='8px'
               fontSize='20px'
               fontWeight='500'>
-              INSPIRED BY THE FUTURE:
+              PREDICT THE FUTURE:
             </Text>
             <Text
               textAlign='center'
@@ -214,8 +214,10 @@ function SignIn() {
               fontSize='36px'
               fontWeight='bold'
               bgClip='text !important'
-              bg='linear-gradient(94.56deg, #FFFFFF 79.99%, #21242F 102.65%)'>
-              THE VISION UI DASHBOARD
+              // bg='linear-gradient(94.56deg, #FFFFFF 79.99%, #21242F 102.65%)'
+              bg='white'
+              >
+              BECOME A WALL ST. TRADER
             </Text>
           </Box>
         </Box>

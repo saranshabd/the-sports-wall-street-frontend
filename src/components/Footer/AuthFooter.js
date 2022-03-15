@@ -29,7 +29,7 @@ export default function AuthFooter(props) {
       alignItems={{
         base: "center",
       }}
-      justifyContent='space-between'
+      justifyContent='center'
       pb='20px'
       fontSize='sm'>
       <Text
@@ -38,7 +38,8 @@ export default function AuthFooter(props) {
           base: "center",
         }}
         mb={{ base: "20px" }}>
-        &copy; {1900 + new Date().getYear()},{" "}
+          Made with 💰 by <Link fontWeight='bold' href='https://saranshabd.com' target='_blank'>Shabd Saran</Link>
+        {/* &copy; {1900 + new Date().getYear()},{" "}
         <Text as='span' mx='2px'>
           {document.documentElement.dir === "rtl"
             ? " مصنوع من ❤️ بواسطة"
@@ -55,9 +56,9 @@ export default function AuthFooter(props) {
         </Link>
         {document.documentElement.dir === "rtl"
           ? "للحصول على ويب أفضل"
-          : " for a better web"}
+          : " for a better web"} */}
       </Text>
-      <List display='flex'>
+      {/* <List display='flex'>
         <ListItem
           me={{
             base: "20px",
@@ -96,7 +97,7 @@ export default function AuthFooter(props) {
             {document.documentElement.dir === "rtl" ? "رخصة" : "License"}
           </Link>
         </ListItem>
-      </List>
+      </List> */}
     </Flex>
   );
 }

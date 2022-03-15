@@ -65,24 +65,30 @@ export default function AuthNavbar(props) {
   let navbarBackdrop = "blur(42px)";
   let navbarPosition = "fixed";
   var brand = (
-    <Link
-      href={`${process.env.PUBLIC_URL}/#/`}
-      target='_blank'
-      display='flex'
-      lineHeight='100%'
-      fontWeight='bold'
-      justifyContent='center'
-      alignItems='center'
-      color={mainText}>
+    // <Link
+    //   href={`${process.env.PUBLIC_URL}/#/`}
+    //   target='_blank'
+    //   display='flex'
+    //   lineHeight='100%'
+    //   fontWeight='bold'
+    //   justifyContent='center'
+    //   alignItems='center'
+    //   color={mainText}>
       <Box
         // bg='linear-gradient(97.89deg, #FFFFFF 70.67%, rgba(117, 122, 140, 0) 108.55%)'
         bg='white'
-        bgClip='text'>
+        bgClip='text'
+        fontWeight='bold'
+        lineHeight='100%'
+        justifyContent='center'
+        alignItems='center'
+        cursor='default'
+        >
         <Text fontSize='sm' letterSpacing='3px' mt='3px' color='transparent'>
           {logoText}
         </Text>
       </Box>
-    </Link>
+    // </Link>
   );
   var linksAuth = (
     <HStack display={{ sm: "none", lg: "flex" }}>
