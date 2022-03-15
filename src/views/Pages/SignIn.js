@@ -69,7 +69,7 @@ function SignIn() {
             mt={{ base: "50px", md: "150px", lg: "160px", xl: "245px" }}
             mb={{ base: "60px", lg: "95px" }}>
             <Heading color={titleColor} fontSize='32px' mb='10px'>
-              Ready to trade?
+              Predict the future
             </Heading>
             <Text
               mb='36px'
@@ -77,7 +77,7 @@ function SignIn() {
               color={textColor}
               fontWeight='bold'
               fontSize='14px'>
-              Use virtual currency like a sports pro trader
+              Become a Wall Street Pro Trader
             </Text>
             {/* <FormControl>
               <FormLabel
@@ -146,13 +146,14 @@ function SignIn() {
             </FormControl> */}
             <Button
               variant='brand'
-              fontSize='10px'
-              type='submit'
+              fontSize='xs'
+              // type='submit'
               w='100%'
               maxW='350px'
               h='45'
               mb='20px'
-              mt='20px'>
+              mt='20px'
+              fontWeight='extrabold'>
               SIGN IN WITH GOOGLE
             </Button>
 
@@ -205,7 +206,7 @@ function SignIn() {
               letterSpacing='8px'
               fontSize='20px'
               fontWeight='500'>
-              PREDICT THE FUTURE:
+              VIRTUAL CURRENCY SPORTS TRADING
             </Text>
             <Text
               textAlign='center'
@@ -217,7 +218,7 @@ function SignIn() {
               // bg='linear-gradient(94.56deg, #FFFFFF 79.99%, #21242F 102.65%)'
               bg='white'
               >
-              BECOME A WALL ST. TRADER
+              BEAT THE ORDINARY
             </Text>
           </Box>
         </Box>
