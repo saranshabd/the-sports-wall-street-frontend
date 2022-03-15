@@ -371,7 +371,7 @@ function Portfolio() {
                       color='gray.400'
                       fontFamily='Plus Jakarta Display'
                       borderBottomColor='#56577A'>
-                      Clubs
+                      Club
                     </Th>
                     <Th
                       color='gray.400'
@@ -416,6 +416,7 @@ function Portfolio() {
                         budget={row.budget}
                         progression={row.progression}
                         lastItem={index === arr.length - 1 ? true : false}
+                        showButton={true}
                       />
                     );
                   })}

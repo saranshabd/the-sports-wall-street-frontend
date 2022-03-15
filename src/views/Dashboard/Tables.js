@@ -153,7 +153,7 @@ function Tables() {
                   at €70 per stock.
                 </Text>
               </Flex>
-              <Button my='1rem' borderRadius="12px" colorScheme="blue">
+              <Button my='1rem' borderRadius="12px" colorScheme="blackAlpha">
                 Buy
               </Button>
             </Flex>
@@ -251,31 +251,7 @@ function Tables() {
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Clubs
-                </Th>
-                <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Avg. Performance
-                </Th>
-                <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Stock Price
-                </Th>
-                <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Latest Results
-                </Th>
-                <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Upcoming Fixtures
+                  Club
                 </Th>
                 <Th
                   color='gray.400'
@@ -283,6 +259,30 @@ function Tables() {
                   borderBottomColor='#56577A'>
                   Points
                 </Th>
+                <Th
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
+                  Games Played
+                </Th>
+                <Th
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
+                  Win Percentage
+                </Th>
+                <Th
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
+                  Goal Difference
+                </Th>
+                {/* <Th
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
+                  Points
+                </Th> */}
                 {/* <Th borderBottomColor='#56577A'></Th> */}
               </Tr>
             </Thead>
