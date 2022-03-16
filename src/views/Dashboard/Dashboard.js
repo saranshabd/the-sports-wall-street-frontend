@@ -83,18 +83,24 @@ import { dashboardTableData, timelineData } from "variables/general";
 // query
 import { useLeagueStandings } from "query/leagueStandings";
 import { useUpcomingMatches } from "query/matches";
+import { useUser } from 'query/user';
 
 export default function Dashboard() {
   const leagueStandingsResp = useLeagueStandings();
   // const { status, data: upcoming, error, isFetching } = useUpcomingMatches();
   const upcomingMatchesResp = useUpcomingMatches();
+  const userResp = useUser();
 
-  if (leagueStandingsResp.isFetching || upcomingMatchesResp.isFetching) {
+  if (leagueStandingsResp.isFetching || upcomingMatchesResp.isFetching || userResp.isFetching) {
     return <Text>Loading</Text>;
+  }
+  if (!!userResp.error) {
+    history.push('/');
   }
 
   const leagueStandings = leagueStandingsResp.data;
   const upcomingMatches = upcomingMatchesResp.data;
+  const user = userResp.data;
 
   const maxGamesPlayed = Math.max(...leagueStandings.map(item => item.playedGames));
 
@@ -262,7 +268,7 @@ export default function Dashboard() {
                   Welcome back,
                 </Text>
                 <Text fontSize='28px' color='#fff' fontWeight='bold' mb='18px'>
-                  Harsh Vardhan
+                  {user.name}
                 </Text>
                 <Text
                   fontSize='md'

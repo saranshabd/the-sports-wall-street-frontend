@@ -61,11 +61,16 @@ import { AiFillCheckCircle } from 'react-icons/ai'
 // query
 import { useLeagueStandings } from 'query/leagueStandings'
 import { useStockPrices } from 'query/stockPrices'
+import { useUser } from 'query/user';
 
 function StockPriceChart(props) {
+  const userResp = useUser();
   const stockPricesResp = useStockPrices(props.teamInfo.teamId);
-  if (stockPricesResp.isFetching) {
+  if (stockPricesResp.isFetching || userResp.isFetching) {
     return <Text>Loading</Text>;
+  }
+  if (!!userResp.error) {
+    history.push('/');
   }
 
   const stockPrices = stockPricesResp.data.map(item => item.stockPrice);

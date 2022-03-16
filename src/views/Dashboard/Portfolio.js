@@ -57,7 +57,17 @@ import {
 } from "variables/general";
 import { tablesProjectData, tablesTableData } from "variables/general";
 
+import { useUser } from 'query/user';
+
 function Portfolio() {
+  const userResp = useUser();
+
+  if (userResp.isFetching) {
+    return <Text>Loading</Text>;
+  }
+  if (!!userResp.error) {
+    history.push('/');
+  }
 
   return (
     <Flex direction='column' pt={{ base: "40px", md: "0px" }} mx='auto'>
