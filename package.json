@@ -1,8 +1,7 @@
 {
-  "name": "vision-dashboard-chakra",
+  "name": "the-sports-wall-street-frontend",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://demos.creative-tim.com/vision-ui-dashboard-chakra/#/",
   "dependencies": {
     "@chakra-ui/icons": "^1.0.14",
     "@chakra-ui/react": "^1.6.5",
