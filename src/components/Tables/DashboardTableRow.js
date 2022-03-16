@@ -43,7 +43,7 @@ function DashboardTableRow(props) {
         </Text>
       </Td>
       <Td
-        minWidth={{ sm: "250px" }}
+        minWidth={{ sm: "150px" }}
         ps='0px'
         borderBottomColor='#56577A'
         border={lastItem ? "none" : null}>

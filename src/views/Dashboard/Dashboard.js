@@ -82,13 +82,19 @@ import { dashboardTableData, timelineData } from "variables/general";
 
 // query
 import { useLeagueStandings } from "query/leagueStandings";
+import { useUpcomingMatches } from "query/matches";
 
 export default function Dashboard() {
-  const { status, data: leagueStandings, error, isFetching } = useLeagueStandings();
+  const leagueStandingsResp = useLeagueStandings();
+  // const { status, data: upcoming, error, isFetching } = useUpcomingMatches();
+  const upcomingMatchesResp = useUpcomingMatches();
 
-  if (isFetching) {
+  if (leagueStandingsResp.isFetching || upcomingMatchesResp.isFetching) {
     return <Text>Loading</Text>;
   }
+
+  const leagueStandings = leagueStandingsResp.data;
+  const upcomingMatches = upcomingMatchesResp.data;
 
   const maxGamesPlayed = Math.max(...leagueStandings.map(item => item.playedGames));
 
@@ -752,11 +758,12 @@ export default function Dashboard() {
           <CardBody>
             <Flex direction='column' lineHeight='21px'>
               {timelineData.map((row, index, arr) => {
+                const title = `${upcomingMatches[index].homeTeam} vs ${upcomingMatches[index].awayTeam}`
                 return (
                   <TimelineRow
                     logo={row.logo}
-                    title={row.title}
-                    date={row.date}
+                    title={title}
+                    date={upcomingMatches[index].utcDate}
                     color={row.color}
                     index={index}
                     arrLength={arr.length}
