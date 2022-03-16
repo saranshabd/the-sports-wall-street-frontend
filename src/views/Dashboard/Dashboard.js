@@ -80,7 +80,18 @@ import {
 } from "variables/charts";
 import { dashboardTableData, timelineData } from "variables/general";
 
+// query
+import { useLeagueStandings } from "query/leagueStandings";
+
 export default function Dashboard() {
+  const { status, data: leagueStandings, error, isFetching } = useLeagueStandings();
+
+  if (isFetching) {
+    return <Text>Loading</Text>;
+  }
+
+  const maxGamesPlayed = Math.max(...leagueStandings.map(item => item.playedGames));
+
   return (
     <Flex flexDirection='column' pt={{ base: "40px", md: "0px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 2 }} spacing='24px'>
@@ -666,19 +677,20 @@ export default function Dashboard() {
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Clubs
+                  Position
+                </Th>
+                <Th
+                  ps='0px'
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
+                  Club
                 </Th>
                 <Th
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Avg. Performance
-                </Th>
-                <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
-                  Stock Price
+                  Games Played
                 </Th>
                 <Th
                   color='gray.400'
@@ -686,18 +698,27 @@ export default function Dashboard() {
                   borderBottomColor='#56577A'>
                   Points
                 </Th>
+                <Th
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
+                  Win %
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
-              {dashboardTableData.map((row, index, arr) => {
+              {leagueStandings.slice(0, 6).map((row, index, arr) => {
+                const winPerc = Math.round((row.won / row.playedGames) * 100);
                 return (
                   <DashboardTableRow
-                    name={row.name}
-                    logo={row.logo}
-                    members={row.members}
-                    budget={row.budget}
-                    progression={row.progression}
+                    position={index + 1}
+                    name={row.teamInfo.shortName}
+                    // logo={row.teamInfo.crestUrl}
+                    members={row.playedGames}
+                    budget={row.points}
+                    progression={winPerc}
                     lastItem={index === arr.length - 1 ? true : false}
+                    maxGamesPlayed={maxGamesPlayed}
                   />
                 );
               })}

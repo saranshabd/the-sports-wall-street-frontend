@@ -30,24 +30,32 @@ import {
 import React from "react";
 
 function DashboardTableRow(props) {
-  const { logo, name, members, budget, progression, lastItem } = props;
+  const { position, logo, name, members, budget, progression, lastItem, maxGamesPlayed } = props;
   const textColor = useColorModeValue("gray.700", "white");
+
+  const membersColor = members < maxGamesPlayed ? 'green.400' : 'white';
+
   return (
     <Tr>
+      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
+        <Text fontSize='sm' color='white' fontWeight='bold' pb='.5rem'>
+          {position}.
+        </Text>
+      </Td>
       <Td
         minWidth={{ sm: "250px" }}
         ps='0px'
         borderBottomColor='#56577A'
         border={lastItem ? "none" : null}>
         <Flex align='center' py='.8rem' minWidth='100%' flexWrap='nowrap'>
-          <Icon as={logo} h={"24px"} w={"24px"} me='18px' />
-          <Text fontSize='sm' color='#fff' fontWeight='normal' minWidth='100%'>
+          {/* <Icon as={logo} h={"24px"} w={"24px"} me='18px' /> */}
+          <Text fontSize='sm' color='#fff' fontWeight='bold' minWidth='100%'>
             {name}
           </Text>
         </Flex>
       </Td>
 
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
+      {/* <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
         <AvatarGroup size='xs' showBorder={false}>
           {members.map((member) => {
             return (
@@ -61,6 +69,11 @@ function DashboardTableRow(props) {
             );
           })}
         </AvatarGroup>
+      </Td> */}
+      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
+        <Text fontSize='sm' color={membersColor} fontWeight='bold' pb='.5rem'>
+          {members}
+        </Text>
       </Td>
       <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
         <Text fontSize='sm' color='#fff' fontWeight='bold' pb='.5rem'>

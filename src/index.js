@@ -19,19 +19,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
-import RTLLayout from "layouts/RTL.js";
 
-ReactDOM.render(
-  <HashRouter>
-    <Switch>
-      <Route path={`/auth`} component={AuthLayout} />
-      <Route path={`/admin`} component={AdminLayout} />
-      {/* <Route path={`/rtl`} component={RTLLayout} /> */}
-      <Redirect from={`/`} to='/admin/dashboard' />
-    </Switch>
-  </HashRouter>,
-  document.getElementById("root")
-);
+const queryClient = new QueryClient();
+
+function IndexComp() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <HashRouter>
+        <Switch>
+          <Route path={`/auth`} component={AuthLayout} />
+          <Route path={`/admin`} component={AdminLayout} />
+          <Redirect from={`/`} to='/admin/dashboard' />
+        </Switch>
+      </HashRouter>
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  );
+}
+
+ReactDOM.render(<IndexComp />, document.getElementById("root"));

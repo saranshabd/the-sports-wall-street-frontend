@@ -16,7 +16,7 @@
 
 */
 
-import React from "react";
+import React, { useState } from "react";
 
 // Chakra imports
 import {
@@ -58,13 +58,26 @@ import { tablesProjectData, tablesTableData } from "variables/general";
 // Icons
 import { AiFillCheckCircle } from "react-icons/ai";
 
+// query
+import { useLeagueStandings } from "query/leagueStandings";
+
 function Tables() {
+  const [selectedClubIndex, setSelectedClubIndex] = useState(0);
+  const { status, data: leagueStandings, error, isFetching } = useLeagueStandings();
+
+  if (isFetching) {
+    return <Text>Loading</Text>;
+  }
+
+  const maxGamesPlayed = Math.max(...leagueStandings.map(item => item.playedGames));
+  const selectedClub = leagueStandings[selectedClubIndex];
+
   return (
     <Flex direction='column' pt={{ base: "40px", md: "0px" }}>
       <Card>
         <CardHeader py='12px'>
           <Text fontSize='lg' color='#fff' fontWeight='bold'>
-            Manchester City
+            {selectedClub.teamInfo.name}
           </Text>
         </CardHeader>
         <CardBody pt='12px'>
@@ -81,7 +94,7 @@ function Tables() {
                     Points
                   </Text>
                   <Text color='#fff' fontWeight='bold' fontSize='24px'>
-                    70
+                    {selectedClub.points}
                   </Text>
                 </Flex>
               </Flex>
@@ -96,7 +109,7 @@ function Tables() {
                     Games Played
                   </Text>
                   <Text color='#fff' fontWeight='bold' fontSize='24px'>
-                    29
+                    {selectedClub.playedGames}
                   </Text>
                 </Flex>
               </Flex>
@@ -111,7 +124,7 @@ function Tables() {
                     Standing
                   </Text>
                   <Text color='#fff' fontWeight='bold' fontSize='24px'>
-                    1
+                    {selectedClubIndex + 1}
                   </Text>
                 </Flex>
               </Flex>
@@ -126,7 +139,7 @@ function Tables() {
                     Goal Difference
                   </Text>
                   <Text color='#fff' fontWeight='bold' fontSize='24px'>
-                    30
+                    {selectedClub.goalDifference}
                   </Text>
                 </Flex>
               </Flex>
@@ -150,7 +163,7 @@ function Tables() {
                   </NumberInputStepper>
                 </NumberInput>
                 <Text color='#E9EDF7' fontSize='sm' fontWeight='bold'>
-                  at €70 per stock.
+                  at €{selectedClub.points} per stock.
                 </Text>
               </Flex>
               <Button my='1rem' borderRadius="12px" colorScheme="blackAlpha">
@@ -251,6 +264,13 @@ function Tables() {
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
+                  Position
+                </Th>
+                <Th
+                  ps='0px'
+                  color='gray.400'
+                  fontFamily='Plus Jakarta Display'
+                  borderBottomColor='#56577A'>
                   Club
                 </Th>
                 <Th
@@ -269,13 +289,13 @@ function Tables() {
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Win Percentage
+                  Win %
                 </Th>
                 <Th
                   color='gray.400'
                   fontFamily='Plus Jakarta Display'
                   borderBottomColor='#56577A'>
-                  Goal Difference
+                  Stock Price
                 </Th>
                 {/* <Th
                   color='gray.400'
@@ -287,15 +307,24 @@ function Tables() {
               </Tr>
             </Thead>
             <Tbody>
-              {tablesProjectData.map((row, index, arr) => {
+              {leagueStandings.map((row, index, arr) => {
+                const winPerc = Math.round((row.won / row.playedGames) * 100);
                 return (
                   <TablesProjectRow
-                    name={row.name}
-                    logo={row.logo}
-                    status={row.status}
-                    budget={row.budget}
-                    progression={row.progression}
+                    position={index + 1}
+                    name={row.teamInfo.shortName}
+                    upNextName={`€${row.points}`}
+                    // logo={row.logo}
+                    status={row.playedGames}
+                    budget={row.points}
+                    progression={winPerc}
                     lastItem={index === arr.length - 1 ? true : false}
+                    maxGamesPlayed={maxGamesPlayed}
+                    onClick={() => {
+                      setSelectedClubIndex(index);
+                      window.scrollTo(0, 0);
+                    }}
+                    isSelected={index == selectedClubIndex}
                   />
                 );
               })}

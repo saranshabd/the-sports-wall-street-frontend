@@ -30,29 +30,36 @@ import {
 import { FaEllipsisV } from "react-icons/fa";
 
 function DashboardTableRow(props) {
-  const { logo, name, status, budget, progression, lastItem, showButton } = props;
+  const { position, logo, name, upNextName, status, budget, progression, lastItem, showButton, maxGamesPlayed, onClick, isSelected } = props;
   const textColor = useColorModeValue("gray.700", "white");
+  const statusColor = status < maxGamesPlayed ? 'green.400' : 'white';
+  const nameColor = isSelected ? 'gold' : 'white';
   return (
-    <Tr>
+    <Tr onClick={onClick} _hover={{cursor: 'pointer'}}>
+      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
+        <Text fontSize='sm' color={nameColor} fontWeight='bold'>
+          {position}.
+        </Text>
+      </Td>
       <Td
         minWidth={{ sm: "250px" }}
         ps='0px'
         borderBottomColor='#56577A'
         border={lastItem ? "none" : null}>
         <Flex alignItems='center' py='.8rem' minWidth='100%' flexWrap='nowrap'>
-          <Icon as={logo} h={"20px"} w={"20px"} me='18px' />
-          <Text fontSize='sm' color='#fff' minWidth='100%'>
+          {/* <Icon as={logo} h={"20px"} w={"20px"} me='18px' /> */}
+          <Text fontSize='sm' fontWeight='bold' color={nameColor} minWidth='100%'>
             {name}
           </Text>
         </Flex>
       </Td>
       <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color='#fff' fontWeight='bold' pb='.5rem'>
+        <Text fontSize='sm' color='#fff' fontWeight='bold'>
           {budget}
         </Text>
       </Td>
       <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color='#fff' fontWeight='bold' pb='.5rem'>
+        <Text fontSize='sm' color={statusColor} fontWeight='bold'>
           {status}
         </Text>
       </Td>
@@ -71,6 +78,18 @@ function DashboardTableRow(props) {
             value={progression}
             borderRadius='15px'
           />
+        </Flex>
+      </Td>
+      <Td
+        // minWidth={{ sm: "250px" }}
+        // ps='0px'
+        borderBottomColor='#56577A'
+        border={lastItem ? "none" : null}>
+        <Flex alignItems='center' py='.8rem' minWidth='100%' flexWrap='nowrap'>
+          {/* <Icon as={logo} h={"20px"} w={"20px"} me='18px' /> */}
+          <Text fontSize='sm' fontWeight='bold' color='#fff' minWidth='100%'>
+            {upNextName}
+          </Text>
         </Flex>
       </Td>
       {
