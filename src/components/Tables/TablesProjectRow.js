@@ -16,7 +16,7 @@
 
 */
 
-import React from "react";
+import React from 'react'
 import {
   Tr,
   Td,
@@ -26,84 +26,109 @@ import {
   Icon,
   Button,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { FaEllipsisV } from "react-icons/fa";
+} from '@chakra-ui/react'
+import { FaEllipsisV } from 'react-icons/fa'
 
 function DashboardTableRow(props) {
-  const { position, logo, name, upNextName, status, budget, progression, lastItem, showButton, maxGamesPlayed, onClick, isSelected } = props;
-  const textColor = useColorModeValue("gray.700", "white");
-  const statusColor = status < maxGamesPlayed ? 'green.400' : 'white';
-  const nameColor = isSelected ? 'gold' : 'white';
+  const {
+    position,
+    logo,
+    name,
+    upNextName,
+    status,
+    budget,
+    progression,
+    lastItem,
+    showButton,
+    maxGamesPlayed,
+    onClick,
+    isSelected,
+    stockPriceDiff,
+  } = props
+  const textColor = useColorModeValue('gray.700', 'white')
+  const statusColor = status < maxGamesPlayed ? 'green.400' : 'white'
+  const nameColor = isSelected ? 'gold' : 'white'
+  const stockColor = stockPriceDiff > 0 ? 'green.400' : 'red.400'
+  
   return (
-    <Tr onClick={onClick} _hover={{cursor: 'pointer'}}>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color={nameColor} fontWeight='bold'>
+    <Tr onClick={onClick} _hover={{ cursor: 'pointer' }}>
+      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Text fontSize="sm" color={nameColor} fontWeight="bold">
           {position}.
         </Text>
       </Td>
       <Td
-        minWidth={{ sm: "250px" }}
-        ps='0px'
-        borderBottomColor='#56577A'
-        border={lastItem ? "none" : null}>
-        <Flex alignItems='center' py='.8rem' minWidth='100%' flexWrap='nowrap'>
+        // minWidth={{ sm: '125px' }}
+        ps="0px"
+        borderBottomColor="#56577A"
+        border={lastItem ? 'none' : null}
+      >
+        <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           {/* <Icon as={logo} h={"20px"} w={"20px"} me='18px' /> */}
-          <Text fontSize='sm' fontWeight='bold' color={nameColor} minWidth='100%'>
+          <Text
+            fontSize="sm"
+            fontWeight="bold"
+            color={nameColor}
+            minWidth="100%"
+          >
             {name}
           </Text>
         </Flex>
       </Td>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color='#fff' fontWeight='bold'>
+      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Text fontSize="sm" color="#fff" fontWeight="bold">
           {budget}
         </Text>
       </Td>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color={statusColor} fontWeight='bold'>
+      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Text fontSize="sm" color={statusColor} fontWeight="bold">
           {status}
         </Text>
       </Td>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Flex direction='column'>
+      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Flex direction="column">
           <Text
-            fontSize='sm'
-            color='#fff'
-            fontWeight='bold'
-            pb='.2rem'>{`${progression}%`}</Text>
+            fontSize="sm"
+            color="#fff"
+            fontWeight="bold"
+            pb=".2rem"
+          >{`${progression}%`}</Text>
           <Progress
-            colorScheme='brand'
-            maxW='125px'
-            h='3px'
-            bg='#2D2E5F'
+            colorScheme="brand"
+            maxW="125px"
+            h="3px"
+            bg="#2D2E5F"
             value={progression}
-            borderRadius='15px'
+            borderRadius="15px"
           />
         </Flex>
       </Td>
       <Td
         // minWidth={{ sm: "250px" }}
         // ps='0px'
-        borderBottomColor='#56577A'
-        border={lastItem ? "none" : null}>
-        <Flex alignItems='center' py='.8rem' minWidth='100%' flexWrap='nowrap'>
+        borderBottomColor="#56577A"
+        border={lastItem ? 'none' : null}
+      >
+        <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap" gap='12px'>
           {/* <Icon as={logo} h={"20px"} w={"20px"} me='18px' /> */}
-          <Text fontSize='sm' fontWeight='bold' color='#fff' minWidth='100%'>
+          <Text fontSize="sm" fontWeight="bold" color='white'>
             {upNextName}
+          </Text>
+          <Text fontSize="sm" fontWeight="bold" color={stockColor}>
+            {stockPriceDiff > 0 && "+"}{stockPriceDiff}
           </Text>
         </Flex>
       </Td>
-      {
-        showButton && (
-          <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-            <Button borderRadius="12px" colorScheme="blackAlpha">
-              {/* <Icon as={FaEllipsisV} color='gray.400' cursor='pointer' /> */}
-              Cash out
-            </Button>
-          </Td>
-        )
-      }
+      {showButton && (
+        <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+          <Button borderRadius="12px" colorScheme="blackAlpha">
+            {/* <Icon as={FaEllipsisV} color='gray.400' cursor='pointer' /> */}
+            Cash out
+          </Button>
+        </Td>
+      )}
     </Tr>
-  );
+  )
 }
 
-export default DashboardTableRow;
+export default DashboardTableRow
