@@ -39,6 +39,9 @@ import signInImage from "assets/img/signInImage.png";
 import AuthFooter from "components/Footer/AuthFooter";
 import GradientBorder from "components/GradientBorder/GradientBorder";
 
+// Google Sign In
+import {GoogleLogin} from "react-google-login"
+
 function SignIn() {
   const titleColor = "white";
   const textColor = "gray.400";
@@ -144,7 +147,19 @@ function SignIn() {
                 Remember me
               </FormLabel>
             </FormControl> */}
-            <Button
+
+            <GoogleLogin
+              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+              buttonText="Sign in with Google"
+              onSuccess={(res) => {
+                console.log(res);
+              }}
+              onFailure={() => {}}
+              cookiePolicy='single_host_origin'
+              isSignedIn={true}
+            />
+
+            {/* <Button
               variant='brand'
               fontSize='xs'
               // type='submit'
@@ -155,7 +170,7 @@ function SignIn() {
               mt='20px'
               fontWeight='extrabold'>
               SIGN IN WITH GOOGLE
-            </Button>
+            </Button> */}
 
             {/* <Flex
               flexDirection='column'
