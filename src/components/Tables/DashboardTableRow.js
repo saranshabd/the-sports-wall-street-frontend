@@ -38,7 +38,7 @@ function DashboardTableRow(props) {
   return (
     <Tr>
       <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color='white' fontWeight='bold' pb='.5rem'>
+        <Text fontSize='sm' color='white' fontWeight='bold'>
           {position}.
         </Text>
       </Td>
@@ -71,12 +71,12 @@ function DashboardTableRow(props) {
         </AvatarGroup>
       </Td> */}
       <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color={membersColor} fontWeight='bold' pb='.5rem'>
+        <Text fontSize='sm' color={membersColor} fontWeight='bold'>
           {members}
         </Text>
       </Td>
       <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color='#fff' fontWeight='bold' pb='.5rem'>
+        <Text fontSize='sm' color='#fff' fontWeight='bold'>
           {budget}
         </Text>
       </Td>
