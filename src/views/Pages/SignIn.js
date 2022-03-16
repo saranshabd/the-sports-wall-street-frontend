@@ -40,11 +40,18 @@ import AuthFooter from "components/Footer/AuthFooter";
 import GradientBorder from "components/GradientBorder/GradientBorder";
 
 // Google Sign In
-import {GoogleLogin} from "react-google-login"
+import {GoogleLogin} from "react-google-login";
+
+import * as auth from "utils/auth";
 
 function SignIn() {
   const titleColor = "white";
   const textColor = "gray.400";
+
+  async function signInOnSuccess(res) {
+    const {tokenId} = res;
+    await auth.signIn(tokenId);
+  }
 
   return (
     <Flex position='relative'>
@@ -151,10 +158,7 @@ function SignIn() {
             <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
               buttonText="Sign in with Google"
-              onSuccess={(res) => {
-                console.log(res);
-              }}
-              onFailure={() => {}}
+              onSuccess={signInOnSuccess}
               cookiePolicy='single_host_origin'
               isSignedIn={true}
             />
