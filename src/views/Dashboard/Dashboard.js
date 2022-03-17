@@ -16,6 +16,7 @@
 
 */
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 // Chakra imports
 import {
@@ -86,6 +87,8 @@ import { useUpcomingMatches } from "query/matches";
 import { useUser } from "query/user";
 
 export default function Dashboard() {
+  const history = useHistory();
+
   const userResp = useUser();
   const leagueStandingsResp = useLeagueStandings();
   const upcomingMatchesResp = useUpcomingMatches();
@@ -97,8 +100,13 @@ export default function Dashboard() {
   ) {
     return <Text>Loading</Text>;
   }
-  if (!!userResp.error) {
-    history.push("/");
+  if (
+    !!userResp.error ||
+    !!leagueStandingsResp.error ||
+    !!upcomingMatchesResp.error
+  ) {
+    history.push("/auth");
+    history.go(0); // reloads the page
   }
 
   const leagueStandings = leagueStandingsResp.data;

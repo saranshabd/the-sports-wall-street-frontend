@@ -17,6 +17,7 @@
 */
 
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 // Chakra imports
 import {
@@ -64,13 +65,18 @@ import { useStockPrices } from "query/stockPrices";
 import { useUser } from "query/user";
 
 function StockPriceChart(props) {
+  const history = useHistory();
+
   const userResp = useUser();
   const stockPricesResp = useStockPrices(props.teamInfo.teamId);
+
   if (stockPricesResp.isFetching || userResp.isFetching) {
     return <Text>Loading</Text>;
   }
-  if (!!userResp.error) {
-    history.push("/");
+
+  if (!!userResp.error || !!stockPricesResp.error) {
+    history.push("/auth");
+    history.go(0); // reloads the page
   }
 
   const stockPrices = stockPricesResp.data.map((item) => item.stockPrice);
