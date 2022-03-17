@@ -174,7 +174,7 @@ function Portfolio() {
                       Net worth
                     </Text> */}
                     <Text
-                      color="#fff"
+                      // color="#fff"
                       fontWeight="bold"
                       color="green.400"
                       fontSize="18px"

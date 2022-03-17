@@ -233,7 +233,7 @@ function SignIn() {
             h="100%"
             bgSize="cover"
             bgPosition="50%"
-            position="absolute"
+            // position="absolute"
             display="flex"
             flexDirection="column"
             justifyContent="center"
