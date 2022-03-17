@@ -16,7 +16,7 @@
 
 */
 
-import React from 'react'
+import React from "react";
 // Chakra imports
 import {
   Box,
@@ -30,70 +30,70 @@ import {
   Switch,
   Text,
   DarkMode,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
 // Assets
-import signInImage from 'assets/img/signInImage.png'
+import signInImage from "assets/img/signInImage.png";
 
 // Custom Components
-import AuthFooter from 'components/Footer/AuthFooter'
-import GradientBorder from 'components/GradientBorder/GradientBorder'
+import AuthFooter from "components/Footer/AuthFooter";
+import GradientBorder from "components/GradientBorder/GradientBorder";
 
 // Google Sign In
-import { GoogleLogin } from 'react-google-login'
+import { GoogleLogin } from "react-google-login";
 
-import * as auth from 'utils/auth'
-import { useUser } from 'query/user'
+import * as auth from "utils/auth";
+import { useUser } from "query/user";
 
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 function SignIn() {
-  const history = useHistory()
+  const history = useHistory();
 
-  const titleColor = 'white'
-  const textColor = 'gray.400'
+  const titleColor = "white";
+  const textColor = "gray.400";
 
   async function signInOnSuccess(res) {
-    const { tokenId } = res
-    await auth.signIn(tokenId)
-    history.push('/admin')
+    const { tokenId } = res;
+    await auth.signIn(tokenId);
+    history.push("/admin");
   }
 
-  const { status, data, error, isFetching } = useUser()
+  const { status, data, error, isFetching } = useUser();
   if (isFetching) {
-    return <Text>Loading...</Text>
+    return <Text>Loading...</Text>;
   }
   if (!error) {
-    history.push('/admin')
+    history.push("/admin");
   }
 
   return (
     <Flex position="relative">
       <Flex
         minH="100vh"
-        h={{ base: '120vh', lg: 'fit-content' }}
+        h={{ base: "120vh", lg: "fit-content" }}
         w="100%"
         maxW="1044px"
         mx="auto"
-        pt={{ sm: '100px', md: '0px' }}
+        pt={{ sm: "100px", md: "0px" }}
         flexDirection="column"
-        me={{ base: 'auto', lg: '50px', xl: 'auto' }}
+        me={{ base: "auto", lg: "50px", xl: "auto" }}
       >
         <Flex
           alignItems="center"
           justifyContent="start"
-          style={{ userSelect: 'none' }}
-          mx={{ base: 'auto', lg: 'unset' }}
-          ms={{ base: 'auto', lg: 'auto' }}
-          w={{ base: '100%', md: '50%', lg: '450px' }}
+          style={{ userSelect: "none" }}
+          mx={{ base: "auto", lg: "unset" }}
+          ms={{ base: "auto", lg: "auto" }}
+          w={{ base: "100%", md: "50%", lg: "450px" }}
           px="50px"
         >
           <Flex
             direction="column"
             w="100%"
             background="transparent"
-            mt={{ base: '50px', md: '150px', lg: '160px', xl: '245px' }}
-            mb={{ base: '60px', lg: '95px' }}
+            mt={{ base: "50px", md: "150px", lg: "160px", xl: "245px" }}
+            mb={{ base: "60px", lg: "95px" }}
           >
             <Heading color={titleColor} fontSize="32px" mb="10px">
               Predict the future
@@ -210,18 +210,18 @@ function SignIn() {
           </Flex>
         </Flex>
         <Box
-          w={{ base: '335px', md: '450px' }}
-          mx={{ base: 'auto', lg: 'unset' }}
-          ms={{ base: 'auto', lg: 'auto' }}
+          w={{ base: "335px", md: "450px" }}
+          mx={{ base: "auto", lg: "unset" }}
+          ms={{ base: "auto", lg: "auto" }}
           mb="80px"
         >
           <AuthFooter />
         </Box>
         <Box
-          display={{ base: 'none', lg: 'block' }}
+          display={{ base: "none", lg: "block" }}
           overflowX="hidden"
           h="100%"
-          maxW={{ md: '50vw', lg: '50vw' }}
+          maxW={{ md: "50vw", lg: "50vw" }}
           minH="100vh"
           w="960px"
           position="absolute"
@@ -265,7 +265,7 @@ function SignIn() {
         </Box>
       </Flex>
     </Flex>
-  )
+  );
 }
 
-export default SignIn
+export default SignIn;

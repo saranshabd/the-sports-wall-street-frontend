@@ -25,21 +25,30 @@ import {
   Text,
   Tr,
   useColorModeValue,
-} from '@chakra-ui/react'
-import React from 'react'
+} from "@chakra-ui/react";
+import React from "react";
 
 function TablesTableRow(props) {
-  const { logo, name, email, subdomain, domain, status, date, lastItem } = props
-  const textColor = useColorModeValue('gray.700', 'white')
-  const bgStatus = useColorModeValue('gray.400', '#1a202c')
-  const colorStatus = useColorModeValue('white', 'gray.400')
+  const {
+    logo,
+    name,
+    email,
+    subdomain,
+    domain,
+    status,
+    date,
+    lastItem,
+  } = props;
+  const textColor = useColorModeValue("gray.700", "white");
+  const bgStatus = useColorModeValue("gray.400", "#1a202c");
+  const colorStatus = useColorModeValue("white", "gray.400");
 
   return (
     <Tr>
       <Td
-        minWidth={{ sm: '250px' }}
+        minWidth={{ sm: "250px" }}
         ps="0px"
-        border={lastItem ? 'none' : null}
+        border={lastItem ? "none" : null}
         borderBottomColor="#56577A"
       >
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
@@ -67,7 +76,7 @@ function TablesTableRow(props) {
       </Td>
 
       <Td
-        border={lastItem ? 'none' : null}
+        border={lastItem ? "none" : null}
         borderBottomColor="#56577A"
         minW="150px"
       >
@@ -80,25 +89,25 @@ function TablesTableRow(props) {
           </Text>
         </Flex>
       </Td>
-      <Td border={lastItem ? 'none' : null} borderBottomColor="#56577A">
+      <Td border={lastItem ? "none" : null} borderBottomColor="#56577A">
         <Badge
-          bg={status === 'Online' ? 'green.400' : 'transparent'}
-          color={status === 'Online' ? 'white' : colorStatus}
+          bg={status === "Online" ? "green.400" : "transparent"}
+          color={status === "Online" ? "white" : colorStatus}
           fontSize="sm"
           p="3px 10px"
           borderRadius="8px"
-          border={status === 'Online' ? 'none' : '1px solid #fff'}
+          border={status === "Online" ? "none" : "1px solid #fff"}
           fontWeight="normal"
         >
           {status}
         </Badge>
       </Td>
-      <Td border={lastItem ? 'none' : null} borderBottomColor="#56577A">
+      <Td border={lastItem ? "none" : null} borderBottomColor="#56577A">
         <Text fontSize="sm" color="#fff" fontWeight="normal">
           {date}
         </Text>
       </Td>
-      <Td border={lastItem ? 'none' : null} borderBottomColor="#56577A">
+      <Td border={lastItem ? "none" : null} borderBottomColor="#56577A">
         <Button p="0px" bg="transparent" variant="no-hover">
           <Text
             fontSize="sm"
@@ -111,7 +120,7 @@ function TablesTableRow(props) {
         </Button>
       </Td>
     </Tr>
-  )
+  );
 }
 
-export default TablesTableRow
+export default TablesTableRow;

@@ -16,7 +16,7 @@
 
 */
 
-import React from 'react'
+import React from "react";
 import {
   Tr,
   Td,
@@ -26,8 +26,8 @@ import {
   Icon,
   Button,
   useColorModeValue,
-} from '@chakra-ui/react'
-import { FaEllipsisV } from 'react-icons/fa'
+} from "@chakra-ui/react";
+import { FaEllipsisV } from "react-icons/fa";
 
 function DashboardTableRow(props) {
   const {
@@ -44,15 +44,15 @@ function DashboardTableRow(props) {
     onClick,
     isSelected,
     stockPriceDiff,
-  } = props
-  const textColor = useColorModeValue('gray.700', 'white')
-  const statusColor = status < maxGamesPlayed ? 'green.400' : 'white'
-  const nameColor = isSelected ? 'gold' : 'white'
-  const stockColor = stockPriceDiff > 0 ? 'green.400' : 'red.400'
+  } = props;
+  const textColor = useColorModeValue("gray.700", "white");
+  const statusColor = status < maxGamesPlayed ? "green.400" : "white";
+  const nameColor = isSelected ? "gold" : "white";
+  const stockColor = stockPriceDiff > 0 ? "green.400" : "red.400";
 
   return (
-    <Tr onClick={onClick} _hover={{ cursor: 'pointer' }}>
-      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+    <Tr onClick={onClick} _hover={{ cursor: "pointer" }}>
+      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Text fontSize="sm" color={nameColor} fontWeight="bold">
           {position}.
         </Text>
@@ -61,7 +61,7 @@ function DashboardTableRow(props) {
         // minWidth={{ sm: '125px' }}
         ps="0px"
         borderBottomColor="#56577A"
-        border={lastItem ? 'none' : null}
+        border={lastItem ? "none" : null}
       >
         <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           {/* <Icon as={logo} h={"20px"} w={"20px"} me='18px' /> */}
@@ -75,17 +75,17 @@ function DashboardTableRow(props) {
           </Text>
         </Flex>
       </Td>
-      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Text fontSize="sm" color="#fff" fontWeight="bold">
           {budget}
         </Text>
       </Td>
-      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Text fontSize="sm" color={statusColor} fontWeight="bold">
           {status}
         </Text>
       </Td>
-      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Flex direction="column">
           <Text
             fontSize="sm"
@@ -107,7 +107,7 @@ function DashboardTableRow(props) {
         // minWidth={{ sm: "250px" }}
         // ps='0px'
         borderBottomColor="#56577A"
-        border={lastItem ? 'none' : null}
+        border={lastItem ? "none" : null}
       >
         <Flex
           alignItems="center"
@@ -121,13 +121,13 @@ function DashboardTableRow(props) {
             {upNextName}
           </Text>
           <Text fontSize="sm" fontWeight="bold" color={stockColor}>
-            {stockPriceDiff > 0 && '+'}
+            {stockPriceDiff > 0 && "+"}
             {stockPriceDiff}
           </Text>
         </Flex>
       </Td>
       {showButton && (
-        <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
           <Button borderRadius="12px" colorScheme="blackAlpha">
             {/* <Icon as={FaEllipsisV} color='gray.400' cursor='pointer' /> */}
             Cash out
@@ -135,7 +135,7 @@ function DashboardTableRow(props) {
         </Td>
       )}
     </Tr>
-  )
+  );
 }
 
-export default DashboardTableRow
+export default DashboardTableRow;

@@ -16,7 +16,7 @@
 
 */
 
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
 // Chakra imports
 import {
@@ -36,44 +36,44 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
 // Custom components
-import Card from 'components/Card/Card.js'
-import CardHeader from 'components/Card/CardHeader.js'
-import CardBody from 'components/Card/CardBody.js'
-import LineChart from 'components/Charts/LineChart'
+import Card from "components/Card/Card.js";
+import CardHeader from "components/Card/CardHeader.js";
+import CardBody from "components/Card/CardBody.js";
+import LineChart from "components/Charts/LineChart";
 
 // Table Components
-import TablesProjectRow from 'components/Tables/TablesProjectRow'
-import TablesTableRow from 'components/Tables/TablesTableRow'
+import TablesProjectRow from "components/Tables/TablesProjectRow";
+import TablesTableRow from "components/Tables/TablesTableRow";
 
 // Data
 import {
   lineChartDataDashboard,
   lineChartOptionsDashboard,
-} from 'variables/charts'
-import { tablesProjectData, tablesTableData } from 'variables/general'
+} from "variables/charts";
+import { tablesProjectData, tablesTableData } from "variables/general";
 
 // Icons
-import { AiFillCheckCircle } from 'react-icons/ai'
+import { AiFillCheckCircle } from "react-icons/ai";
 
 // query
-import { useLeagueStandings } from 'query/leagueStandings'
-import { useStockPrices } from 'query/stockPrices'
-import { useUser } from 'query/user'
+import { useLeagueStandings } from "query/leagueStandings";
+import { useStockPrices } from "query/stockPrices";
+import { useUser } from "query/user";
 
 function StockPriceChart(props) {
-  const userResp = useUser()
-  const stockPricesResp = useStockPrices(props.teamInfo.teamId)
+  const userResp = useUser();
+  const stockPricesResp = useStockPrices(props.teamInfo.teamId);
   if (stockPricesResp.isFetching || userResp.isFetching) {
-    return <Text>Loading</Text>
+    return <Text>Loading</Text>;
   }
   if (!!userResp.error) {
-    history.push('/')
+    history.push("/");
   }
 
-  const stockPrices = stockPricesResp.data.map((item) => item.stockPrice)
+  const stockPrices = stockPricesResp.data.map((item) => item.stockPrice);
   const stockPricesChartOption = {
     chart: {
       toolbar: {
@@ -81,21 +81,21 @@ function StockPriceChart(props) {
       },
     },
     tooltip: {
-      theme: 'dark',
+      theme: "dark",
     },
     dataLabels: {
       enabled: false,
     },
     stroke: {
-      curve: 'smooth',
+      curve: "smooth",
     },
     xaxis: {
-      type: 'datetime',
+      type: "datetime",
       categories: stockPricesResp.data.map((item) => `${item.matchday}`),
       labels: {
         style: {
-          colors: '#c8cfca',
-          fontSize: '12px',
+          colors: "#c8cfca",
+          fontSize: "12px",
         },
       },
       axisBorder: {
@@ -108,8 +108,8 @@ function StockPriceChart(props) {
     yaxis: {
       labels: {
         style: {
-          colors: '#c8cfca',
-          fontSize: '12px',
+          colors: "#c8cfca",
+          fontSize: "12px",
         },
       },
     },
@@ -118,13 +118,13 @@ function StockPriceChart(props) {
     },
     grid: {
       strokeDashArray: 5,
-      borderColor: '#56577A',
+      borderColor: "#56577A",
     },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
-        shade: 'dark',
-        type: 'vertical',
+        shade: "dark",
+        type: "vertical",
         shadeIntensity: 0,
         gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
         inverseColors: true,
@@ -132,21 +132,21 @@ function StockPriceChart(props) {
         opacityTo: 0,
         stops: [],
       },
-      colors: ['#2CD9FF', '#582CFF'],
+      colors: ["#2CD9FF", "#582CFF"],
     },
-    colors: ['#2CD9FF', '#582CFF'],
-  }
+    colors: ["#2CD9FF", "#582CFF"],
+  };
 
   return (
     <LineChart
       lineChartData={[{ name: props.teamInfo.shortName, data: stockPrices }]}
       lineChartOptions={stockPricesChartOption}
     />
-  )
+  );
 }
 
 function Tables() {
-  const [selectedClubIndex, setSelectedClubIndex] = useState(0)
+  const [selectedClubIndex, setSelectedClubIndex] = useState(0);
   // const {
   //   status,
   //   data: leagueStandings,
@@ -154,27 +154,27 @@ function Tables() {
   //   isFetching,
   // } = useLeagueStandings()
 
-  const leagueStandingsResp = useLeagueStandings()
+  const leagueStandingsResp = useLeagueStandings();
 
   if (leagueStandingsResp.isFetching) {
-    return <Text>Loading</Text>
+    return <Text>Loading</Text>;
   }
-  const leagueStandings = leagueStandingsResp.data
+  const leagueStandings = leagueStandingsResp.data;
 
   const maxGamesPlayed = Math.max(
     ...leagueStandings.map((item) => item.playedGames)
-  )
-  const selectedClub = leagueStandings[selectedClubIndex]
+  );
+  const selectedClub = leagueStandings[selectedClubIndex];
 
   function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   function getStockPriceValue(x) {
-    return `€${numberWithCommas(x)}`
+    return `€${numberWithCommas(x)}`;
   }
 
   return (
-    <Flex direction="column" pt={{ base: '40px', md: '0px' }}>
+    <Flex direction="column" pt={{ base: "40px", md: "0px" }}>
       <Card>
         <CardHeader py="12px">
           <Text fontSize="lg" color="#fff" fontWeight="bold">
@@ -183,7 +183,7 @@ function Tables() {
         </CardHeader>
         <CardBody pt="12px">
           <Flex direction="column" w="100%">
-            <Grid templateColumns={{ sm: '1fr 1fr', md: '1fr 1fr 1fr 1fr' }}>
+            <Grid templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}>
               <Flex
                 justify="space-between"
                 p="22px"
@@ -249,7 +249,7 @@ function Tables() {
                 </Flex>
               </Flex>
             </Grid>
-            <Box w="100%" minH={{ sm: '300px' }}>
+            <Box w="100%" minH={{ sm: "300px" }}>
               <StockPriceChart teamInfo={selectedClub.teamInfo} />
             </Box>
             <Flex direction="column" py="12px">
@@ -341,7 +341,7 @@ function Tables() {
         </CardBody>
       </Card> */}
       {/* Projects Table */}
-      <Card my="22px" overflowX={{ sm: 'scroll', xl: 'hidden' }} pb="0px">
+      <Card my="22px" overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
         <CardHeader p="6px 0px 22px 0px">
           <Flex direction="column">
             <Text fontSize="lg" color="#fff" fontWeight="bold" mb=".5rem">
@@ -423,7 +423,7 @@ function Tables() {
             </Thead>
             <Tbody>
               {leagueStandings.map((row, index, arr) => {
-                const winPerc = Math.round((row.won / row.playedGames) * 100)
+                const winPerc = Math.round((row.won / row.playedGames) * 100);
                 return (
                   <TablesProjectRow
                     position={index + 1}
@@ -437,19 +437,19 @@ function Tables() {
                     lastItem={index === arr.length - 1 ? true : false}
                     maxGamesPlayed={maxGamesPlayed}
                     onClick={() => {
-                      setSelectedClubIndex(index)
-                      window.scrollTo(0, 0)
+                      setSelectedClubIndex(index);
+                      window.scrollTo(0, 0);
                     }}
                     isSelected={index == selectedClubIndex}
                   />
-                )
+                );
               })}
             </Tbody>
           </Table>
         </CardBody>
       </Card>
     </Flex>
-  )
+  );
 }
 
-export default Tables
+export default Tables;

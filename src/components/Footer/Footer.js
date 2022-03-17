@@ -17,19 +17,19 @@
 */
 
 /*eslint-disable*/
-import React from 'react'
-import { Flex, Link, List, ListItem, Text } from '@chakra-ui/react'
+import React from "react";
+import { Flex, Link, List, ListItem, Text } from "@chakra-ui/react";
 
 export default function Footer(props) {
   return (
     <Flex
       flexDirection={{
-        base: 'column',
-        xl: 'row',
+        base: "column",
+        xl: "row",
       }}
       alignItems={{
-        base: 'center',
-        xl: 'start',
+        base: "center",
+        xl: "start",
       }}
       justifyContent="center"
       px="30px"
@@ -39,12 +39,12 @@ export default function Footer(props) {
         fontSize="sm"
         color="white"
         textAlign={{
-          base: 'center',
-          xl: 'start',
+          base: "center",
+          xl: "start",
         }}
-        mb={{ base: '20px', xl: '0px' }}
+        mb={{ base: "20px", xl: "0px" }}
       >
-        Made with 💰 by{' '}
+        Made with 💰 by{" "}
         <Link fontWeight="bold" href="https://saranshabd.com" target="_blank">
           Shabd Saran
         </Link>
@@ -110,5 +110,5 @@ export default function Footer(props) {
         </ListItem>
       </List> */}
     </Flex>
-  )
+  );
 }

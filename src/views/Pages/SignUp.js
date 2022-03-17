@@ -16,7 +16,7 @@
 
 */
 
-import React from 'react'
+import React from "react";
 
 // Chakra imports
 import {
@@ -32,49 +32,49 @@ import {
   Text,
   Icon,
   DarkMode,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
 // Icons
-import { FaApple, FaFacebook, FaGoogle } from 'react-icons/fa'
+import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 // Custom Components
-import AuthFooter from 'components/Footer/AuthFooter'
-import GradientBorder from 'components/GradientBorder/GradientBorder'
+import AuthFooter from "components/Footer/AuthFooter";
+import GradientBorder from "components/GradientBorder/GradientBorder";
 
 // Assets
-import signUpImage from 'assets/img/signUpImage.png'
+import signUpImage from "assets/img/signUpImage.png";
 
 function SignUp() {
-  const titleColor = 'white'
-  const textColor = 'gray.400'
+  const titleColor = "white";
+  const textColor = "gray.400";
 
   return (
-    <Flex position="relative" overflow={{ lg: 'hidden' }}>
+    <Flex position="relative" overflow={{ lg: "hidden" }}>
       <Flex
         flexDirection="column"
-        h={{ sm: 'initial', md: 'unset' }}
-        w={{ base: '90%' }}
+        h={{ sm: "initial", md: "unset" }}
+        w={{ base: "90%" }}
         maxW="1044px"
         mx="auto"
         justifyContent="space-between"
-        pt={{ sm: '100px', md: '0px' }}
-        me={{ base: 'auto', lg: '50px', xl: 'auto' }}
+        pt={{ sm: "100px", md: "0px" }}
+        me={{ base: "auto", lg: "50px", xl: "auto" }}
       >
         <Flex
           alignItems="center"
           justifyContent="start"
-          style={{ userSelect: 'none' }}
+          style={{ userSelect: "none" }}
           flexDirection="column"
-          mx={{ base: 'auto', lg: 'unset' }}
-          ms={{ base: 'auto', lg: 'auto' }}
+          mx={{ base: "auto", lg: "unset" }}
+          ms={{ base: "auto", lg: "auto" }}
           mb="50px"
-          w={{ base: '100%', md: '50%', lg: '42%' }}
+          w={{ base: "100%", md: "50%", lg: "42%" }}
         >
           <Flex
             direction="column"
             textAlign="center"
             justifyContent="center"
             align="center"
-            mt={{ base: '60px', md: '140px', lg: '200px' }}
+            mt={{ base: "60px", md: "140px", lg: "200px" }}
             mb="50px"
           >
             <Text
@@ -90,23 +90,23 @@ function SignUp() {
               color="white"
               fontWeight="normal"
               mt="10px"
-              w={{ base: '100%', md: '90%', lg: '90%', xl: '80%' }}
+              w={{ base: "100%", md: "90%", lg: "90%", xl: "80%" }}
             >
               Use these awesome forms to login or create new account in your
               project for free.
             </Text>
           </Flex>
-          <GradientBorder p="2px" me={{ base: 'none', lg: '30px', xl: 'none' }}>
+          <GradientBorder p="2px" me={{ base: "none", lg: "30px", xl: "none" }}>
             <Flex
               background="transparent"
               borderRadius="30px"
               direction="column"
               p="40px"
-              minW={{ base: 'unset', md: '430px', xl: '450px' }}
+              minW={{ base: "unset", md: "430px", xl: "450px" }}
               w="100%"
-              mx={{ base: '0px' }}
+              mx={{ base: "0px" }}
               bg={{
-                base: 'rgb(19,21,56)',
+                base: "rgb(19,21,56)",
               }}
             >
               <Text
@@ -121,7 +121,7 @@ function SignUp() {
               <HStack spacing="15px" justify="center" mb="22px">
                 <GradientBorder borderRadius="15px">
                   <Flex
-                    _hover={{ filter: 'brightness(120%)' }}
+                    _hover={{ filter: "brightness(120%)" }}
                     transition="all .25s ease"
                     cursor="pointer"
                     justify="center"
@@ -137,14 +137,14 @@ function SignUp() {
                         as={FaFacebook}
                         w="30px"
                         h="30px"
-                        _hover={{ filter: 'brightness(120%)' }}
+                        _hover={{ filter: "brightness(120%)" }}
                       />
                     </Link>
                   </Flex>
                 </GradientBorder>
                 <GradientBorder borderRadius="15px">
                   <Flex
-                    _hover={{ filter: 'brightness(120%)' }}
+                    _hover={{ filter: "brightness(120%)" }}
                     transition="all .25s ease"
                     cursor="pointer"
                     justify="center"
@@ -160,14 +160,14 @@ function SignUp() {
                         as={FaApple}
                         w="30px"
                         h="30px"
-                        _hover={{ filter: 'brightness(120%)' }}
+                        _hover={{ filter: "brightness(120%)" }}
                       />
                     </Link>
                   </Flex>
                 </GradientBorder>
                 <GradientBorder borderRadius="15px">
                   <Flex
-                    _hover={{ filter: 'brightness(120%)' }}
+                    _hover={{ filter: "brightness(120%)" }}
                     transition="all .25s ease"
                     cursor="pointer"
                     justify="center"
@@ -183,7 +183,7 @@ function SignUp() {
                         as={FaGoogle}
                         w="30px"
                         h="30px"
-                        _hover={{ filter: 'brightness(120%)' }}
+                        _hover={{ filter: "brightness(120%)" }}
                       />
                     </Link>
                   </Flex>
@@ -211,19 +211,19 @@ function SignUp() {
                 <GradientBorder
                   mb="24px"
                   h="50px"
-                  w={{ base: '100%', lg: 'fit-content' }}
+                  w={{ base: "100%", lg: "fit-content" }}
                   borderRadius="20px"
                 >
                   <Input
                     color={titleColor}
                     bg={{
-                      base: 'rgb(19,21,54)',
+                      base: "rgb(19,21,54)",
                     }}
                     border="transparent"
                     borderRadius="20px"
                     fontSize="sm"
                     size="lg"
-                    w={{ base: '100%', md: '346px' }}
+                    w={{ base: "100%", md: "346px" }}
                     maxW="100%"
                     h="46px"
                     type="text"
@@ -241,19 +241,19 @@ function SignUp() {
                 <GradientBorder
                   mb="24px"
                   h="50px"
-                  w={{ base: '100%', lg: 'fit-content' }}
+                  w={{ base: "100%", lg: "fit-content" }}
                   borderRadius="20px"
                 >
                   <Input
                     color={titleColor}
                     bg={{
-                      base: 'rgb(19,21,54)',
+                      base: "rgb(19,21,54)",
                     }}
                     border="transparent"
                     borderRadius="20px"
                     fontSize="sm"
                     size="lg"
-                    w={{ base: '100%', md: '346px' }}
+                    w={{ base: "100%", md: "346px" }}
                     maxW="100%"
                     h="46px"
                     type="email"
@@ -271,19 +271,19 @@ function SignUp() {
                 <GradientBorder
                   mb="24px"
                   h="50px"
-                  w={{ base: '100%', lg: 'fit-content' }}
+                  w={{ base: "100%", lg: "fit-content" }}
                   borderRadius="20px"
                 >
                   <Input
                     color={titleColor}
                     bg={{
-                      base: 'rgb(19,21,54)',
+                      base: "rgb(19,21,54)",
                     }}
                     border="transparent"
                     borderRadius="20px"
                     fontSize="sm"
                     size="lg"
-                    w={{ base: '100%', md: '346px' }}
+                    w={{ base: "100%", md: "346px" }}
                     maxW="100%"
                     h="46px"
                     type="password"
@@ -341,18 +341,18 @@ function SignUp() {
           </GradientBorder>
         </Flex>
         <Box
-          w={{ base: '335px', md: '450px' }}
-          mx={{ base: 'auto', lg: 'unset' }}
-          ms={{ base: 'auto', lg: 'auto' }}
+          w={{ base: "335px", md: "450px" }}
+          mx={{ base: "auto", lg: "unset" }}
+          ms={{ base: "auto", lg: "auto" }}
           mb="90px"
         >
           <AuthFooter />
         </Box>
         <Box
-          display={{ base: 'none', lg: 'block' }}
+          display={{ base: "none", lg: "block" }}
           overflowX="hidden"
           h="1300px"
-          maxW={{ md: '50vw', lg: '48vw' }}
+          maxW={{ md: "50vw", lg: "48vw" }}
           w="960px"
           position="absolute"
           left="0px"
@@ -368,7 +368,7 @@ function SignUp() {
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
-            position="absolute"
+            // position="absolute"
           >
             <Text
               textAlign="center"
@@ -394,7 +394,7 @@ function SignUp() {
         </Box>
       </Flex>
     </Flex>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;

@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from 'react'
+import React from "react";
 
 // Chakra imports
 import {
@@ -31,35 +31,35 @@ import {
   Tr,
   Th,
   Tbody,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
 // Images
-import BackgroundCard1 from 'assets/img/billing-background-card.png'
+import BackgroundCard1 from "assets/img/billing-background-card.png";
 
 // Table Components
-import TablesProjectRow from 'components/Tables/TablesProjectRow'
-import TablesTableRow from 'components/Tables/TablesTableRow'
+import TablesProjectRow from "components/Tables/TablesProjectRow";
+import TablesTableRow from "components/Tables/TablesTableRow";
 
 // Custom components
-import Card from 'components/Card/Card.js'
-import CardBody from 'components/Card/CardBody.js'
-import CardHeader from 'components/Card/CardHeader.js'
-import GradientBorder from 'components/GradientBorder/GradientBorder'
-import IconBox from 'components/Icons/IconBox'
-import BillingRow from 'components/Tables/BillingRow'
-import InvoicesRow from 'components/Tables/InvoicesRow'
-import TransactionRow from 'components/Tables/TransactionRow'
+import Card from "components/Card/Card.js";
+import CardBody from "components/Card/CardBody.js";
+import CardHeader from "components/Card/CardHeader.js";
+import GradientBorder from "components/GradientBorder/GradientBorder";
+import IconBox from "components/Icons/IconBox";
+import BillingRow from "components/Tables/BillingRow";
+import InvoicesRow from "components/Tables/InvoicesRow";
+import TransactionRow from "components/Tables/TransactionRow";
 
 // Icons
-import { FaPencilAlt, FaRegCalendarAlt } from 'react-icons/fa'
-import { IoEllipsisHorizontalSharp } from 'react-icons/io5'
-import { RiMastercardFill } from 'react-icons/ri'
+import { FaPencilAlt, FaRegCalendarAlt } from "react-icons/fa";
+import { IoEllipsisHorizontalSharp } from "react-icons/io5";
+import { RiMastercardFill } from "react-icons/ri";
 import {
   BillIcon,
   GraphIcon,
   MastercardIcon,
   VisaIcon,
-} from 'components/Icons/Icons'
+} from "components/Icons/Icons";
 
 // Data
 import {
@@ -67,29 +67,29 @@ import {
   invoicesData,
   newestTransactions,
   olderTransactions,
-} from 'variables/general'
-import { tablesProjectData, tablesTableData } from 'variables/general'
+} from "variables/general";
+import { tablesProjectData, tablesTableData } from "variables/general";
 
-import { useUser } from 'query/user'
+import { useUser } from "query/user";
 
 function Portfolio() {
-  const userResp = useUser()
+  const userResp = useUser();
 
   if (userResp.isFetching) {
-    return <Text>Loading</Text>
+    return <Text>Loading</Text>;
   }
   if (!!userResp.error) {
-    history.push('/')
+    history.push("/");
   }
 
   return (
-    <Flex direction="column" pt={{ base: '40px', md: '0px' }} mx="auto">
-      <Grid templateColumns={{ sm: '1fr', lg: '100% 100%' }}>
+    <Flex direction="column" pt={{ base: "40px", md: "0px" }} mx="auto">
+      <Grid templateColumns={{ sm: "1fr", lg: "100% 100%" }}>
         <Box>
           <Grid
             templateColumns={{
-              sm: '1fr',
-              md: '1fr 1fr',
+              sm: "1fr",
+              md: "1fr 1fr",
             }}
             gap="26px"
           >
@@ -126,7 +126,7 @@ function Portfolio() {
                   <Flex direction="column">
                     <Box>
                       <Text
-                        fontSize={{ sm: '48px', lg: '48px', xl: '48px' }}
+                        fontSize={{ sm: "48px", lg: "48px", xl: "48px" }}
                         letterSpacing="2px"
                         fontWeight="bold"
                       >
@@ -387,12 +387,12 @@ function Portfolio() {
           </CardBody>
         </Card> */}
       </Grid>
-      <Grid templateColumns={{ sm: '1fr', lg: '100%' }}>
+      <Grid templateColumns={{ sm: "1fr", lg: "100%" }}>
         {/* Billing Information */}
         <Card
-          my={{ sm: '24px', lg: '24px' }}
-          me={{ sm: '24px', lg: '24px' }}
-          overflowX={{ sm: 'scroll', xl: 'hidden' }}
+          my={{ sm: "24px", lg: "24px" }}
+          me={{ sm: "24px", lg: "24px" }}
+          overflowX={{ sm: "scroll", xl: "hidden" }}
         >
           <Flex direction="column">
             <CardHeader py="12px">
@@ -460,7 +460,7 @@ function Portfolio() {
                         lastItem={index === arr.length - 1 ? true : false}
                         showButton={true}
                       />
-                    )
+                    );
                   })}
                 </Tbody>
               </Table>
@@ -544,7 +544,7 @@ function Portfolio() {
         </Card> */}
       </Grid>
     </Flex>
-  )
+  );
 }
 
-export default Portfolio
+export default Portfolio;

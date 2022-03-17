@@ -17,17 +17,17 @@
 */
 
 /*eslint-disable*/
-import React from 'react'
-import { Flex, Link, List, ListItem, Text } from '@chakra-ui/react'
+import React from "react";
+import { Flex, Link, List, ListItem, Text } from "@chakra-ui/react";
 
 export default function AuthFooter(props) {
   return (
     <Flex
       flexDirection={{
-        base: 'column',
+        base: "column",
       }}
       alignItems={{
-        base: 'center',
+        base: "center",
       }}
       justifyContent="center"
       pb="20px"
@@ -36,11 +36,11 @@ export default function AuthFooter(props) {
       <Text
         color="white"
         textAlign={{
-          base: 'center',
+          base: "center",
         }}
-        mb={{ base: '20px' }}
+        mb={{ base: "20px" }}
       >
-        Made with 💰 by{' '}
+        Made with 💰 by{" "}
         <Link fontWeight="bold" href="https://saranshabd.com" target="_blank">
           Shabd Saran
         </Link>
@@ -104,5 +104,5 @@ export default function AuthFooter(props) {
         </ListItem>
       </List> */}
     </Flex>
-  )
+  );
 }

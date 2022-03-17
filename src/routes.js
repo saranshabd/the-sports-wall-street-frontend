@@ -17,12 +17,12 @@
 */
 
 // import
-import Dashboard from 'views/Dashboard/Dashboard.js'
-import Tables from 'views/Dashboard/Tables.js'
-import Portfolio from 'views/Dashboard/Portfolio.js'
-import Profile from 'views/Dashboard/Profile.js'
-import SignIn from 'views/Pages/SignIn.js'
-import SignUp from 'views/Pages/SignUp.js'
+import Dashboard from "views/Dashboard/Dashboard.js";
+import Tables from "views/Dashboard/Tables.js";
+import Portfolio from "views/Dashboard/Portfolio.js";
+import Profile from "views/Dashboard/Profile.js";
+import SignIn from "views/Pages/SignIn.js";
+import SignUp from "views/Pages/SignUp.js";
 
 import {
   HomeIcon,
@@ -32,40 +32,40 @@ import {
   DocumentIcon,
   RocketIcon,
   SupportIcon,
-} from 'components/Icons/Icons'
+} from "components/Icons/Icons";
 
 var dashRoutes = [
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    rtlName: 'لوحة القيادة',
+    path: "/dashboard",
+    name: "Dashboard",
+    rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
-    layout: '/admin',
+    layout: "/admin",
   },
   {
-    path: '/league-table',
-    name: 'League Table',
-    rtlName: 'لوحة القيادة',
+    path: "/league-table",
+    name: "League Table",
+    rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
     component: Tables,
-    layout: '/admin',
+    layout: "/admin",
   },
   {
-    path: '/portfolio',
-    name: 'Portfolio',
-    rtlName: 'لوحة القيادة',
+    path: "/portfolio",
+    name: "Portfolio",
+    rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
     component: Portfolio,
-    layout: '/admin',
+    layout: "/admin",
   },
   {
-    path: '/signin',
-    name: 'Sign Out',
-    rtlName: 'لوحة القيادة',
+    path: "/signin",
+    name: "Sign Out",
+    rtlName: "لوحة القيادة",
     icon: <DocumentIcon color="inherit" />,
     component: SignIn,
-    layout: '/auth',
+    layout: "/auth",
   },
   // {
   //   name: "ACCOUNT PAGES",
@@ -101,5 +101,5 @@ var dashRoutes = [
   //     },
   //   ],
   // },
-]
-export default dashRoutes
+];
+export default dashRoutes;

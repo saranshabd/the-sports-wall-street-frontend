@@ -16,10 +16,10 @@
 
 */
 
-import { Box, Button, Flex, Icon, Spacer, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Icon, Spacer, Text } from "@chakra-ui/react";
 
 function InvoicesRow(props) {
-  const { date, code, price, format, logo } = props
+  const { date, code, price, format, logo } = props;
 
   return (
     <Flex mb="24px" alignItems="center">
@@ -53,7 +53,7 @@ function InvoicesRow(props) {
         </Flex>
       </Button>
     </Flex>
-  )
+  );
 }
 
-export default InvoicesRow
+export default InvoicesRow;

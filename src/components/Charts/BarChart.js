@@ -16,25 +16,25 @@
 
 */
 
-import React, { Component } from 'react'
-import Chart from 'react-apexcharts'
+import React, { Component } from "react";
+import Chart from "react-apexcharts";
 
 class BarChart extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       chartData: [],
       chartOptions: {},
-    }
+    };
   }
 
   componentDidMount() {
-    const { barChartData, barChartOptions } = this.props
+    const { barChartData, barChartOptions } = this.props;
 
     this.setState({
       chartData: barChartData,
       chartOptions: barChartOptions,
-    })
+    });
   }
 
   render() {
@@ -46,8 +46,8 @@ class BarChart extends Component {
         width="100%"
         height="100%"
       />
-    )
+    );
   }
 }
 
-export default BarChart
+export default BarChart;

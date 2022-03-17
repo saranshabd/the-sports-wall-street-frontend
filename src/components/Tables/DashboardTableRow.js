@@ -26,8 +26,8 @@ import {
   Text,
   Tr,
   useColorModeValue,
-} from '@chakra-ui/react'
-import React from 'react'
+} from "@chakra-ui/react";
+import React from "react";
 
 function DashboardTableRow(props) {
   const {
@@ -39,23 +39,23 @@ function DashboardTableRow(props) {
     progression,
     lastItem,
     maxGamesPlayed,
-  } = props
-  const textColor = useColorModeValue('gray.700', 'white')
+  } = props;
+  const textColor = useColorModeValue("gray.700", "white");
 
-  const membersColor = members < maxGamesPlayed ? 'green.400' : 'white'
+  const membersColor = members < maxGamesPlayed ? "green.400" : "white";
 
   return (
     <Tr>
-      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Text fontSize="sm" color="white" fontWeight="bold">
           {position}.
         </Text>
       </Td>
       <Td
-        minWidth={{ sm: '150px' }}
+        minWidth={{ sm: "150px" }}
         ps="0px"
         borderBottomColor="#56577A"
-        border={lastItem ? 'none' : null}
+        border={lastItem ? "none" : null}
       >
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           {/* <Icon as={logo} h={"24px"} w={"24px"} me='18px' /> */}
@@ -80,17 +80,17 @@ function DashboardTableRow(props) {
           })}
         </AvatarGroup>
       </Td> */}
-      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Text fontSize="sm" color={membersColor} fontWeight="bold">
           {members}
         </Text>
       </Td>
-      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Text fontSize="sm" color="#fff" fontWeight="bold">
           {budget}
         </Text>
       </Td>
-      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Flex direction="column">
           <Text
             fontSize="sm"
@@ -108,7 +108,7 @@ function DashboardTableRow(props) {
         </Flex>
       </Td>
     </Tr>
-  )
+  );
 }
 
-export default DashboardTableRow
+export default DashboardTableRow;

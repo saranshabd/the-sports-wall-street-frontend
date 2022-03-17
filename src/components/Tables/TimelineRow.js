@@ -16,16 +16,16 @@
 
 */
 
-import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
-import React from 'react'
-import moment from 'moment'
+import { Box, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
+import React from "react";
+import moment from "moment";
 
 function TimelineRow(props) {
-  const { logo, title, date: utcDate, color, index, arrLength } = props
-  const textColor = useColorModeValue('gray.700', 'white.300')
-  const bgIconColor = useColorModeValue('white.300', 'gray.700')
+  const { logo, title, date: utcDate, color, index, arrLength } = props;
+  const textColor = useColorModeValue("gray.700", "white.300");
+  const bgIconColor = useColorModeValue("white.300", "gray.700");
 
-  const date = new Date(utcDate)
+  const date = new Date(utcDate);
 
   return (
     <Flex alignItems="center" minH="78px" justifyContent="start" mb="5px">
@@ -50,7 +50,7 @@ function TimelineRow(props) {
         </Text>
       </Flex>
     </Flex>
-  )
+  );
 }
 
-export default TimelineRow
+export default TimelineRow;
