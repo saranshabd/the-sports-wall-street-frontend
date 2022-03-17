@@ -16,16 +16,16 @@
 
 */
 
-import React from "react";
-import ReactDOM from "react-dom";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 
-import AuthLayout from "layouts/Auth.js";
-import AdminLayout from "layouts/Admin.js";
+import AuthLayout from 'layouts/Auth.js'
+import AdminLayout from 'layouts/Admin.js'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 function IndexComp() {
   return (
@@ -34,12 +34,12 @@ function IndexComp() {
         <Switch>
           <Route path={`/auth`} component={AuthLayout} />
           <Route path={`/admin`} component={AdminLayout} />
-          <Redirect from={`/`} to='/auth/signin' />
+          <Redirect from={`/`} to="/auth/signin" />
         </Switch>
       </HashRouter>
       <ReactQueryDevtools />
     </QueryClientProvider>
-  );
+  )
 }
 
-ReactDOM.render(<IndexComp />, document.getElementById("root"));
+ReactDOM.render(<IndexComp />, document.getElementById('root'))

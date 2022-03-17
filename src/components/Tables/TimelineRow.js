@@ -16,19 +16,19 @@
 
 */
 
-import { Box, Flex, Icon, Text, useColorModeValue } from "@chakra-ui/react";
-import React from "react";
-import moment from "moment";
+import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
+import React from 'react'
+import moment from 'moment'
 
 function TimelineRow(props) {
-  const { logo, title, date: utcDate, color, index, arrLength } = props;
-  const textColor = useColorModeValue("gray.700", "white.300");
-  const bgIconColor = useColorModeValue("white.300", "gray.700");
+  const { logo, title, date: utcDate, color, index, arrLength } = props
+  const textColor = useColorModeValue('gray.700', 'white.300')
+  const bgIconColor = useColorModeValue('white.300', 'gray.700')
 
-  const date = new Date(utcDate);
+  const date = new Date(utcDate)
 
   return (
-    <Flex alignItems='center' minH='78px' justifyContent='start' mb='5px'>
+    <Flex alignItems="center" minH="78px" justifyContent="start" mb="5px">
       {/* <Flex direction='column' h='100%' align='center'>
         <Icon
           as={logo}
@@ -41,16 +41,16 @@ function TimelineRow(props) {
           left={document.documentElement.dir === "rtl" ? "" : "-8px"}
         />
       </Flex> */}
-      <Flex direction='column' justifyContent='flex-start' h='100%' pl='12px'>
-        <Text fontSize='sm' color='#fff' fontWeight='bold' mb='3px'>
+      <Flex direction="column" justifyContent="flex-start" h="100%" pl="12px">
+        <Text fontSize="sm" color="#fff" fontWeight="bold" mb="3px">
           {title}
         </Text>
-        <Text fontSize='sm' color='gray.400' fontWeight='normal'>
+        <Text fontSize="sm" color="gray.400" fontWeight="normal">
           {moment(date).calendar()}
         </Text>
       </Flex>
     </Flex>
-  );
+  )
 }
 
-export default TimelineRow;
+export default TimelineRow

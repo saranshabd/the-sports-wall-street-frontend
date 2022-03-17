@@ -61,19 +61,19 @@ import { AiFillCheckCircle } from 'react-icons/ai'
 // query
 import { useLeagueStandings } from 'query/leagueStandings'
 import { useStockPrices } from 'query/stockPrices'
-import { useUser } from 'query/user';
+import { useUser } from 'query/user'
 
 function StockPriceChart(props) {
-  const userResp = useUser();
-  const stockPricesResp = useStockPrices(props.teamInfo.teamId);
+  const userResp = useUser()
+  const stockPricesResp = useStockPrices(props.teamInfo.teamId)
   if (stockPricesResp.isFetching || userResp.isFetching) {
-    return <Text>Loading</Text>;
+    return <Text>Loading</Text>
   }
   if (!!userResp.error) {
-    history.push('/');
+    history.push('/')
   }
 
-  const stockPrices = stockPricesResp.data.map(item => item.stockPrice);
+  const stockPrices = stockPricesResp.data.map((item) => item.stockPrice)
   const stockPricesChartOption = {
     chart: {
       toolbar: {
@@ -81,21 +81,21 @@ function StockPriceChart(props) {
       },
     },
     tooltip: {
-      theme: "dark",
+      theme: 'dark',
     },
     dataLabels: {
       enabled: false,
     },
     stroke: {
-      curve: "smooth",
+      curve: 'smooth',
     },
     xaxis: {
-      type: "datetime",
-      categories: stockPricesResp.data.map(item => `${item.matchday}`),
+      type: 'datetime',
+      categories: stockPricesResp.data.map((item) => `${item.matchday}`),
       labels: {
         style: {
-          colors: "#c8cfca",
-          fontSize: "12px",
+          colors: '#c8cfca',
+          fontSize: '12px',
         },
       },
       axisBorder: {
@@ -108,8 +108,8 @@ function StockPriceChart(props) {
     yaxis: {
       labels: {
         style: {
-          colors: "#c8cfca",
-          fontSize: "12px",
+          colors: '#c8cfca',
+          fontSize: '12px',
         },
       },
     },
@@ -118,13 +118,13 @@ function StockPriceChart(props) {
     },
     grid: {
       strokeDashArray: 5,
-      borderColor: "#56577A"
+      borderColor: '#56577A',
     },
     fill: {
-      type: "gradient",
+      type: 'gradient',
       gradient: {
-        shade: "dark",
-        type: "vertical",
+        shade: 'dark',
+        type: 'vertical',
         shadeIntensity: 0,
         gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
         inverseColors: true,
@@ -132,14 +132,14 @@ function StockPriceChart(props) {
         opacityTo: 0,
         stops: [],
       },
-      colors: ["#2CD9FF", "#582CFF"],
+      colors: ['#2CD9FF', '#582CFF'],
     },
-    colors: ["#2CD9FF", "#582CFF"],
-  };
+    colors: ['#2CD9FF', '#582CFF'],
+  }
 
   return (
     <LineChart
-      lineChartData={[{name: props.teamInfo.shortName, data: stockPrices}]}
+      lineChartData={[{ name: props.teamInfo.shortName, data: stockPrices }]}
       lineChartOptions={stockPricesChartOption}
     />
   )
@@ -154,12 +154,12 @@ function Tables() {
   //   isFetching,
   // } = useLeagueStandings()
 
-  const leagueStandingsResp = useLeagueStandings();
-  
+  const leagueStandingsResp = useLeagueStandings()
+
   if (leagueStandingsResp.isFetching) {
-    return <Text>Loading</Text>;
+    return <Text>Loading</Text>
   }
-  const leagueStandings = leagueStandingsResp.data;
+  const leagueStandings = leagueStandingsResp.data
 
   const maxGamesPlayed = Math.max(
     ...leagueStandings.map((item) => item.playedGames)
@@ -167,7 +167,7 @@ function Tables() {
   const selectedClub = leagueStandings[selectedClubIndex]
 
   function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
   function getStockPriceValue(x) {
     return `€${numberWithCommas(x)}`
@@ -271,7 +271,8 @@ function Tables() {
                   </NumberInputStepper>
                 </NumberInput>
                 <Text color="#E9EDF7" fontSize="sm" fontWeight="bold">
-                  at {getStockPriceValue(selectedClub.stockPrice.value)} per stock.
+                  at {getStockPriceValue(selectedClub.stockPrice.value)} per
+                  stock.
                 </Text>
               </Flex>
               <Button my="1rem" borderRadius="12px" colorScheme="blackAlpha">

@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react'
 
 // Chakra imports
 import {
@@ -38,21 +38,21 @@ import {
   Th,
   Thead,
   Tr,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
 // Styles for the circular progressbar
-import "react-circular-progressbar/dist/styles.css";
-import medusa from "assets/img/background-body-admin.png";
+import 'react-circular-progressbar/dist/styles.css'
+import medusa from 'assets/img/background-body-admin.png'
 // Custom components
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import BarChart from "components/Charts/BarChart";
-import LineChart from "components/Charts/LineChart";
-import IconBox from "components/Icons/IconBox";
-import DashboardTableRow from "components/Tables/DashboardTableRow";
-import TimelineRow from "components/Tables/TimelineRow";
-import * as GradientProgress from "@delowar/react-circle-progressbar";
+import Card from 'components/Card/Card.js'
+import CardBody from 'components/Card/CardBody.js'
+import CardHeader from 'components/Card/CardHeader.js'
+import BarChart from 'components/Charts/BarChart'
+import LineChart from 'components/Charts/LineChart'
+import IconBox from 'components/Icons/IconBox'
+import DashboardTableRow from 'components/Tables/DashboardTableRow'
+import TimelineRow from 'components/Tables/TimelineRow'
+import * as GradientProgress from '@delowar/react-circle-progressbar'
 
 // Icons
 import {
@@ -62,14 +62,14 @@ import {
   RocketIcon,
   StatsIcon,
   WalletIcon,
-} from "components/Icons/Icons.js";
-import { BsArrowRight } from "react-icons/bs";
+} from 'components/Icons/Icons.js'
+import { BsArrowRight } from 'react-icons/bs'
 import {
   IoCheckmarkDoneCircleSharp,
   IoEllipsisHorizontal,
-} from "react-icons/io5";
-import { BiHappy } from "react-icons/bi";
-import { AiFillCheckCircle } from "react-icons/ai";
+} from 'react-icons/io5'
+import { BiHappy } from 'react-icons/bi'
+import { AiFillCheckCircle } from 'react-icons/ai'
 
 // Data
 import {
@@ -77,84 +77,93 @@ import {
   barChartOptionsDashboard,
   lineChartDataDashboard,
   lineChartOptionsDashboard,
-} from "variables/charts";
-import { dashboardTableData, timelineData } from "variables/general";
+} from 'variables/charts'
+import { dashboardTableData, timelineData } from 'variables/general'
 
 // query
-import { useLeagueStandings } from "query/leagueStandings";
-import { useUpcomingMatches } from "query/matches";
-import { useUser } from 'query/user';
+import { useLeagueStandings } from 'query/leagueStandings'
+import { useUpcomingMatches } from 'query/matches'
+import { useUser } from 'query/user'
 
 export default function Dashboard() {
-  const leagueStandingsResp = useLeagueStandings();
+  const leagueStandingsResp = useLeagueStandings()
   // const { status, data: upcoming, error, isFetching } = useUpcomingMatches();
-  const upcomingMatchesResp = useUpcomingMatches();
-  const userResp = useUser();
+  const upcomingMatchesResp = useUpcomingMatches()
+  const userResp = useUser()
 
-  if (leagueStandingsResp.isFetching || upcomingMatchesResp.isFetching || userResp.isFetching) {
-    return <Text>Loading</Text>;
+  if (
+    leagueStandingsResp.isFetching ||
+    upcomingMatchesResp.isFetching ||
+    userResp.isFetching
+  ) {
+    return <Text>Loading</Text>
   }
   if (!!userResp.error) {
-    history.push('/');
+    history.push('/')
   }
 
-  const leagueStandings = leagueStandingsResp.data;
-  const upcomingMatches = upcomingMatchesResp.data;
-  const user = userResp.data;
+  const leagueStandings = leagueStandingsResp.data
+  const upcomingMatches = upcomingMatchesResp.data
+  const user = userResp.data
 
-  const maxGamesPlayed = Math.max(...leagueStandings.map(item => item.playedGames));
+  const maxGamesPlayed = Math.max(
+    ...leagueStandings.map((item) => item.playedGames)
+  )
 
   return (
-    <Flex flexDirection='column' pt={{ base: "40px", md: "0px" }}>
-      <SimpleGrid columns={{ sm: 1, md: 2, xl: 2 }} spacing='24px'>
+    <Flex flexDirection="column" pt={{ base: '40px', md: '0px' }}>
+      <SimpleGrid columns={{ sm: 1, md: 2, xl: 2 }} spacing="24px">
         {/* MiniStatistics Card */}
         <Card>
           <CardBody>
-            <Flex flexDirection='row' align='center' justify='center' w='100%'>
-              <Stat me='auto'>
+            <Flex flexDirection="row" align="center" justify="center" w="100%">
+              <Stat me="auto">
                 <StatLabel
-                  fontSize='sm'
-                  color='gray.400'
-                  fontWeight='bold'
-                  pb='2px'>
+                  fontSize="sm"
+                  color="gray.400"
+                  fontWeight="bold"
+                  pb="2px"
+                >
                   Net worth
                 </StatLabel>
                 <Flex>
-                  <StatNumber fontSize='lg' color='#fff'>
+                  <StatNumber fontSize="lg" color="#fff">
                     €53,000
                   </StatNumber>
                   <StatHelpText
-                    alignSelf='flex-end'
-                    justifySelf='flex-end'
-                    m='0px'
-                    color='green.400'
-                    fontWeight='bold'
-                    ps='3px'
-                    fontSize='md'>
+                    alignSelf="flex-end"
+                    justifySelf="flex-end"
+                    m="0px"
+                    color="green.400"
+                    fontWeight="bold"
+                    ps="3px"
+                    fontSize="md"
+                  >
                     +55%
                   </StatHelpText>
                 </Flex>
               </Stat>
-              <IconBox as='box' h={"45px"} w={"45px"} bg='brand.200'>
-                <GlobeIcon h={"24px"} w={"24px"} color='#fff' />
+              <IconBox as="box" h={'45px'} w={'45px'} bg="brand.200">
+                <GlobeIcon h={'24px'} w={'24px'} color="#fff" />
               </IconBox>
             </Flex>
           </CardBody>
         </Card>
         {/* MiniStatistics Card */}
-        <Card minH='83px'>
+        <Card minH="83px">
           <CardBody>
-            <Flex flexDirection='row' align='center' justify='center' w='100%'>
-              <Stat me='auto'>
+            <Flex flexDirection="row" align="center" justify="center" w="100%">
+              <Stat me="auto">
                 <StatLabel
-                  fontSize='sm'
-                  color='gray.400'
-                  fontWeight='bold'
-                  pb='2px'>
+                  fontSize="sm"
+                  color="gray.400"
+                  fontWeight="bold"
+                  pb="2px"
+                >
                   Cash
                 </StatLabel>
                 <Flex>
-                  <StatNumber fontSize='lg' color='#fff'>
+                  <StatNumber fontSize="lg" color="#fff">
                     €2,300
                   </StatNumber>
                   {/* <StatHelpText
@@ -169,8 +178,8 @@ export default function Dashboard() {
                   </StatHelpText> */}
                 </Flex>
               </Stat>
-              <IconBox as='box' h={"45px"} w={"45px"} bg='brand.200'>
-                <WalletIcon h={"24px"} w={"24px"} color='#fff' />
+              <IconBox as="box" h={'45px'} w={'45px'} bg="brand.200">
+                <WalletIcon h={'24px'} w={'24px'} color="#fff" />
               </IconBox>
             </Flex>
           </CardBody>
@@ -246,35 +255,39 @@ export default function Dashboard() {
         </Card> */}
       </SimpleGrid>
       <Grid
-        templateColumns={{ sm: "1fr", md: "1fr 1fr", "2xl": "2fr 1.2fr 1.5fr" }}
-        my='26px'
-        gap='18px'>
+        templateColumns={{ sm: '1fr', md: '1fr 1fr', '2xl': '2fr 1.2fr 1.5fr' }}
+        my="26px"
+        gap="18px"
+      >
         {/* Welcome Card */}
         <Card
-          p='0px'
-          gridArea={{ md: "1 / 1 / 2 / 3", "2xl": "auto" }}
+          p="0px"
+          gridArea={{ md: '1 / 1 / 2 / 3', '2xl': 'auto' }}
           bgImage={medusa}
-          bgSize='cover'
-          bgPosition='50%'>
-          <CardBody w='100%' h='100%'>
-            <Flex flexDirection={{ sm: "column", lg: "row" }} w='100%' h='100%'>
+          bgSize="cover"
+          bgPosition="50%"
+        >
+          <CardBody w="100%" h="100%">
+            <Flex flexDirection={{ sm: 'column', lg: 'row' }} w="100%" h="100%">
               <Flex
-                flexDirection='column'
-                h='100%'
-                p='22px'
-                minW='60%'
-                lineHeight='1.6'>
-                <Text fontSize='sm' color='gray.400' fontWeight='bold'>
+                flexDirection="column"
+                h="100%"
+                p="22px"
+                minW="60%"
+                lineHeight="1.6"
+              >
+                <Text fontSize="sm" color="gray.400" fontWeight="bold">
                   Welcome back,
                 </Text>
-                <Text fontSize='28px' color='#fff' fontWeight='bold' mb='18px'>
+                <Text fontSize="28px" color="#fff" fontWeight="bold" mb="18px">
                   {user.name}
                 </Text>
                 <Text
-                  fontSize='md'
-                  color='gray.400'
-                  fontWeight='normal'
-                  mb='auto'>
+                  fontSize="md"
+                  color="gray.400"
+                  fontWeight="normal"
+                  mb="auto"
+                >
                   Glad to see you again!
                 </Text>
                 {/* <Spacer />
@@ -655,13 +668,14 @@ export default function Dashboard() {
         </Card>
       </Grid> */}
       <Grid
-        templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "2fr 1fr" }}
-        gap='24px'>
+        templateColumns={{ sm: '1fr', md: '1fr 1fr', lg: '2fr 1fr' }}
+        gap="24px"
+      >
         {/* Projects */}
-        <Card p='16px' overflowX={{ sm: "scroll", xl: "hidden" }}>
-          <CardHeader p='12px 0px 28px 0px'>
-            <Flex direction='column'>
-              <Text fontSize='lg' color='#fff' fontWeight='bold' pb='8px'>
+        <Card p="16px" overflowX={{ sm: 'scroll', xl: 'hidden' }}>
+          <CardHeader p="12px 0px 28px 0px">
+            <Flex direction="column">
+              <Text fontSize="lg" color="#fff" fontWeight="bold" pb="8px">
                 League Table
               </Text>
               {/* <Flex align='center'>
@@ -681,46 +695,51 @@ export default function Dashboard() {
               </Flex> */}
             </Flex>
           </CardHeader>
-          <Table variant='simple' color='#fff'>
+          <Table variant="simple" color="#fff">
             <Thead>
-              <Tr my='.8rem' ps='0px'>
+              <Tr my=".8rem" ps="0px">
                 <Th
-                  ps='0px'
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
+                  ps="0px"
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
                   Position
                 </Th>
                 <Th
-                  ps='0px'
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
+                  ps="0px"
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
                   Club
                 </Th>
                 <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
                   Games Played
                 </Th>
                 <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
                   Points
                 </Th>
                 <Th
-                  color='gray.400'
-                  fontFamily='Plus Jakarta Display'
-                  borderBottomColor='#56577A'>
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
                   Win %
                 </Th>
               </Tr>
             </Thead>
             <Tbody>
               {leagueStandings.slice(0, 6).map((row, index, arr) => {
-                const winPerc = Math.round((row.won / row.playedGames) * 100);
+                const winPerc = Math.round((row.won / row.playedGames) * 100)
                 return (
                   <DashboardTableRow
                     position={index + 1}
@@ -732,16 +751,16 @@ export default function Dashboard() {
                     lastItem={index === arr.length - 1 ? true : false}
                     maxGamesPlayed={maxGamesPlayed}
                   />
-                );
+                )
               })}
             </Tbody>
           </Table>
         </Card>
         {/* Orders Overview */}
         <Card>
-          <CardHeader mb='32px'>
-            <Flex direction='column'>
-              <Text fontSize='lg' color='#fff' fontWeight='bold' mb='6px'>
+          <CardHeader mb="32px">
+            <Flex direction="column">
+              <Text fontSize="lg" color="#fff" fontWeight="bold" mb="6px">
                 Upcoming Fixtures
               </Text>
               {/* <Flex align='center'>
@@ -762,7 +781,7 @@ export default function Dashboard() {
             </Flex>
           </CardHeader>
           <CardBody>
-            <Flex direction='column' lineHeight='21px'>
+            <Flex direction="column" lineHeight="21px">
               {timelineData.map((row, index, arr) => {
                 const title = `${upcomingMatches[index].homeTeam} vs ${upcomingMatches[index].awayTeam}`
                 return (
@@ -774,12 +793,12 @@ export default function Dashboard() {
                     index={index}
                     arrLength={arr.length}
                   />
-                );
+                )
               })}
             </Flex>
           </CardBody>
         </Card>
       </Grid>
     </Flex>
-  );
+  )
 }

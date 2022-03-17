@@ -54,17 +54,17 @@ function SignIn() {
   const textColor = 'gray.400'
 
   async function signInOnSuccess(res) {
-    const { tokenId } = res;
-    await auth.signIn(tokenId);
-    history.push('/admin');
+    const { tokenId } = res
+    await auth.signIn(tokenId)
+    history.push('/admin')
   }
 
-  const { status, data, error, isFetching } = useUser();
+  const { status, data, error, isFetching } = useUser()
   if (isFetching) {
-    return <Text>Loading...</Text>;
+    return <Text>Loading...</Text>
   }
   if (!error) {
-    history.push('/admin');
+    history.push('/admin')
   }
 
   return (

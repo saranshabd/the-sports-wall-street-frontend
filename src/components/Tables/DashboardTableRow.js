@@ -26,30 +26,40 @@ import {
   Text,
   Tr,
   useColorModeValue,
-} from "@chakra-ui/react";
-import React from "react";
+} from '@chakra-ui/react'
+import React from 'react'
 
 function DashboardTableRow(props) {
-  const { position, logo, name, members, budget, progression, lastItem, maxGamesPlayed } = props;
-  const textColor = useColorModeValue("gray.700", "white");
+  const {
+    position,
+    logo,
+    name,
+    members,
+    budget,
+    progression,
+    lastItem,
+    maxGamesPlayed,
+  } = props
+  const textColor = useColorModeValue('gray.700', 'white')
 
-  const membersColor = members < maxGamesPlayed ? 'green.400' : 'white';
+  const membersColor = members < maxGamesPlayed ? 'green.400' : 'white'
 
   return (
     <Tr>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color='white' fontWeight='bold'>
+      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Text fontSize="sm" color="white" fontWeight="bold">
           {position}.
         </Text>
       </Td>
       <Td
-        minWidth={{ sm: "150px" }}
-        ps='0px'
-        borderBottomColor='#56577A'
-        border={lastItem ? "none" : null}>
-        <Flex align='center' py='.8rem' minWidth='100%' flexWrap='nowrap'>
+        minWidth={{ sm: '150px' }}
+        ps="0px"
+        borderBottomColor="#56577A"
+        border={lastItem ? 'none' : null}
+      >
+        <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           {/* <Icon as={logo} h={"24px"} w={"24px"} me='18px' /> */}
-          <Text fontSize='sm' color='#fff' fontWeight='bold' minWidth='100%'>
+          <Text fontSize="sm" color="#fff" fontWeight="bold" minWidth="100%">
             {name}
           </Text>
         </Flex>
@@ -70,34 +80,35 @@ function DashboardTableRow(props) {
           })}
         </AvatarGroup>
       </Td> */}
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color={membersColor} fontWeight='bold'>
+      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Text fontSize="sm" color={membersColor} fontWeight="bold">
           {members}
         </Text>
       </Td>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Text fontSize='sm' color='#fff' fontWeight='bold'>
+      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Text fontSize="sm" color="#fff" fontWeight="bold">
           {budget}
         </Text>
       </Td>
-      <Td borderBottomColor='#56577A' border={lastItem ? "none" : null}>
-        <Flex direction='column'>
+      <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
+        <Flex direction="column">
           <Text
-            fontSize='sm'
-            color='#fff'
-            fontWeight='bold'
-            pb='.2rem'>{`${progression}%`}</Text>
+            fontSize="sm"
+            color="#fff"
+            fontWeight="bold"
+            pb=".2rem"
+          >{`${progression}%`}</Text>
           <Progress
-            colorScheme='brand'
-            h='3px'
-            bg='#2D2E5F'
+            colorScheme="brand"
+            h="3px"
+            bg="#2D2E5F"
             value={progression}
-            borderRadius='30px'
+            borderRadius="30px"
           />
         </Flex>
       </Td>
     </Tr>
-  );
+  )
 }
 
-export default DashboardTableRow;
+export default DashboardTableRow

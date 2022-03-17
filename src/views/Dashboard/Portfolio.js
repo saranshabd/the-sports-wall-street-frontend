@@ -15,38 +15,51 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react'
 
 // Chakra imports
-import { Box, Button, Flex, Grid, Icon, Spacer, Text, Table, Thead, Tr, Th, Tbody } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Icon,
+  Spacer,
+  Text,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+} from '@chakra-ui/react'
 
 // Images
-import BackgroundCard1 from "assets/img/billing-background-card.png";
+import BackgroundCard1 from 'assets/img/billing-background-card.png'
 
 // Table Components
-import TablesProjectRow from "components/Tables/TablesProjectRow";
-import TablesTableRow from "components/Tables/TablesTableRow";
+import TablesProjectRow from 'components/Tables/TablesProjectRow'
+import TablesTableRow from 'components/Tables/TablesTableRow'
 
 // Custom components
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import GradientBorder from "components/GradientBorder/GradientBorder";
-import IconBox from "components/Icons/IconBox";
-import BillingRow from "components/Tables/BillingRow";
-import InvoicesRow from "components/Tables/InvoicesRow";
-import TransactionRow from "components/Tables/TransactionRow";
+import Card from 'components/Card/Card.js'
+import CardBody from 'components/Card/CardBody.js'
+import CardHeader from 'components/Card/CardHeader.js'
+import GradientBorder from 'components/GradientBorder/GradientBorder'
+import IconBox from 'components/Icons/IconBox'
+import BillingRow from 'components/Tables/BillingRow'
+import InvoicesRow from 'components/Tables/InvoicesRow'
+import TransactionRow from 'components/Tables/TransactionRow'
 
 // Icons
-import { FaPencilAlt, FaRegCalendarAlt } from "react-icons/fa";
-import { IoEllipsisHorizontalSharp } from "react-icons/io5";
-import { RiMastercardFill } from "react-icons/ri";
+import { FaPencilAlt, FaRegCalendarAlt } from 'react-icons/fa'
+import { IoEllipsisHorizontalSharp } from 'react-icons/io5'
+import { RiMastercardFill } from 'react-icons/ri'
 import {
   BillIcon,
   GraphIcon,
   MastercardIcon,
   VisaIcon,
-} from "components/Icons/Icons";
+} from 'components/Icons/Icons'
 
 // Data
 import {
@@ -54,49 +67,52 @@ import {
   invoicesData,
   newestTransactions,
   olderTransactions,
-} from "variables/general";
-import { tablesProjectData, tablesTableData } from "variables/general";
+} from 'variables/general'
+import { tablesProjectData, tablesTableData } from 'variables/general'
 
-import { useUser } from 'query/user';
+import { useUser } from 'query/user'
 
 function Portfolio() {
-  const userResp = useUser();
+  const userResp = useUser()
 
   if (userResp.isFetching) {
-    return <Text>Loading</Text>;
+    return <Text>Loading</Text>
   }
   if (!!userResp.error) {
-    history.push('/');
+    history.push('/')
   }
 
   return (
-    <Flex direction='column' pt={{ base: "40px", md: "0px" }} mx='auto'>
-      <Grid templateColumns={{ sm: "1fr", lg: "100% 100%" }}>
+    <Flex direction="column" pt={{ base: '40px', md: '0px' }} mx="auto">
+      <Grid templateColumns={{ sm: '1fr', lg: '100% 100%' }}>
         <Box>
           <Grid
             templateColumns={{
-              sm: "1fr",
-              md: "1fr 1fr",
+              sm: '1fr',
+              md: '1fr 1fr',
             }}
-            gap='26px'>
-              {/* Mastercard */}
+            gap="26px"
+          >
+            {/* Mastercard */}
             <Card
               // backgroundImage={BackgroundCard1}
               // backgroundRepeat='no-repeat'
               // bgSize='cover'
               // bgPosition='10%'
-              p='16px'>
-              <CardBody h='100%' w='100%'>
+              p="16px"
+            >
+              <CardBody h="100%" w="100%">
                 <Flex
-                  direction='column'
-                  color='white'
-                  h='100%'
-                  p='10px'
-                  w='100%'
-                  align='center'
-                  justify='center'>
-                  <Flex justify='space-between' align='center'>
-                    <Text fontSize='xl' fontWeight='bold'>
+                  direction="column"
+                  color="white"
+                  h="100%"
+                  p="10px"
+                  w="100%"
+                  align="center"
+                  justify="center"
+                >
+                  <Flex justify="space-between" align="center">
+                    <Text fontSize="xl" fontWeight="bold">
                       Game Week
                     </Text>
                     {/* <Icon
@@ -107,12 +123,13 @@ function Portfolio() {
                     /> */}
                   </Flex>
                   {/* <Spacer /> */}
-                  <Flex direction='column'>
+                  <Flex direction="column">
                     <Box>
                       <Text
-                        fontSize={{ sm: "48px", lg: "48px", xl: "48px" }}
-                        letterSpacing='2px'
-                        fontWeight='bold'>
+                        fontSize={{ sm: '48px', lg: '48px', xl: '48px' }}
+                        letterSpacing="2px"
+                        fontWeight="bold"
+                      >
                         31
                       </Text>
                     </Box>
@@ -136,26 +153,32 @@ function Portfolio() {
             </Card>
             {/* Credit Balance */}
             <Card>
-              <Flex direction='column'>
+              <Flex direction="column">
                 <Flex
-                  justify='space-between'
-                  p='22px'
-                  mb='18px'
-                  bg='linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)'
-                  borderRadius='18px'>
-                  <Flex direction='column'>
-                    <Text color='#E9EDF7' fontSize='12px'>
+                  justify="space-between"
+                  p="22px"
+                  mb="18px"
+                  bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
+                  borderRadius="18px"
+                >
+                  <Flex direction="column">
+                    <Text color="#E9EDF7" fontSize="12px">
                       Net worth
                     </Text>
-                    <Text color='#fff' fontWeight='bold' fontSize='24px'>
+                    <Text color="#fff" fontWeight="bold" fontSize="24px">
                       €25,215
                     </Text>
                   </Flex>
-                  <Flex direction='column'>
+                  <Flex direction="column">
                     {/* <Text color='#E9EDF7' fontSize='12px'>
                       Net worth
                     </Text> */}
-                    <Text color='#fff' fontWeight='bold' color='green.400' fontSize='18px'>
+                    <Text
+                      color="#fff"
+                      fontWeight="bold"
+                      color="green.400"
+                      fontSize="18px"
+                    >
                       +50%
                     </Text>
                   </Flex>
@@ -179,16 +202,17 @@ function Portfolio() {
                   </Flex> */}
                 </Flex>
                 <Flex
-                  justify='space-between'
-                  p='22px'
+                  justify="space-between"
+                  p="22px"
                   // mb='18px'
-                  bg='linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)'
-                  borderRadius='18px'>
-                  <Flex direction='column'>
-                    <Text color='#E9EDF7' fontSize='12px'>
+                  bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
+                  borderRadius="18px"
+                >
+                  <Flex direction="column">
+                    <Text color="#E9EDF7" fontSize="12px">
                       Cash
                     </Text>
-                    <Text color='#fff' fontWeight='bold' fontSize='24px'>
+                    <Text color="#fff" fontWeight="bold" fontSize="24px">
                       €5,215
                     </Text>
                   </Flex>
@@ -363,42 +387,50 @@ function Portfolio() {
           </CardBody>
         </Card> */}
       </Grid>
-      <Grid templateColumns={{ sm: "1fr", lg: "100%" }}>
+      <Grid templateColumns={{ sm: '1fr', lg: '100%' }}>
         {/* Billing Information */}
-        <Card my={{ sm: '24px', lg: "24px" }} me={{ sm: '24px', lg: "24px" }} overflowX={{ sm: "scroll", xl: "hidden" }}>
-          <Flex direction='column'>
-            <CardHeader py='12px'>
-              <Text color='#fff' fontSize='lg' fontWeight='bold'>
+        <Card
+          my={{ sm: '24px', lg: '24px' }}
+          me={{ sm: '24px', lg: '24px' }}
+          overflowX={{ sm: 'scroll', xl: 'hidden' }}
+        >
+          <Flex direction="column">
+            <CardHeader py="12px">
+              <Text color="#fff" fontSize="lg" fontWeight="bold">
                 Investments
               </Text>
             </CardHeader>
             <CardBody>
-              <Table variant='simple' color='#fff'>
+              <Table variant="simple" color="#fff">
                 <Thead>
-                  <Tr my='.8rem' ps='0px'>
+                  <Tr my=".8rem" ps="0px">
                     <Th
-                      ps='0px'
-                      color='gray.400'
-                      fontFamily='Plus Jakarta Display'
-                      borderBottomColor='#56577A'>
+                      ps="0px"
+                      color="gray.400"
+                      fontFamily="Plus Jakarta Display"
+                      borderBottomColor="#56577A"
+                    >
                       Club
                     </Th>
                     <Th
-                      color='gray.400'
-                      fontFamily='Plus Jakarta Display'
-                      borderBottomColor='#56577A'>
+                      color="gray.400"
+                      fontFamily="Plus Jakarta Display"
+                      borderBottomColor="#56577A"
+                    >
                       Investment
                     </Th>
                     <Th
-                      color='gray.400'
-                      fontFamily='Plus Jakarta Display'
-                      borderBottomColor='#56577A'>
+                      color="gray.400"
+                      fontFamily="Plus Jakarta Display"
+                      borderBottomColor="#56577A"
+                    >
                       Points
                     </Th>
                     <Th
-                      color='gray.400'
-                      fontFamily='Plus Jakarta Display'
-                      borderBottomColor='#56577A'>
+                      color="gray.400"
+                      fontFamily="Plus Jakarta Display"
+                      borderBottomColor="#56577A"
+                    >
                       Returns
                     </Th>
                     {/* <Th
@@ -428,7 +460,7 @@ function Portfolio() {
                         lastItem={index === arr.length - 1 ? true : false}
                         showButton={true}
                       />
-                    );
+                    )
                   })}
                 </Tbody>
               </Table>
@@ -512,7 +544,7 @@ function Portfolio() {
         </Card> */}
       </Grid>
     </Flex>
-  );
+  )
 }
 
-export default Portfolio;
+export default Portfolio

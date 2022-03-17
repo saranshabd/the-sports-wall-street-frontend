@@ -49,7 +49,7 @@ function DashboardTableRow(props) {
   const statusColor = status < maxGamesPlayed ? 'green.400' : 'white'
   const nameColor = isSelected ? 'gold' : 'white'
   const stockColor = stockPriceDiff > 0 ? 'green.400' : 'red.400'
-  
+
   return (
     <Tr onClick={onClick} _hover={{ cursor: 'pointer' }}>
       <Td borderBottomColor="#56577A" border={lastItem ? 'none' : null}>
@@ -109,13 +109,20 @@ function DashboardTableRow(props) {
         borderBottomColor="#56577A"
         border={lastItem ? 'none' : null}
       >
-        <Flex alignItems="center" py=".8rem" minWidth="100%" flexWrap="nowrap" gap='12px'>
+        <Flex
+          alignItems="center"
+          py=".8rem"
+          minWidth="100%"
+          flexWrap="nowrap"
+          gap="12px"
+        >
           {/* <Icon as={logo} h={"20px"} w={"20px"} me='18px' /> */}
-          <Text fontSize="sm" fontWeight="bold" color='white'>
+          <Text fontSize="sm" fontWeight="bold" color="white">
             {upNextName}
           </Text>
           <Text fontSize="sm" fontWeight="bold" color={stockColor}>
-            {stockPriceDiff > 0 && "+"}{stockPriceDiff}
+            {stockPriceDiff > 0 && '+'}
+            {stockPriceDiff}
           </Text>
         </Flex>
       </Td>
