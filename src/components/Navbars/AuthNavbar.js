@@ -96,7 +96,7 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+          // me="0px"
           px="0px"
           me={{ sm: '2px', md: '16px' }}
           color={navbarIcon}
@@ -110,7 +110,7 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+          // me="0px"
           px="0px"
           me={{ sm: '2px', md: '16px' }}
           color={navbarIcon}
@@ -126,7 +126,7 @@ export default function AuthNavbar(props) {
         <Button
           fontSize="sm"
           ms="0px"
-          me="0px"
+          // me="0px"
           px="0px"
           me={{ sm: '2px', md: '16px' }}
           color={navbarIcon}

@@ -39,7 +39,14 @@ function InvoicesRow(props) {
       </Box>
       <Button p="0px" bg="transparent" variant="no-hover">
         <Flex alignItems="center" p="12px">
-          <Icon as={logo} w="16px" h="16px" h="auto" me="5px" color="#fff" />
+          <Icon
+            as={logo}
+            w="16px"
+            // h="16px"
+            h="auto"
+            me="5px"
+            color="#fff"
+          />
           <Text fontSize="xs" color="gray.400">
             {format}
           </Text>
