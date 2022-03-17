@@ -85,6 +85,7 @@ import { dashboardTableData, timelineData } from "variables/general";
 import { useLeagueStandings } from "query/leagueStandings";
 import { useUpcomingMatches } from "query/matches";
 import { useUser } from "query/user";
+import { usePortfolio } from "query/portfolio";
 
 export default function Dashboard() {
   const history = useHistory();
@@ -92,18 +93,21 @@ export default function Dashboard() {
   const userResp = useUser();
   const leagueStandingsResp = useLeagueStandings();
   const upcomingMatchesResp = useUpcomingMatches();
+  const portfolioResp = usePortfolio();
 
   if (
     leagueStandingsResp.isFetching ||
     upcomingMatchesResp.isFetching ||
-    userResp.isFetching
+    userResp.isFetching ||
+    portfolioResp.isFetching
   ) {
     return <Text>Loading</Text>;
   }
   if (
     !!userResp.error ||
     !!leagueStandingsResp.error ||
-    !!upcomingMatchesResp.error
+    !!upcomingMatchesResp.error ||
+    !!portfolioResp.error
   ) {
     history.push("/auth");
     history.go(0); // reloads the page
@@ -112,10 +116,40 @@ export default function Dashboard() {
   const leagueStandings = leagueStandingsResp.data;
   const upcomingMatches = upcomingMatchesResp.data;
   const user = userResp.data;
+  const portfolio = portfolioResp.data;
 
   const maxGamesPlayed = Math.max(
     ...leagueStandings.map((item) => item.playedGames)
   );
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function getTotalNetWorth() {
+    let totalNetWorth = 0;
+    portfolio.forEach((item) => {
+      totalNetWorth += item.stocksCount * item.latestStockPrice;
+    });
+    return totalNetWorth + user.portfolio.cash;
+  }
+
+  function getPrevTotalNetWorth() {
+    let totalNetWorth = 0;
+    portfolio.forEach((item) => {
+      totalNetWorth += item.stocksCount * item.buyingPrice;
+    });
+    return totalNetWorth + user.portfolio.cash;
+  }
+
+  function getDiffPerc() {
+    const totalNetWorth = getTotalNetWorth();
+    const prevTotalNetWorth = getPrevTotalNetWorth();
+    const diff = (totalNetWorth - prevTotalNetWorth) / prevTotalNetWorth;
+    return Math.round(diff * 100);
+  }
+
+  const diffPerc = getDiffPerc();
 
   return (
     <Flex flexDirection="column" pt={{ base: "40px", md: "0px" }}>
@@ -135,18 +169,19 @@ export default function Dashboard() {
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize="lg" color="#fff">
-                    €53,000
+                    €{numberWithCommas(getTotalNetWorth())}
                   </StatNumber>
                   <StatHelpText
                     alignSelf="flex-end"
                     justifySelf="flex-end"
                     m="0px"
-                    color="green.400"
+                    color={diffPerc < 0 ? "red.400" : "green.400"}
                     fontWeight="bold"
                     ps="3px"
+                    ml="5px"
                     fontSize="md"
                   >
-                    +55%
+                    {diffPerc}%
                   </StatHelpText>
                 </Flex>
               </Stat>
@@ -171,7 +206,7 @@ export default function Dashboard() {
                 </StatLabel>
                 <Flex>
                   <StatNumber fontSize="lg" color="#fff">
-                    €2,300
+                    €{numberWithCommas(user.portfolio.cash)}
                   </StatNumber>
                   {/* <StatHelpText
                     alignSelf='flex-end'

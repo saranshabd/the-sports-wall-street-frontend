@@ -436,7 +436,6 @@ function Tables() {
                     name={row.teamInfo.shortName}
                     upNextName={getStockPriceValue(row.stockPrice.value)}
                     stockPriceDiff={row.stockPrice.diff}
-                    // logo={row.logo}
                     status={row.playedGames}
                     budget={row.points}
                     progression={winPerc}
@@ -447,6 +446,7 @@ function Tables() {
                       window.scrollTo(0, 0);
                     }}
                     isSelected={index == selectedClubIndex}
+                    showPosition={true}
                   />
                 );
               })}

@@ -71,16 +71,51 @@ import {
 import { tablesProjectData, tablesTableData } from "variables/general";
 
 import { useUser } from "query/user";
+import { usePortfolio } from "query/portfolio";
 
 function Portfolio() {
   const userResp = useUser();
+  const portfolioResp = usePortfolio();
 
-  if (userResp.isFetching) {
+  if (userResp.isFetching || portfolioResp.isFetching) {
     return <Text>Loading</Text>;
   }
-  if (!!userResp.error) {
-    history.push("/");
+  if (!!userResp.error || !!portfolioResp.error) {
+    history.push("/auth");
+    history.go(0); // reloads the page
   }
+
+  const user = userResp.data;
+  const portfolio = portfolioResp.data;
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function getTotalNetWorth() {
+    let totalNetWorth = 0;
+    portfolio.forEach((item) => {
+      totalNetWorth += item.stocksCount * item.latestStockPrice;
+    });
+    return totalNetWorth + user.portfolio.cash;
+  }
+
+  function getPrevTotalNetWorth() {
+    let totalNetWorth = 0;
+    portfolio.forEach((item) => {
+      totalNetWorth += item.stocksCount * item.buyingPrice;
+    });
+    return totalNetWorth + user.portfolio.cash;
+  }
+
+  function getDiffPerc() {
+    const totalNetWorth = getTotalNetWorth();
+    const prevTotalNetWorth = getPrevTotalNetWorth();
+    const diff = (totalNetWorth - prevTotalNetWorth) / prevTotalNetWorth;
+    return Math.round(diff * 100);
+  }
+
+  const diffPerc = getDiffPerc();
 
   return (
     <Flex direction="column" pt={{ base: "40px", md: "0px" }} mx="auto">
@@ -166,7 +201,7 @@ function Portfolio() {
                       Net worth
                     </Text>
                     <Text color="#fff" fontWeight="bold" fontSize="24px">
-                      €25,215
+                      €{numberWithCommas(getTotalNetWorth())}
                     </Text>
                   </Flex>
                   <Flex direction="column">
@@ -176,10 +211,10 @@ function Portfolio() {
                     <Text
                       // color="#fff"
                       fontWeight="bold"
-                      color="green.400"
+                      color={diffPerc < 0 ? "red.400" : "green.400"}
                       fontSize="18px"
                     >
-                      +50%
+                      {diffPerc}%
                     </Text>
                   </Flex>
                   {/* <Flex direction='column'>
@@ -213,7 +248,7 @@ function Portfolio() {
                       Cash
                     </Text>
                     <Text color="#fff" fontWeight="bold" fontSize="24px">
-                      €5,215
+                      €{numberWithCommas(user.portfolio.cash)}
                     </Text>
                   </Flex>
                   {/* <Flex direction='column'>
@@ -410,6 +445,14 @@ function Portfolio() {
                       fontFamily="Plus Jakarta Display"
                       borderBottomColor="#56577A"
                     >
+                      Index
+                    </Th>
+                    <Th
+                      ps="0px"
+                      color="gray.400"
+                      fontFamily="Plus Jakarta Display"
+                      borderBottomColor="#56577A"
+                    >
                       Club
                     </Th>
                     <Th
@@ -417,14 +460,21 @@ function Portfolio() {
                       fontFamily="Plus Jakarta Display"
                       borderBottomColor="#56577A"
                     >
-                      Investment
+                      Buying Price
                     </Th>
                     <Th
                       color="gray.400"
                       fontFamily="Plus Jakarta Display"
                       borderBottomColor="#56577A"
                     >
-                      Points
+                      Stock Price
+                    </Th>
+                    <Th
+                      color="gray.400"
+                      fontFamily="Plus Jakarta Display"
+                      borderBottomColor="#56577A"
+                    >
+                      Units Owned
                     </Th>
                     <Th
                       color="gray.400"
@@ -449,16 +499,22 @@ function Portfolio() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {tablesProjectData.map((row, index, arr) => {
+                  {portfolio.map((row, index, arr) => {
+                    const returns =
+                      (row.latestStockPrice - row.buyingPrice) /
+                      row.buyingPrice;
                     return (
                       <TablesProjectRow
-                        name={row.name}
-                        logo={row.logo}
-                        status={row.status}
-                        budget={row.budget}
-                        progression={row.progression}
-                        lastItem={index === arr.length - 1 ? true : false}
+                        position={index + 1}
+                        name={row.teamId.shortName}
+                        showProgressionColor={true}
+                        status={row.stocksCount}
+                        budget={`€${numberWithCommas(row.latestStockPrice)}`}
+                        buyingPrice={`€${numberWithCommas(row.buyingPrice)}`}
+                        progression={Math.round(returns * 100)}
+                        lastItem={index === portfolio.length - 1 ? true : false}
                         showButton={true}
+                        showPosition={true}
                       />
                     );
                   })}
