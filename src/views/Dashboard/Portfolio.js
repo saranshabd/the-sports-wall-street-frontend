@@ -165,7 +165,7 @@ function Portfolio() {
                         letterSpacing="2px"
                         fontWeight="bold"
                       >
-                        31
+                        {user.season.currentMatchday}
                       </Text>
                     </Box>
                     {/* <Flex mt='14px'>
