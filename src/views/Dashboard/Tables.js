@@ -37,6 +37,11 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  CloseButton,
+  Alert,
+  AlertTitle,
+  AlertDescription,
+  AlertIcon,
 } from "@chakra-ui/react";
 
 // Custom components
@@ -64,17 +69,18 @@ import { useLeagueStandings } from "query/leagueStandings";
 import { useStockPrices } from "query/stockPrices";
 import { useUser } from "query/user";
 
+import * as portfolioUtils from "utils/portfolio";
+
 function StockPriceChart(props) {
   const history = useHistory();
 
-  const userResp = useUser();
   const stockPricesResp = useStockPrices(props.teamInfo.teamId);
 
-  if (stockPricesResp.isFetching || userResp.isFetching) {
+  if (stockPricesResp.isFetching) {
     return <Text>Loading</Text>;
   }
 
-  if (!!userResp.error || !!stockPricesResp.error) {
+  if (!!stockPricesResp.error) {
     history.push("/auth");
     history.go(0); // reloads the page
   }
@@ -152,7 +158,13 @@ function StockPriceChart(props) {
 }
 
 function Tables() {
+  const history = useHistory();
+
+  const [errorMessage, setErrorMessage] = useState("");
   const [selectedClubIndex, setSelectedClubIndex] = useState(0);
+  const [selectedStockCount, setSelectedStocksCount] = useState(15);
+  const [isBuyLoading, setIsBuyLoading] = useState(false);
+
   // const {
   //   status,
   //   data: leagueStandings,
@@ -160,11 +172,18 @@ function Tables() {
   //   isFetching,
   // } = useLeagueStandings()
 
+  const userResp = useUser();
   const leagueStandingsResp = useLeagueStandings();
 
-  if (leagueStandingsResp.isFetching) {
+  if (userResp.isFetching || leagueStandingsResp.isFetching) {
     return <Text>Loading</Text>;
   }
+  if (!!userResp.error || !!leagueStandingsResp.error) {
+    history.push("/auth");
+    history.go(0); // reloads the page
+  }
+
+  const user = userResp.data;
   const leagueStandings = leagueStandingsResp.data;
 
   const maxGamesPlayed = Math.max(
@@ -181,6 +200,12 @@ function Tables() {
 
   return (
     <Flex direction="column" pt={{ base: "40px", md: "0px" }}>
+      {"" !== errorMessage && (
+        <Alert status="error">
+          <AlertIcon />
+          <AlertDescription>{errorMessage}</AlertDescription>
+        </Alert>
+      )}
       <Card>
         <CardHeader py="12px">
           <Text fontSize="lg" color="#fff" fontWeight="bold">
@@ -269,6 +294,8 @@ function Tables() {
                   min={1}
                   max={20}
                   color="white"
+                  value={selectedStockCount}
+                  onChange={(newValue) => setSelectedStocksCount(newValue)}
                 >
                   <NumberInputField />
                   <NumberInputStepper>
@@ -281,7 +308,33 @@ function Tables() {
                   stock.
                 </Text>
               </Flex>
-              <Button my="1rem" borderRadius="12px" colorScheme="blackAlpha">
+              <Button
+                my="1rem"
+                borderRadius="12px"
+                colorScheme="blackAlpha"
+                onClick={async () => {
+                  setErrorMessage("");
+                  if (
+                    user.portfolio.cash <
+                    selectedStockCount * selectedClub.stockPrice.value
+                  ) {
+                    setErrorMessage(
+                      "You do not have enough cash to buy these stocks"
+                    );
+                    setTimeout(() => setErrorMessage(""), 5000);
+                    return;
+                  }
+                  setIsBuyLoading(true);
+                  await portfolioUtils.buyStocks(
+                    selectedClub.teamInfo.teamId,
+                    selectedStockCount,
+                    selectedClub.stockPrice.value
+                  );
+                  setIsBuyLoading(false);
+                  history.push("/admin/portfolio");
+                }}
+                isLoading={isBuyLoading}
+              >
                 Buy
               </Button>
             </Flex>
@@ -441,8 +494,9 @@ function Tables() {
                     progression={winPerc}
                     lastItem={index === arr.length - 1 ? true : false}
                     maxGamesPlayed={maxGamesPlayed}
-                    onClick={() => {
+                    rowOnClick={() => {
                       setSelectedClubIndex(index);
+                      setSelectedStocksCount(15);
                       window.scrollTo(0, 0);
                     }}
                     isSelected={index == selectedClubIndex}

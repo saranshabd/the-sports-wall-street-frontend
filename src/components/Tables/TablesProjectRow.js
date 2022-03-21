@@ -44,6 +44,7 @@ function DashboardTableRow(props) {
     showButton,
     maxGamesPlayed,
     onClick,
+    rowOnClick,
     isSelected,
     stockPriceDiff,
     showProgressionColor,
@@ -57,7 +58,7 @@ function DashboardTableRow(props) {
   const stockColor = stockPriceDiff > 0 ? "green.400" : "red.400";
 
   return (
-    <Tr _hover={{ cursor: "pointer" }}>
+    <Tr onClick={rowOnClick} _hover={{ cursor: "pointer" }}>
       {showPosition && (
         <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
           <Text fontSize="sm" color={nameColor} fontWeight="bold">
