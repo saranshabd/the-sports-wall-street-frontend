@@ -16,7 +16,7 @@
 
 */
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Tr,
   Td,
@@ -30,6 +30,8 @@ import {
 import { FaEllipsisV } from "react-icons/fa";
 
 function DashboardTableRow(props) {
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     position,
     logo,
@@ -48,13 +50,14 @@ function DashboardTableRow(props) {
     showPosition,
     buyingPrice,
   } = props;
+
   const textColor = useColorModeValue("gray.700", "white");
   const statusColor = status < maxGamesPlayed ? "green.400" : "white";
   const nameColor = isSelected ? "gold" : "white";
   const stockColor = stockPriceDiff > 0 ? "green.400" : "red.400";
 
   return (
-    <Tr onClick={onClick} _hover={{ cursor: "pointer" }}>
+    <Tr _hover={{ cursor: "pointer" }}>
       {showPosition && (
         <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
           <Text fontSize="sm" color={nameColor} fontWeight="bold">
@@ -152,7 +155,17 @@ function DashboardTableRow(props) {
           borderBottomColor="#56577A"
           border={lastItem ? "none" : null}
         >
-          <Button borderRadius="12px" colorScheme="blackAlpha" isFullWidth>
+          <Button
+            borderRadius="12px"
+            colorScheme="blackAlpha"
+            isFullWidth
+            isLoading={isLoading}
+            onClick={async () => {
+              setIsLoading(true);
+              await onClick();
+              setIsLoading(false);
+            }}
+          >
             {/* <Icon as={FaEllipsisV} color='gray.400' cursor='pointer' /> */}
             Cash out
           </Button>

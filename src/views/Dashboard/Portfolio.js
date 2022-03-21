@@ -72,6 +72,7 @@ import { tablesProjectData, tablesTableData } from "variables/general";
 
 import { useUser } from "query/user";
 import { usePortfolio } from "query/portfolio";
+import * as portfolioUtils from "utils/portfolio";
 
 function Portfolio() {
   const userResp = useUser();
@@ -515,6 +516,11 @@ function Portfolio() {
                         lastItem={index === portfolio.length - 1 ? true : false}
                         showButton={true}
                         showPosition={true}
+                        onClick={async () => {
+                          const teamIdToSell = row.teamId.teamId;
+                          await portfolioUtils.sellAll(teamIdToSell);
+                          history.go(0);
+                        }}
                       />
                     );
                   })}
