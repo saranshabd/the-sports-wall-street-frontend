@@ -49,6 +49,7 @@ import Card from "components/Card/Card.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import LineChart from "components/Charts/LineChart";
+import Loader from "components/Loader";
 
 // Table Components
 import TablesProjectRow from "components/Tables/TablesProjectRow";
@@ -77,7 +78,7 @@ function StockPriceChart(props) {
   const stockPricesResp = useStockPrices(props.teamInfo.teamId);
 
   if (stockPricesResp.isFetching) {
-    return <Text>Loading</Text>;
+    return <Loader />;
   }
 
   if (!!stockPricesResp.error) {
@@ -176,7 +177,7 @@ function Tables() {
   const leagueStandingsResp = useLeagueStandings();
 
   if (userResp.isFetching || leagueStandingsResp.isFetching) {
-    return <Text>Loading</Text>;
+    return <Loader />;
   }
   if (!!userResp.error || !!leagueStandingsResp.error) {
     history.push("/auth");

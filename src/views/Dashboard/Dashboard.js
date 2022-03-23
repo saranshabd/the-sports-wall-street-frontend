@@ -39,6 +39,7 @@ import {
   Th,
   Thead,
   Tr,
+  Spinner,
 } from "@chakra-ui/react";
 
 // Styles for the circular progressbar
@@ -54,6 +55,7 @@ import IconBox from "components/Icons/IconBox";
 import DashboardTableRow from "components/Tables/DashboardTableRow";
 import TimelineRow from "components/Tables/TimelineRow";
 import * as GradientProgress from "@delowar/react-circle-progressbar";
+import Loader from "components/Loader";
 
 // Icons
 import {
@@ -101,8 +103,9 @@ export default function Dashboard() {
     userResp.isFetching ||
     portfolioResp.isFetching
   ) {
-    return <Text>Loading</Text>;
+    return <Loader />;
   }
+
   if (
     !!userResp.error ||
     !!leagueStandingsResp.error ||

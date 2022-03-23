@@ -38,6 +38,7 @@ import signInImage from "assets/img/signInImage.png";
 // Custom Components
 import AuthFooter from "components/Footer/AuthFooter";
 import GradientBorder from "components/GradientBorder/GradientBorder";
+import Loader from "components/Loader";
 
 // Google Sign In
 import { GoogleLogin } from "react-google-login";
@@ -61,8 +62,9 @@ function SignIn() {
 
   const { status, data, error, isFetching } = useUser();
   if (isFetching) {
-    return <Text>Loading...</Text>;
+    return <Loader />;
   }
+
   if (!error) {
     history.push("/admin");
   }

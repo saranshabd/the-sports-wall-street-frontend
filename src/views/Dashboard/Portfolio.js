@@ -49,6 +49,7 @@ import IconBox from "components/Icons/IconBox";
 import BillingRow from "components/Tables/BillingRow";
 import InvoicesRow from "components/Tables/InvoicesRow";
 import TransactionRow from "components/Tables/TransactionRow";
+import Loader from "components/Loader";
 
 // Icons
 import { FaPencilAlt, FaRegCalendarAlt } from "react-icons/fa";
@@ -79,8 +80,9 @@ function Portfolio() {
   const portfolioResp = usePortfolio();
 
   if (userResp.isFetching || portfolioResp.isFetching) {
-    return <Text>Loading</Text>;
+    return <Loader />;
   }
+
   if (!!userResp.error || !!portfolioResp.error) {
     history.push("/auth");
     history.go(0); // reloads the page
