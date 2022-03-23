@@ -24,6 +24,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
+import HomeLayout from "layouts/Home.js";
 
 const queryClient = new QueryClient();
 
@@ -34,7 +35,7 @@ function IndexComp() {
         <Switch>
           <Route path={`/auth`} component={AuthLayout} />
           <Route path={`/admin`} component={AdminLayout} />
-          <Redirect from={`/`} to="/auth/signin" />
+          <Route from={`/`} component={HomeLayout} />
         </Switch>
       </HashRouter>
       <ReactQueryDevtools />
