@@ -26,6 +26,8 @@ import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
 import HomeLayout from "layouts/Home.js";
 
+import * as serviceWorker from "serviceWorker";
+
 const queryClient = new QueryClient();
 
 function IndexComp() {
@@ -44,3 +46,6 @@ function IndexComp() {
 }
 
 ReactDOM.render(<IndexComp />, document.getElementById("root"));
+
+// Register servive worker for the PWA
+serviceWorker.register();
