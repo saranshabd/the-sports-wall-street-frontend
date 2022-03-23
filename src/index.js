@@ -18,7 +18,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
@@ -33,13 +33,13 @@ const queryClient = new QueryClient();
 function IndexComp() {
   return (
     <QueryClientProvider client={queryClient}>
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <Route path={`/auth`} component={AuthLayout} />
           <Route path={`/admin`} component={AdminLayout} />
           <Route from={`/`} component={HomeLayout} />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
       <ReactQueryDevtools />
     </QueryClientProvider>
   );

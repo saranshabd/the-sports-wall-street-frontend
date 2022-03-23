@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 // Chakra imports
@@ -96,6 +96,11 @@ export default function Dashboard() {
   const leagueStandingsResp = useLeagueStandings();
   const upcomingMatchesResp = useUpcomingMatches();
   const portfolioResp = usePortfolio();
+
+  // Update the title of the page
+  useEffect(() => {
+    document.title = "Sports Wall St. | Dashboard";
+  }, []);
 
   if (
     leagueStandingsResp.isFetching ||

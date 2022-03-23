@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useEffect } from "react";
 
 // Chakra imports
 import {
@@ -76,6 +76,11 @@ import { usePortfolio } from "query/portfolio";
 import * as portfolioUtils from "utils/portfolio";
 
 function Portfolio() {
+  // Update the title of the page
+  useEffect(() => {
+    document.title = "Sports Wall St. | Portfolio";
+  }, []);
+
   const userResp = useUser();
   const portfolioResp = usePortfolio();
 

@@ -16,7 +16,7 @@
 
 */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 // Chakra imports
@@ -74,6 +74,11 @@ import * as portfolioUtils from "utils/portfolio";
 
 function StockPriceChart(props) {
   const history = useHistory();
+
+  // Update the title of the page
+  useEffect(() => {
+    document.title = "Sports Wall St. | League Table";
+  }, []);
 
   const stockPricesResp = useStockPrices(props.teamInfo.teamId);
 
