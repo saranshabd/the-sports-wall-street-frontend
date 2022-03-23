@@ -33,6 +33,8 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
+import AddToHomeScreen from "@ideasio/add-to-homescreen-react";
+
 export default function Dashboard(props) {
   const { ...rest } = props;
   // states and functions
@@ -111,9 +113,21 @@ export default function Dashboard(props) {
   };
   const { isOpen, onOpen, onClose } = useDisclosure();
   document.documentElement.dir = "ltr";
+
+  function addToHomeScreenOnShow() {}
+
+  function addToHomeScreenOnInstall() {}
+
+  function addToHomeScreenOnCancel() {}
+
   // Chakra Color Mode
   return (
     <ChakraProvider theme={theme} resetCss={false}>
+      <AddToHomeScreen
+        onShow={addToHomeScreenOnShow}
+        onInstall={addToHomeScreenOnInstall}
+        onCancel={addToHomeScreenOnCancel}
+      />
       <Sidebar
         routes={routes}
         logoText={"SPORTS WALL ST."}
