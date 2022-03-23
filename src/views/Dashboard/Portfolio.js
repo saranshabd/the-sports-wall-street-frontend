@@ -84,6 +84,7 @@ function Portfolio() {
   }
 
   if (!!userResp.error || !!portfolioResp.error) {
+    window.gtag("event", "false_auth_error"); // Google Analytics
     history.push("/auth");
     history.go(0); // reloads the page
   }
@@ -519,6 +520,10 @@ function Portfolio() {
                         showButton={true}
                         showPosition={true}
                         onClick={async () => {
+                          const teamName = row.teamId.shortName
+                            .split(" ")
+                            .join("_");
+                          window.gtag("event", `portfolio_${teamName}_cashout`); // Google Analytics
                           const teamIdToSell = row.teamId.teamId;
                           await portfolioUtils.sellAll(teamIdToSell);
                           history.go(0);

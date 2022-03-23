@@ -163,6 +163,7 @@ function Sidebar(props) {
               }}
               onClick={async () => {
                 if ("Sign Out" !== prop.name) {
+                  window.gtag("event", `sidenav_${prop.name}_click`); // Google Analytics
                   return;
                 }
                 await authUtils.signOut();
@@ -397,6 +398,7 @@ export function SidebarResponsive(props) {
               }}
               onClick={async () => {
                 if ("Sign Out" !== prop.name) {
+                  window.gtag("event", `sidenav_${prop.name}_click`); // Google Analytics
                   return;
                 }
                 await authUtils.signOut();

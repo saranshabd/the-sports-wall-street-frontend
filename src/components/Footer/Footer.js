@@ -21,6 +21,10 @@ import React from "react";
 import { Flex, Link, List, ListItem, Text } from "@chakra-ui/react";
 
 export default function Footer(props) {
+  function profileOnClick() {
+    window.gtag("event", "footer_saranshabd_click"); // Google Analytics
+  }
+
   return (
     <Flex
       flexDirection={{
@@ -45,7 +49,12 @@ export default function Footer(props) {
         mb={{ base: "20px", xl: "0px" }}
       >
         Made with 💰 by{" "}
-        <Link fontWeight="bold" href="https://saranshabd.com" target="_blank">
+        <Link
+          fontWeight="bold"
+          href="https://saranshabd.com"
+          target="_blank"
+          onClick={profileOnClick}
+        >
           Shabd Saran
         </Link>
         {/* &copy; {1900 + new Date().getYear()},{" "}

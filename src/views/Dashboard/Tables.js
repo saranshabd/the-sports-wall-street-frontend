@@ -82,6 +82,7 @@ function StockPriceChart(props) {
   }
 
   if (!!stockPricesResp.error) {
+    window.gtag("event", "false_auth_error"); // Google Analytics
     history.push("/auth");
     history.go(0); // reloads the page
   }
@@ -326,6 +327,15 @@ function Tables() {
                     return;
                   }
                   setIsBuyLoading(true);
+
+                  const teamName = selectedClub.teamInfo.shortName
+                    .split(" ")
+                    .join("_");
+                  window.gtag("event", `tables_${teamName}_buy`, {
+                    stockPrice: selectedClub.stockPrice.value,
+                    count: selectedStockCount,
+                  }); // Google Analytics
+
                   await portfolioUtils.buyStocks(
                     selectedClub.teamInfo.teamId,
                     selectedStockCount,
@@ -496,6 +506,10 @@ function Tables() {
                     lastItem={index === arr.length - 1 ? true : false}
                     maxGamesPlayed={maxGamesPlayed}
                     rowOnClick={() => {
+                      const teamName = row.teamInfo.shortName
+                        .split(" ")
+                        .join("_");
+                      window.gtag("event", `tables_${teamName}_select`); // Google Analytics
                       setSelectedClubIndex(index);
                       setSelectedStocksCount(15);
                       window.scrollTo(0, 0);

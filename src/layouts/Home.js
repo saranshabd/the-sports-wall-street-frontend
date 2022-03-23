@@ -65,6 +65,11 @@ const Feature = ({ title, text }) => {
 export default function Home() {
   const history = useHistory();
 
+  function getStartedOnClick() {
+    window.gtag("event", "home_get_started_click"); // Google Analytics
+    history.push("/auth");
+  }
+
   // Chakra Color Mode
   return (
     <ChakraProvider theme={theme} resetCss={false}>
@@ -106,7 +111,7 @@ export default function Home() {
             <Button
               colorScheme={"telegram"}
               px={20}
-              onClick={() => history.push("/auth")}
+              onClick={getStartedOnClick}
             >
               Get started
             </Button>

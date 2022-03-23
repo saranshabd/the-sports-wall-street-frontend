@@ -112,6 +112,7 @@ export default function Dashboard() {
     !!upcomingMatchesResp.error ||
     !!portfolioResp.error
   ) {
+    window.gtag("event", "false_auth_error"); // Google Analytics
     history.push("/auth");
     history.go(0); // reloads the page
   }
