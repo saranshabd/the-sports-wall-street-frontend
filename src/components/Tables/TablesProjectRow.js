@@ -91,7 +91,11 @@ function DashboardTableRow(props) {
       </Td>
       {buyingPrice && (
         <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
-          <Text fontSize="sm" color={statusColor} fontWeight="bold">
+          <Text
+            fontSize="sm"
+            color={progression < 0 ? "red.400" : "green.400"}
+            fontWeight="bold"
+          >
             {buyingPrice}
           </Text>
         </Td>

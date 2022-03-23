@@ -513,8 +513,12 @@ function Portfolio() {
                         name={row.teamId.shortName}
                         showProgressionColor={true}
                         status={row.stocksCount}
-                        budget={`€${numberWithCommas(row.latestStockPrice)}`}
-                        buyingPrice={`€${numberWithCommas(row.buyingPrice)}`}
+                        budget={`€${numberWithCommas(
+                          Math.round(row.buyingPrice)
+                        )}`}
+                        buyingPrice={`€${numberWithCommas(
+                          row.latestStockPrice
+                        )}`}
                         progression={Math.round(returns * 100)}
                         lastItem={index === portfolio.length - 1 ? true : false}
                         showButton={true}
