@@ -233,7 +233,7 @@ export default function Home() {
             </Text>
           </Flex>
         </Stack>
-        <Footer />
+        {/* <Footer /> */}
       </MainPanel>
     </ChakraProvider>
   );

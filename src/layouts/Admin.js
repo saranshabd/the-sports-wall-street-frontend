@@ -162,7 +162,7 @@ export default function Dashboard(props) {
             </PanelContainer>
           </PanelContent>
         ) : null}
-        <Footer />
+        {/* <Footer /> */}
         {/* <Portal>
           <FixedPlugin
             secondary={getActiveNavbar(routes)}
