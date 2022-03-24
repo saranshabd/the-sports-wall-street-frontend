@@ -33,7 +33,7 @@ export default function AuthFooter(props) {
       pb="20px"
       fontSize="sm"
     >
-      <Text
+      {/* <Text
         color="white"
         textAlign={{
           base: "center",
@@ -43,8 +43,8 @@ export default function AuthFooter(props) {
         Made with 💰 by{" "}
         <Link fontWeight="bold" href="https://saranshabd.com" target="_blank">
           Shabd Saran
-        </Link>
-        {/* &copy; {1900 + new Date().getYear()},{" "}
+        </Link> */}
+      {/* &copy; {1900 + new Date().getYear()},{" "}
         <Text as='span' mx='2px'>
           {document.documentElement.dir === "rtl"
             ? " مصنوع من ❤️ بواسطة"
@@ -62,7 +62,7 @@ export default function AuthFooter(props) {
         {document.documentElement.dir === "rtl"
           ? "للحصول على ويب أفضل"
           : " for a better web"} */}
-      </Text>
+      {/* </Text> */}
       {/* <List display='flex'>
         <ListItem
           me={{

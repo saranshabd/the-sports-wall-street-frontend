@@ -39,7 +39,7 @@ export default function Footer(props) {
       px="30px"
       pb="20px"
     >
-      <Text
+      {/* <Text
         fontSize="sm"
         color="white"
         textAlign={{
@@ -56,8 +56,8 @@ export default function Footer(props) {
           onClick={profileOnClick}
         >
           Shabd Saran
-        </Link>
-        {/* &copy; {1900 + new Date().getYear()},{" "}
+        </Link> */}
+      {/* &copy; {1900 + new Date().getYear()},{" "}
         <Text as='span'>
           {document.documentElement.dir === "rtl"
             ? " مصنوع من ❤️ بواسطة"
@@ -75,7 +75,7 @@ export default function Footer(props) {
         {document.documentElement.dir === "rtl"
           ? "للحصول على ويب أفضل"
           : " for a better web"} */}
-      </Text>
+      {/* </Text> */}
       {/* <List display='flex'>
         <ListItem
           me={{

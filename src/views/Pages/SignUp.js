@@ -346,7 +346,7 @@ function SignUp() {
           ms={{ base: "auto", lg: "auto" }}
           mb="90px"
         >
-          <AuthFooter />
+          {/* <AuthFooter /> */}
         </Box>
         <Box
           display={{ base: "none", lg: "block" }}
