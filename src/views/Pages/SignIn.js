@@ -40,8 +40,9 @@ import AuthFooter from "components/Footer/AuthFooter";
 import GradientBorder from "components/GradientBorder/GradientBorder";
 import Loader from "components/Loader";
 
-// Google Sign In
+// Google/Facebook Sign In
 import { GoogleLogin } from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 
 import * as auth from "utils/auth";
 import { useUser } from "query/user";
@@ -58,6 +59,11 @@ function SignIn() {
     const { tokenId } = res;
     await auth.signIn(tokenId);
     history.push("/admin");
+  }
+
+  function responseFacebook(response) {
+    const { accessToken } = response;
+    auth.facebookSignIn(accessToken).then(() => history.push("/admin"));
   }
 
   const { status, data, error, isFetching } = useUser();
@@ -181,6 +187,23 @@ function SignIn() {
               onSuccess={signInOnSuccess}
               // cookiePolicy="single_host_origin"
               // isSignedIn={true}
+            />
+            {/* <br /> */}
+            <FacebookLogin
+              appId={process.env.REACT_APP_FACEBOOK_APP_ID}
+              autoLoad={true}
+              fields="name,email,picture"
+              callback={responseFacebook}
+              icon="fa-facebook"
+              size="metro"
+              textButton="Continue with Facebook"
+              containerStyle={{ paddingTop: "1rem" }}
+              buttonStyle={{
+                width: "100%",
+                padding: "0.5rem 1rem",
+                textTransform: "none",
+              }}
+              // onClick={(resp) => console.log(resp)}
             />
 
             {/* <Button

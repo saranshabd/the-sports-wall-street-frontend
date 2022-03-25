@@ -28,6 +28,7 @@
     "react-circular-progressbar": "^2.0.4",
     "react-datetime": "3.0.4",
     "react-dom": "17.0.2",
+    "react-facebook-login": "^4.1.1",
     "react-github-btn": "^1.2.1",
     "react-google-login": "^5.2.2",
     "react-gradient-progress": "^1.0.3",
@@ -60,7 +61,7 @@
     "react-error-overlay": "6.0.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HTTPS=true react-scripts start",
     "build": "react-scripts build && gulp licenses",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
