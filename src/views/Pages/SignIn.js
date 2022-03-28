@@ -40,12 +40,12 @@ import AuthFooter from "components/Footer/AuthFooter";
 import GradientBorder from "components/GradientBorder/GradientBorder";
 import Loader from "components/Loader";
 
-// Google/Facebook Sign In
-import { GoogleLogin } from "react-google-login";
-import FacebookLogin from "react-facebook-login";
-
 import * as auth from "utils/auth";
 import { useUser } from "query/user";
+
+// Firebase
+import { auth as firebaseAuth } from "utils/firebase";
+import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 
 import { useHistory } from "react-router-dom";
 
@@ -55,17 +55,6 @@ function SignIn() {
   const titleColor = "white";
   const textColor = "gray.400";
 
-  async function signInOnSuccess(res) {
-    const { tokenId } = res;
-    await auth.signIn(tokenId);
-    history.push("/admin");
-  }
-
-  function responseFacebook(response) {
-    const { accessToken } = response;
-    auth.facebookSignIn(accessToken).then(() => history.push("/admin"));
-  }
-
   const { status, data, error, isFetching } = useUser();
   if (isFetching) {
     return <Loader />;
@@ -73,6 +62,26 @@ function SignIn() {
 
   if (!error) {
     history.push("/admin");
+  }
+
+  function signInWithGoogle() {
+    const googleProvider = new GoogleAuthProvider();
+    firebaseAuth.signInWithPopup(googleProvider).then(async (resp) => {
+      const userId = resp.user.multiFactor.user.uid;
+      await auth.signIn(userId);
+      window.gtag("event", "login", { method: "Google" }); // Google Analytics
+      history.push("/admin");
+    });
+  }
+
+  function signInWithFacebook() {
+    const facebookProvider = new FacebookAuthProvider();
+    firebaseAuth.signInWithPopup(facebookProvider).then(async (resp) => {
+      const userId = resp.user.multiFactor.user.uid;
+      await auth.signIn(userId);
+      window.gtag("event", "login", { method: "Facebook" }); // Google Analytics
+      history.push("/admin");
+    });
   }
 
   return (
@@ -181,30 +190,17 @@ function SignIn() {
               </FormLabel>
             </FormControl> */}
 
-            <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-              buttonText="Sign in with Google"
-              onSuccess={signInOnSuccess}
-              // cookiePolicy="single_host_origin"
-              // isSignedIn={true}
-            />
-            {/* <br /> */}
-            <FacebookLogin
-              appId={process.env.REACT_APP_FACEBOOK_APP_ID}
-              autoLoad={true}
-              fields="name,email,picture"
-              callback={responseFacebook}
-              icon="fa-facebook"
-              size="metro"
-              textButton="Continue with Facebook"
-              containerStyle={{ paddingTop: "1rem" }}
-              buttonStyle={{
-                width: "100%",
-                padding: "0.5rem 1rem",
-                textTransform: "none",
-              }}
-              // onClick={(resp) => console.log(resp)}
-            />
+            <Button fontWeight="medium" onClick={signInWithGoogle} mb={4}>
+              Sign in with Google
+            </Button>
+            <Button
+              fontWeight="medium"
+              colorScheme="facebook"
+              onClick={signInWithFacebook}
+              mb={4}
+            >
+              Sign in with Facebook
+            </Button>
 
             {/* <Button
               variant='brand'
