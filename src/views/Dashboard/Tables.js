@@ -88,7 +88,7 @@ function StockPriceChart(props) {
 
   if (!!stockPricesResp.error) {
     window.gtag("event", "false_auth_error"); // Google Analytics
-    history.push("/auth");
+    history.push("/");
     history.go(0); // reloads the page
   }
 
@@ -186,7 +186,7 @@ function Tables() {
     return <Loader />;
   }
   if (!!userResp.error || !!leagueStandingsResp.error) {
-    history.push("/auth");
+    history.push("/");
     history.go(0); // reloads the page
   }
 

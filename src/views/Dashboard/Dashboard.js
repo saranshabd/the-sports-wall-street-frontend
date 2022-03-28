@@ -118,7 +118,7 @@ export default function Dashboard() {
     !!portfolioResp.error
   ) {
     window.gtag("event", "false_auth_error"); // Google Analytics
-    history.push("/auth");
+    history.push("/");
     history.go(0); // reloads the page
   }
 
