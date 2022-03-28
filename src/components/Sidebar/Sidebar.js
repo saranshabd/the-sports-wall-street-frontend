@@ -472,9 +472,10 @@ export function SidebarResponsive(props) {
       display={{ sm: "flex", xl: "none" }}
       ref={mainPanel}
       alignItems="center"
+      gap={2}
     >
       <HamburgerIcon
-        color={iconColor}
+        color={"white" || iconColor}
         w="18px"
         h="18px"
         ref={btnRef}
