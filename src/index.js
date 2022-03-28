@@ -49,5 +49,5 @@ function IndexComp() {
 
 ReactDOM.render(<IndexComp />, document.getElementById("root"));
 
-// Register servive worker for the PWA
-serviceWorker.register();
+// Unregister servive worker for the PWA
+serviceWorker.unregister();
