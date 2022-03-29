@@ -29,6 +29,7 @@ import HomeLayout from "layouts/Home.js";
 import * as serviceWorker from "serviceWorker";
 
 import "utils/firebase";
+import "utils/logdna";
 
 const queryClient = new QueryClient();
 
