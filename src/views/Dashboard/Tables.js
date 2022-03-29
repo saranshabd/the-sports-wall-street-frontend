@@ -231,6 +231,64 @@ function Tables() {
         </CardHeader>
         <CardBody pt="12px">
           <Flex direction="column" w="100%">
+            <Grid
+              templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}
+              gap={6}
+              mb="2rem"
+            >
+              {selectedClub.lastMatches.map(
+                ({ outcome, opponentTeam, score }) => {
+                  const color =
+                    "Won" === outcome
+                      ? "green.400"
+                      : "Lost" === outcome
+                      ? "red.400"
+                      : "gray";
+
+                  return (
+                    <Flex direction="column" align={"center"}>
+                      <Image src={opponentTeam.crestUrl} boxSize="7" />
+                      <Text color={"white"} fontSize="lg">
+                        {opponentTeam.shortName}
+                      </Text>
+                      <Text color={color} fontWeight="semibold" fontSize="lg">
+                        {`${score.fullTime.homeTeam} - ${score.fullTime.awayTeam}`}
+                      </Text>
+                    </Flex>
+                  );
+                }
+              )}
+            </Grid>
+            {/* <Flex
+              gap={6}
+              flexWrap="wrap"
+              justify="center"
+              mb="2rem"
+              fontFamily="sans-serif"
+            >
+              {selectedClub.lastMatches.map(
+                ({ outcome, opponentTeam, score }) => {
+                  const color =
+                    "Won" === outcome
+                      ? "green.400"
+                      : "Lost" === outcome
+                      ? "red.400"
+                      : "gray";
+
+                  return (
+                    <Flex direction="column" align={"center"}>
+                      <Image src={opponentTeam.crestUrl} boxSize="7" />
+                      <Text color={"white"} fontSize="lg">
+                        {opponentTeam.shortName}
+                      </Text>
+                      <Text color={color} fontWeight="semibold" fontSize="lg">
+                        {`${score.fullTime.homeTeam} - ${score.fullTime.awayTeam}`}
+                      </Text>
+                    </Flex>
+                  );
+                }
+              )}
+            </Flex> */}
             <Grid templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}>
               <Flex
                 justify="space-between"
