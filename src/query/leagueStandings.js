@@ -6,5 +6,9 @@ export function useLeagueStandings() {
     const { data } = await axios.get("/teamStanding/all/");
     return data;
   }
-  return useQuery("leagueStandings", handler, { retry: false });
+  return useQuery("leagueStandings", handler, {
+    retry: false,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    cacheTime: 5 * 60 * 1000, // 5 minutes
+  });
 }

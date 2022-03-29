@@ -21,12 +21,15 @@ import { Separator } from "components/Separator/Separator";
 import { SidebarHelp } from "components/Sidebar/SidebarHelp";
 import PropTypes from "prop-types";
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
 import * as authUtils from "utils/auth";
+import { useQueryClient } from "react-query";
 
 // FUNCTIONS
 
 function Sidebar(props) {
+  const queryClient = useQueryClient();
+  const history = useHistory();
   // to check for active links and opened collapses
   let location = useLocation();
   // this is for the rest of the collapses
@@ -167,6 +170,8 @@ function Sidebar(props) {
                   return;
                 }
                 await authUtils.signOut();
+                queryClient.clear(); // clear all cache
+                history.push("/");
               }}
             >
               <Flex>
@@ -402,6 +407,8 @@ export function SidebarResponsive(props) {
                   return;
                 }
                 await authUtils.signOut();
+                queryClient.clear(); // clear all cache
+                history.push("/");
               }}
             >
               <Flex>

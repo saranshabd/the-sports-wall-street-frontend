@@ -6,5 +6,9 @@ export function useUser() {
     const { data } = await axios.get(`/user/profile/`);
     return data;
   }
-  return useQuery(`user`, handler, { retry: false });
+  return useQuery(`user`, handler, {
+    retry: false,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    cacheTime: 5 * 60 * 1000, // 5 minutes
+  });
 }
