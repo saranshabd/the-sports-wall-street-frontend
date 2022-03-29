@@ -42,6 +42,7 @@ import {
   AlertTitle,
   AlertDescription,
   AlertIcon,
+  Image,
 } from "@chakra-ui/react";
 
 // Custom components
@@ -215,9 +216,18 @@ function Tables() {
       )}
       <Card>
         <CardHeader py="12px">
-          <Text fontSize="lg" color="#fff" fontWeight="bold">
-            {selectedClub.teamInfo.name}
-          </Text>
+          <Flex direction={"column"}>
+            <Image boxSize={"20"} src={selectedClub.teamInfo.crestUrl} />
+            <Flex direction="row" alignItems={"end"} gap={2}>
+              <Text fontSize="2xl" color="#fff" fontWeight="bold">
+                {selectedClub.teamInfo.name}
+              </Text>
+              <Text fontSize="sm" color="whiteAlpha.700">
+                ({selectedClub.teamInfo.founded})
+              </Text>
+            </Flex>
+            <Text color="#fff">{selectedClub.teamInfo.venue}</Text>
+          </Flex>
         </CardHeader>
         <CardBody pt="12px">
           <Flex direction="column" w="100%">
@@ -419,7 +429,11 @@ function Tables() {
       <Card my="22px" overflowX={{ sm: "scroll", xl: "hidden" }} pb="0px">
         <CardHeader p="6px 0px 22px 0px">
           <Flex direction="column">
-            <Text fontSize="lg" color="#fff" fontWeight="bold" mb=".5rem">
+            <Text fontSize="sm" color="whiteAlpha.900">
+              Select club from the table to view more info.
+            </Text>
+            <br />
+            <Text fontSize="xl" color="#fff" fontWeight="bold" mb=".5rem">
               League Table
             </Text>
             {/* <Flex align='center'>
