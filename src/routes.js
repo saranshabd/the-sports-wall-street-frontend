@@ -19,6 +19,7 @@
 // import
 import Dashboard from "views/Dashboard/Dashboard.js";
 import Tables from "views/Dashboard/Tables.js";
+import GlobalRankings from "views/Dashboard/GlobalRankings.js";
 import Portfolio from "views/Dashboard/Portfolio.js";
 import Profile from "views/Dashboard/Profile.js";
 import SignIn from "views/Pages/SignIn.js";
@@ -49,6 +50,14 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
     component: Tables,
+    layout: "/admin",
+  },
+  {
+    path: "/global-rankings",
+    name: "Global Rankings",
+    rtlName: "لوحة القيادة",
+    icon: <StatsIcon color="inherit" />,
+    component: GlobalRankings,
     layout: "/admin",
   },
   {

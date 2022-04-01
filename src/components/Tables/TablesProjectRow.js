@@ -62,7 +62,8 @@ function DashboardTableRow(props) {
       {showPosition && (
         <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
           <Text fontSize="sm" color={nameColor} fontWeight="bold">
-            {position}.
+            {position}
+            {isNaN(position.toString()) ? "" : "."}
           </Text>
         </Td>
       )}
@@ -100,11 +101,13 @@ function DashboardTableRow(props) {
           </Text>
         </Td>
       )}
-      <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
-        <Text fontSize="sm" color={statusColor} fontWeight="bold">
-          {status}
-        </Text>
-      </Td>
+      {status && (
+        <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
+          <Text fontSize="sm" color={statusColor} fontWeight="bold">
+            {status}
+          </Text>
+        </Td>
+      )}
       <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
         <Flex direction="column">
           <Text

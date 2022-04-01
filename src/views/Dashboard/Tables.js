@@ -110,21 +110,27 @@ function StockPriceChart(props) {
       curve: "smooth",
     },
     xaxis: {
-      type: "datetime",
-      categories: stockPricesResp.data.map((item) => `${item.matchday}`),
       labels: {
-        style: {
-          colors: "#c8cfca",
-          fontSize: "12px",
-        },
-      },
-      axisBorder: {
-        show: false,
-      },
-      axisTicks: {
         show: false,
       },
     },
+    // xaxis: {
+    //   enabled: false,
+    //   type: "datetime",
+    //   categories: stockPricesResp.data.map((item) => `${item.matchday}`),
+    //   labels: {
+    //     style: {
+    //       colors: "#c8cfca",
+    //       fontSize: "12px",
+    //     },
+    //   },
+    //   axisBorder: {
+    //     show: false,
+    //   },
+    //   axisTicks: {
+    //     show: false,
+    //   },
+    // },
     yaxis: {
       labels: {
         style: {
@@ -207,9 +213,9 @@ function Tables() {
   }
 
   return (
-    <Flex direction="column" pt={{ base: "40px", md: "0px" }}>
+    <Flex direction="column" pt={{ base: "0px", md: "0px" }}>
       {"" !== errorMessage && (
-        <Alert status="error">
+        <Alert status="error" rounded={"2xl"} mb={5}>
           <AlertIcon />
           <AlertDescription>{errorMessage}</AlertDescription>
         </Alert>
@@ -394,9 +400,10 @@ function Tables() {
                     selectedStockCount * selectedClub.stockPrice.value
                   ) {
                     setErrorMessage(
-                      "You do not have enough cash to buy these stocks"
+                      "Sorry! You do not have enough cash to buy these stocks."
                     );
                     setTimeout(() => setErrorMessage(""), 5000);
+                    window.scrollTo(0, 0);
                     return;
                   }
                   setIsBuyLoading(true);

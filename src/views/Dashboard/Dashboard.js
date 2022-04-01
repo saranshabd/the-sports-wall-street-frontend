@@ -66,6 +66,7 @@ import {
   StatsIcon,
   WalletIcon,
 } from "components/Icons/Icons.js";
+import Prizes from "components/Prizes";
 import { BsArrowRight } from "react-icons/bs";
 import {
   IoCheckmarkDoneCircleSharp,
@@ -161,7 +162,7 @@ export default function Dashboard() {
   const diffPerc = getDiffPerc();
 
   return (
-    <Flex flexDirection="column" pt={{ base: "40px", md: "0px" }}>
+    <Flex flexDirection="column" pt={{ base: "0px", md: "0px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 2 }} spacing="24px">
         {/* MiniStatistics Card */}
         <Card>
@@ -305,15 +306,21 @@ export default function Dashboard() {
           </CardBody>
         </Card> */}
       </SimpleGrid>
-      <Grid
-        templateColumns={{ sm: "1fr", md: "1fr 1fr", "2xl": "2fr 1.2fr 1.5fr" }}
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, xl: 2 }}
+        // templateColumns={{
+        //   sm: "1fr",
+        //   md: "1fr 1fr 1fr",
+        //   "2xl": "2fr 1.2fr 1.5fr",
+        // }}
         my="26px"
         gap="18px"
       >
         {/* Welcome Card */}
+        <Prizes />
         <Card
           p="0px"
-          gridArea={{ md: "1 / 1 / 2 / 3", "2xl": "auto" }}
+          // gridArea={{ md: "1 / 1 / 2 / 3", "2xl": "auto" }}
           bgImage={medusa}
           bgSize="cover"
           bgPosition="50%"
@@ -532,7 +539,7 @@ export default function Dashboard() {
             </Flex>
           </Flex>
         </Card> */}
-      </Grid>
+      </SimpleGrid>
       {/* <Grid
         templateColumns={{ sm: "1fr", lg: "1.7fr 1.3fr" }}
         maxW={{ sm: "100%", md: "100%" }}

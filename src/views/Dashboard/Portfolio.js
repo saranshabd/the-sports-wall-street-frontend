@@ -50,6 +50,7 @@ import BillingRow from "components/Tables/BillingRow";
 import InvoicesRow from "components/Tables/InvoicesRow";
 import TransactionRow from "components/Tables/TransactionRow";
 import Loader from "components/Loader";
+import Prizes from "components/Prizes";
 
 // Icons
 import { FaPencilAlt, FaRegCalendarAlt } from "react-icons/fa";
@@ -127,7 +128,7 @@ function Portfolio() {
   const diffPerc = getDiffPerc();
 
   return (
-    <Flex direction="column" pt={{ base: "40px", md: "0px" }} mx="auto">
+    <Flex direction="column" pt={{ base: "0px", md: "0px" }} mx="auto">
       <Grid templateColumns={{ sm: "1fr", lg: "100% 100%" }}>
         <Box>
           <Grid
@@ -137,64 +138,7 @@ function Portfolio() {
             }}
             gap="26px"
           >
-            {/* Mastercard */}
-            <Card
-              // backgroundImage={BackgroundCard1}
-              // backgroundRepeat='no-repeat'
-              // bgSize='cover'
-              // bgPosition='10%'
-              p="16px"
-            >
-              <CardBody h="100%" w="100%">
-                <Flex
-                  direction="column"
-                  color="white"
-                  h="100%"
-                  p="10px"
-                  w="100%"
-                  align="center"
-                  justify="center"
-                >
-                  <Flex justify="space-between" align="center">
-                    <Text fontSize="xl" fontWeight="bold">
-                      Game Week
-                    </Text>
-                    {/* <Icon
-                      as={RiMastercardFill}
-                      w='48px'
-                      h='auto'
-                      color='gray.400'
-                    /> */}
-                  </Flex>
-                  {/* <Spacer /> */}
-                  <Flex direction="column">
-                    <Box>
-                      <Text
-                        fontSize={{ sm: "48px", lg: "48px", xl: "48px" }}
-                        letterSpacing="2px"
-                        fontWeight="bold"
-                      >
-                        {user.season.currentMatchday}
-                      </Text>
-                    </Box>
-                    {/* <Flex mt='14px'>
-                      <Flex direction='column' me='34px'>
-                        <Text fontSize='xs'>VALID THRU</Text>
-                        <Text fontSize='xs' fontWeight='bold'>
-                          05/24
-                        </Text>
-                      </Flex>
-                      <Flex direction='column'>
-                        <Text fontSize='xs'>CVV</Text>
-                        <Text fontSize='xs' fontWeight='bold'>
-                          09X
-                        </Text>
-                      </Flex>
-                    </Flex> */}
-                  </Flex>
-                </Flex>
-              </CardBody>
-            </Card>
+            <Prizes />
             {/* Credit Balance */}
             <Card>
               <Flex direction="column">
