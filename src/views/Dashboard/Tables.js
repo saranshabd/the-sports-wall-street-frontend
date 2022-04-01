@@ -51,6 +51,7 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardBody from "components/Card/CardBody.js";
 import LineChart from "components/Charts/LineChart";
 import Loader from "components/Loader";
+import TimelineRow from "components/Tables/TimelineRow";
 
 // Table Components
 import TablesProjectRow from "components/Tables/TablesProjectRow";
@@ -70,6 +71,7 @@ import { AiFillCheckCircle } from "react-icons/ai";
 import { useLeagueStandings } from "query/leagueStandings";
 import { useStockPrices } from "query/stockPrices";
 import { useUser } from "query/user";
+import { useUpcomingMatchesOfTeam } from "query/matches";
 
 import * as portfolioUtils from "utils/portfolio";
 
@@ -171,6 +173,49 @@ function StockPriceChart(props) {
   );
 }
 
+function UpcomingFixtures({ teamInfo }) {
+  const upcomingMatchesResp = useUpcomingMatchesOfTeam(teamInfo.teamId);
+
+  if (upcomingMatchesResp.isFetching) {
+    return <Loader />;
+  }
+  if (!!upcomingMatchesResp.error) {
+    window.gtag("event", "false_auth_error"); // Google Analytics
+    history.push("/");
+    history.go(0); // reloads the page
+  }
+
+  const upcomingMatches = upcomingMatchesResp.data;
+
+  return (
+    <Card>
+      <CardHeader mb="32px">
+        <Flex direction="column">
+          <Text fontSize="lg" color="#fff" fontWeight="bold" mb="6px">
+            Upcoming Fixtures
+          </Text>
+        </Flex>
+      </CardHeader>
+      <CardBody>
+        <Flex direction="column" lineHeight="21px">
+          {upcomingMatches.map((row, index, arr) => {
+            return (
+              <TimelineRow
+                logo={row.logo}
+                title={`${row.homeTeam} vs ${row.awayTeam}`}
+                date={row.utcDate}
+                color={row.color}
+                index={index}
+                arrLength={arr.length}
+              />
+            );
+          })}
+        </Flex>
+      </CardBody>
+    </Card>
+  );
+}
+
 function Tables() {
   const history = useHistory();
 
@@ -193,6 +238,7 @@ function Tables() {
     return <Loader />;
   }
   if (!!userResp.error || !!leagueStandingsResp.error) {
+    window.gtag("event", "false_auth_error"); // Google Analytics
     history.push("/");
     history.go(0); // reloads the page
   }
@@ -220,52 +266,53 @@ function Tables() {
           <AlertDescription>{errorMessage}</AlertDescription>
         </Alert>
       )}
-      <Card>
-        <CardHeader py="12px">
-          <Flex direction={"column"}>
-            <Image boxSize={"20"} src={selectedClub.teamInfo.crestUrl} />
-            <Flex direction="row" alignItems={"end"} gap={2}>
-              <Text fontSize="2xl" color="#fff" fontWeight="bold">
-                {selectedClub.teamInfo.name}
-              </Text>
-              <Text fontSize="sm" color="whiteAlpha.700">
-                ({selectedClub.teamInfo.founded})
-              </Text>
+      <Grid templateColumns={{ md: "2fr 1fr", sm: "1fr" }} gap={6}>
+        <Card>
+          <CardHeader py="12px">
+            <Flex direction={"column"}>
+              <Image boxSize={"20"} src={selectedClub.teamInfo.crestUrl} />
+              <Flex direction="row" alignItems={"end"} gap={2}>
+                <Text fontSize="2xl" color="#fff" fontWeight="bold">
+                  {selectedClub.teamInfo.name}
+                </Text>
+                <Text fontSize="sm" color="whiteAlpha.700">
+                  ({selectedClub.teamInfo.founded})
+                </Text>
+              </Flex>
+              <Text color="#fff">{selectedClub.teamInfo.venue}</Text>
             </Flex>
-            <Text color="#fff">{selectedClub.teamInfo.venue}</Text>
-          </Flex>
-        </CardHeader>
-        <CardBody pt="12px">
-          <Flex direction="column" w="100%">
-            <Grid
-              templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}
-              gap={6}
-              mb="2rem"
-            >
-              {selectedClub.lastMatches.map(
-                ({ outcome, opponentTeam, score }) => {
-                  const color =
-                    "Won" === outcome
-                      ? "green.400"
-                      : "Lost" === outcome
-                      ? "red.400"
-                      : "gray";
+          </CardHeader>
+          <CardBody pt="12px">
+            <Flex direction="column" w="100%">
+              <Grid
+                templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}
+                gap={6}
+                mb="2rem"
+              >
+                {selectedClub.lastMatches.map(
+                  ({ outcome, opponentTeam, score }) => {
+                    const color =
+                      "Won" === outcome
+                        ? "green.400"
+                        : "Lost" === outcome
+                        ? "red.400"
+                        : "gray";
 
-                  return (
-                    <Flex direction="column" align={"center"}>
-                      <Image src={opponentTeam.crestUrl} boxSize="7" />
-                      <Text color={"white"} fontSize="lg">
-                        {opponentTeam.shortName}
-                      </Text>
-                      <Text color={color} fontWeight="semibold" fontSize="lg">
-                        {`${score.fullTime.homeTeam} - ${score.fullTime.awayTeam}`}
-                      </Text>
-                    </Flex>
-                  );
-                }
-              )}
-            </Grid>
-            {/* <Flex
+                    return (
+                      <Flex direction="column" align={"center"}>
+                        <Image src={opponentTeam.crestUrl} boxSize="7" />
+                        <Text color={"white"} fontSize="lg">
+                          {opponentTeam.shortName}
+                        </Text>
+                        <Text color={color} fontWeight="semibold" fontSize="lg">
+                          {`${score.fullTime.homeTeam} - ${score.fullTime.awayTeam}`}
+                        </Text>
+                      </Flex>
+                    );
+                  }
+                )}
+              </Grid>
+              {/* <Flex
               gap={6}
               flexWrap="wrap"
               justify="center"
@@ -295,143 +342,145 @@ function Tables() {
                 }
               )}
             </Flex> */}
-            <Grid templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}>
-              <Flex
-                justify="space-between"
-                p="22px"
-                mb="18px"
-                bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
-                borderRadius="18px"
-              >
-                <Flex direction="column">
-                  <Text color="#E9EDF7" fontSize="12px">
-                    Points
-                  </Text>
-                  <Text color="#fff" fontWeight="bold" fontSize="24px">
-                    {selectedClub.points}
-                  </Text>
-                </Flex>
-              </Flex>
-              <Flex
-                justify="space-between"
-                p="22px"
-                mb="18px"
-                bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
-                borderRadius="18px"
-              >
-                <Flex direction="column">
-                  <Text color="#E9EDF7" fontSize="12px">
-                    Games Played
-                  </Text>
-                  <Text color="#fff" fontWeight="bold" fontSize="24px">
-                    {selectedClub.playedGames}
-                  </Text>
-                </Flex>
-              </Flex>
-              <Flex
-                justify="space-between"
-                p="22px"
-                mb="18px"
-                bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
-                borderRadius="18px"
-              >
-                <Flex direction="column">
-                  <Text color="#E9EDF7" fontSize="12px">
-                    Standing
-                  </Text>
-                  <Text color="#fff" fontWeight="bold" fontSize="24px">
-                    {selectedClubIndex + 1}
-                  </Text>
-                </Flex>
-              </Flex>
-              <Flex
-                justify="space-between"
-                p="22px"
-                mb="18px"
-                bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
-                borderRadius="18px"
-              >
-                <Flex direction="column">
-                  <Text color="#E9EDF7" fontSize="12px">
-                    Goal Difference
-                  </Text>
-                  <Text color="#fff" fontWeight="bold" fontSize="24px">
-                    {selectedClub.goalDifference}
-                  </Text>
-                </Flex>
-              </Flex>
-            </Grid>
-            <Box w="100%" minH={{ sm: "300px" }}>
-              <StockPriceChart teamInfo={selectedClub.teamInfo} />
-            </Box>
-            <Flex direction="column" py="12px">
-              <Flex align="center" gap="12px">
-                <Text color="#E9EDF7" fontSize="sm" fontWeight="bold">
-                  Buy
-                </Text>
-                <NumberInput
-                  maxW="100px"
-                  defaultValue={15}
-                  min={1}
-                  max={20}
-                  color="white"
-                  value={selectedStockCount}
-                  onChange={(newValue) => setSelectedStocksCount(newValue)}
+              <Grid templateColumns={{ sm: "1fr 1fr", md: "1fr 1fr 1fr 1fr" }}>
+                <Flex
+                  justify="space-between"
+                  p="22px"
+                  mb="18px"
+                  bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
+                  borderRadius="18px"
                 >
-                  <NumberInputField />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-                <Text color="#E9EDF7" fontSize="sm" fontWeight="bold">
-                  at {getStockPriceValue(selectedClub.stockPrice.value)} per
-                  stock.
-                </Text>
-              </Flex>
-              <Button
-                my="1rem"
-                borderRadius="12px"
-                colorScheme="blackAlpha"
-                onClick={async () => {
-                  setErrorMessage("");
-                  if (
-                    user.portfolio.cash <
-                    selectedStockCount * selectedClub.stockPrice.value
-                  ) {
-                    setErrorMessage(
-                      "Sorry! You do not have enough cash to buy these stocks."
+                  <Flex direction="column">
+                    <Text color="#E9EDF7" fontSize="12px">
+                      Points
+                    </Text>
+                    <Text color="#fff" fontWeight="bold" fontSize="24px">
+                      {selectedClub.points}
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex
+                  justify="space-between"
+                  p="22px"
+                  mb="18px"
+                  bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
+                  borderRadius="18px"
+                >
+                  <Flex direction="column">
+                    <Text color="#E9EDF7" fontSize="12px">
+                      Games Played
+                    </Text>
+                    <Text color="#fff" fontWeight="bold" fontSize="24px">
+                      {selectedClub.playedGames}
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex
+                  justify="space-between"
+                  p="22px"
+                  mb="18px"
+                  bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
+                  borderRadius="18px"
+                >
+                  <Flex direction="column">
+                    <Text color="#E9EDF7" fontSize="12px">
+                      Standing
+                    </Text>
+                    <Text color="#fff" fontWeight="bold" fontSize="24px">
+                      {selectedClubIndex + 1}
+                    </Text>
+                  </Flex>
+                </Flex>
+                <Flex
+                  justify="space-between"
+                  p="22px"
+                  mb="18px"
+                  bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
+                  borderRadius="18px"
+                >
+                  <Flex direction="column">
+                    <Text color="#E9EDF7" fontSize="12px">
+                      Goal Difference
+                    </Text>
+                    <Text color="#fff" fontWeight="bold" fontSize="24px">
+                      {selectedClub.goalDifference}
+                    </Text>
+                  </Flex>
+                </Flex>
+              </Grid>
+              <Box w="100%" minH={{ sm: "300px" }}>
+                <StockPriceChart teamInfo={selectedClub.teamInfo} />
+              </Box>
+              <Flex direction="column" py="12px">
+                <Flex align="center" gap="12px">
+                  <Text color="#E9EDF7" fontSize="sm" fontWeight="bold">
+                    Buy
+                  </Text>
+                  <NumberInput
+                    maxW="100px"
+                    defaultValue={15}
+                    min={1}
+                    max={20}
+                    color="white"
+                    value={selectedStockCount}
+                    onChange={(newValue) => setSelectedStocksCount(newValue)}
+                  >
+                    <NumberInputField />
+                    <NumberInputStepper>
+                      <NumberIncrementStepper />
+                      <NumberDecrementStepper />
+                    </NumberInputStepper>
+                  </NumberInput>
+                  <Text color="#E9EDF7" fontSize="sm" fontWeight="bold">
+                    at {getStockPriceValue(selectedClub.stockPrice.value)} per
+                    stock.
+                  </Text>
+                </Flex>
+                <Button
+                  my="1rem"
+                  borderRadius="12px"
+                  colorScheme="blackAlpha"
+                  onClick={async () => {
+                    setErrorMessage("");
+                    if (
+                      user.portfolio.cash <
+                      selectedStockCount * selectedClub.stockPrice.value
+                    ) {
+                      setErrorMessage(
+                        "Sorry! You do not have enough cash to buy these stocks."
+                      );
+                      setTimeout(() => setErrorMessage(""), 5000);
+                      window.scrollTo(0, 0);
+                      return;
+                    }
+                    setIsBuyLoading(true);
+
+                    const teamName = selectedClub.teamInfo.shortName
+                      .split(" ")
+                      .join("_");
+                    window.gtag("event", `tables_${teamName}_buy`, {
+                      stockPrice: selectedClub.stockPrice.value,
+                      count: selectedStockCount,
+                    }); // Google Analytics
+
+                    await portfolioUtils.buyStocks(
+                      selectedClub.teamInfo.teamId,
+                      selectedStockCount,
+                      selectedClub.stockPrice.value
                     );
-                    setTimeout(() => setErrorMessage(""), 5000);
-                    window.scrollTo(0, 0);
-                    return;
-                  }
-                  setIsBuyLoading(true);
-
-                  const teamName = selectedClub.teamInfo.shortName
-                    .split(" ")
-                    .join("_");
-                  window.gtag("event", `tables_${teamName}_buy`, {
-                    stockPrice: selectedClub.stockPrice.value,
-                    count: selectedStockCount,
-                  }); // Google Analytics
-
-                  await portfolioUtils.buyStocks(
-                    selectedClub.teamInfo.teamId,
-                    selectedStockCount,
-                    selectedClub.stockPrice.value
-                  );
-                  setIsBuyLoading(false);
-                  history.push("/admin/portfolio");
-                }}
-                isLoading={isBuyLoading}
-              >
-                Buy
-              </Button>
+                    setIsBuyLoading(false);
+                    history.push("/admin/portfolio");
+                  }}
+                  isLoading={isBuyLoading}
+                >
+                  Buy
+                </Button>
+              </Flex>
             </Flex>
-          </Flex>
-        </CardBody>
-      </Card>
+          </CardBody>
+        </Card>
+        <UpcomingFixtures teamInfo={selectedClub.teamInfo} />
+      </Grid>
       {/* Authors Table */}
       {/* <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
         <CardHeader p='6px 0px 22px 0px'>
