@@ -223,9 +223,7 @@ function GlobalRankings() {
               {globalRankings.map((row, index, arr) => {
                 return (
                   <TablesProjectRow
-                    position={
-                      index <= 3 ? "👑" : index <= 10 ? "⚔️" : index + 1
-                    }
+                    position={index < 3 ? "👑" : index < 10 ? "⚔️" : index + 1}
                     name={row.user.name}
                     // upNextName={getStockPriceValue(row.stockPrice.value)}
                     // stockPriceDiff={row.stockPrice.diff}
