@@ -35,12 +35,12 @@ function Prizes({ maxWidth }) {
         <Text as="span" fontWeight="bold">
           👑 Top 3
         </Text>{" "}
-        - Favourite Club Jersey
+        - Favorite Club's Jersey
         <br />
         <Text as="span" fontWeight="bold">
-          ⚔️ Top 10
+          ⚔️ Rest Top 10
         </Text>{" "}
-        - Favourite Club Goodies
+        - Favorite Club's Goodies
       </AlertDescription>
     </Alert>
   );
