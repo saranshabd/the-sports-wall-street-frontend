@@ -40,6 +40,7 @@ import Footer from "components/Footer/Footer.js";
 // Layout components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
+import Prizes from "components/Prizes";
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
@@ -78,16 +79,20 @@ export default function Home() {
           as={Box}
           textAlign={"center"}
           spacing={{ base: 8, md: 10 }}
-          py={{ base: 20, md: 36 }}
+          // py={{ base: 20, md: 36 }}
           px={{ base: "5rem", md: "5rem", sm: "1rem" }}
           mt="2rem"
         >
+          <Box align={"center"}>
+            <Prizes maxWidth="xl" />
+          </Box>
           <Heading
             fontWeight={900}
             fontSize={{ base: "2xl", sm: "4xl", md: "8xl" }}
             lineHeight={"110%"}
             color="white"
             fontFamily={"revert"}
+            pt="1rem"
           >
             Football stocks. <br />
             <Text as={"span"} color="white">
@@ -106,7 +111,7 @@ export default function Home() {
             align={"center"}
             alignSelf={"center"}
             position={"relative"}
-            pt="5rem"
+            pt="2rem"
           >
             <Button
               colorScheme={"telegram"}
@@ -206,32 +211,22 @@ export default function Home() {
               </Stack>
             </Container>
           </Box>
-          <Flex flexDirection={"column"} gap={8}>
-            <Text color="white" fontSize="lg" fontFamily="revert">
-              Start with (fake){" "}
-              <Text as="span" fontSize="xl" fontWeight="bold" color="green.100">
-                €100,000
-              </Text>{" "}
-              in the account, and show off your trading skills.
-            </Text>
-            <Text color="white" fontSize="lg" fontFamily="revert">
-              Stock price of the League winning team will boost up by{" "}
-              <Text as="span" fontSize="xl" fontWeight="bold" color="green.100">
-                40-50%
-              </Text>{" "}
-              at the end of the season.
-            </Text>
-            <Text color="white" fontSize="lg" fontFamily="revert">
-              Stock price of the teams finishing in Top 4 will boost up by{" "}
-              <Text as="span" fontSize="xl" fontWeight="bold" color="green.100">
-                20-30%
-              </Text>{" "}
-              at the end of the season.
-            </Text>
-            <Text color="white" fontSize="lg" fontFamily="revert">
-              You cannot buy/sell team stocks while they are playing a game.
-            </Text>
-          </Flex>
+          <Stack
+            direction={"column"}
+            spacing={3}
+            align={"center"}
+            alignSelf={"center"}
+            position={"relative"}
+            pb="5rem"
+          >
+            <Button
+              colorScheme={"telegram"}
+              px={20}
+              onClick={getStartedOnClick}
+            >
+              Let's get going!
+            </Button>
+          </Stack>
         </Stack>
         {/* <Footer /> */}
       </MainPanel>

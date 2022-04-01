@@ -7,7 +7,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 
-function Prizes() {
+function Prizes({ maxWidth }) {
   return (
     <Alert
       status="success"
@@ -20,6 +20,7 @@ function Prizes() {
       bgImage="https://ak.picdn.net/shutterstock/videos/23781511/thumb/1.jpg"
       bgPos="center"
       bgSize={"cover"}
+      maxWidth={maxWidth}
     >
       {/* <AlertIcon boxSize="40px" mr={0} /> */}
       <AlertTitle mb={1} fontSize="xl">
