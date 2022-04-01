@@ -17,6 +17,7 @@
 */
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useQueryClient } from "react-query";
 
 // Chakra imports
 import {
@@ -79,6 +80,7 @@ import * as portfolioUtils from "utils/portfolio";
 
 function Portfolio() {
   const history = useHistory();
+  const queryClient = useQueryClient();
 
   // Update the title of the page
   useEffect(() => {
@@ -511,7 +513,7 @@ function Portfolio() {
                           window.gtag("event", `portfolio_${teamName}_cashout`); // Google Analytics
                           const teamIdToSell = row.teamId.teamId;
                           await portfolioUtils.sellAll(teamIdToSell);
-                          history.go(0);
+                          queryClient.invalidateQueries("portfolio"); // clear portfolio cache
                         }}
                       />
                     );

@@ -18,6 +18,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useQueryClient } from "react-query";
 
 // Chakra imports
 import {
@@ -218,6 +219,7 @@ function UpcomingFixtures({ teamInfo }) {
 
 function Tables() {
   const history = useHistory();
+  const queryClient = useQueryClient();
 
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedClubIndex, setSelectedClubIndex] = useState(0);
@@ -468,6 +470,7 @@ function Tables() {
                       selectedStockCount,
                       selectedClub.stockPrice.value
                     );
+                    queryClient.invalidateQueries("portfolio"); // clear portfolio cache
                     setIsBuyLoading(false);
                     history.push("/admin/portfolio");
                   }}
