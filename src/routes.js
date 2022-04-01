@@ -44,8 +44,8 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/league-table",
-    name: "League Table",
+    path: "/marketplace",
+    name: "Marketplace",
     rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
     component: Tables,

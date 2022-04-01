@@ -78,7 +78,7 @@ function StockPriceChart(props) {
 
   // Update the title of the page
   useEffect(() => {
-    document.title = "Sports Wall St. | League Table";
+    document.title = "Sports Wall St. | Marketplace";
   }, []);
 
   const stockPricesResp = useStockPrices(props.teamInfo.teamId);
