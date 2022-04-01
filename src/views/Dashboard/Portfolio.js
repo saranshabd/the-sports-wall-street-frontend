@@ -16,6 +16,7 @@
 
 */
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 // Chakra imports
 import {
@@ -77,6 +78,8 @@ import { usePortfolio } from "query/portfolio";
 import * as portfolioUtils from "utils/portfolio";
 
 function Portfolio() {
+  const history = useHistory();
+
   // Update the title of the page
   useEffect(() => {
     document.title = "Sports Wall St. | Portfolio";
@@ -110,22 +113,8 @@ function Portfolio() {
     return totalNetWorth + user.portfolio.cash;
   }
 
-  function getPrevTotalNetWorth() {
-    let totalNetWorth = 0;
-    portfolio.forEach((item) => {
-      totalNetWorth += item.stocksCount * item.buyingPrice;
-    });
-    return totalNetWorth + user.portfolio.cash;
-  }
-
-  function getDiffPerc() {
-    const totalNetWorth = getTotalNetWorth();
-    const prevTotalNetWorth = getPrevTotalNetWorth();
-    const diff = (totalNetWorth - prevTotalNetWorth) / prevTotalNetWorth;
-    return Math.round(diff * 100);
-  }
-
-  const diffPerc = getDiffPerc();
+  const totalNetWorth = getTotalNetWorth();
+  const diffPerc = ((totalNetWorth - 100_000) / 1000).toFixed(2);
 
   return (
     <Flex direction="column" pt={{ base: "0px", md: "0px" }} mx="auto">
@@ -141,7 +130,7 @@ function Portfolio() {
             <Prizes />
             {/* Credit Balance */}
             <Card>
-              <Flex direction="column">
+              <Grid templateColumns="1fr">
                 <Flex
                   justify="space-between"
                   p="22px"
@@ -151,10 +140,46 @@ function Portfolio() {
                 >
                   <Flex direction="column">
                     <Text color="#E9EDF7" fontSize="12px">
+                      Welcome back,
+                    </Text>
+                    <Text color="#fff" fontWeight="bold" fontSize="xl">
+                      {user.name}
+                    </Text>
+                  </Flex>
+                  {/* <Flex direction='column'>
+                    <Button
+                      bg='transparent'
+                      _hover='none'
+                      _active='none'
+                      alignSelf='flex-end'
+                      p='0px'>
+                      <Icon
+                        as={IoEllipsisHorizontalSharp}
+                        color='#fff'
+                        w='24px'
+                        h='24px'
+                        justifySelf='flex-start'
+                        alignSelf='flex-start'
+                      />
+                    </Button>
+                    <GraphIcon w='60px' h='18px' />
+                  </Flex> */}
+                </Flex>
+              </Grid>
+              <Grid templateColumns="1fr 1fr" gap={5}>
+                <Box
+                  justify="space-between"
+                  p="22px"
+                  // mb="18px"
+                  bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
+                  borderRadius="18px"
+                >
+                  <Flex direction="column">
+                    <Text color="#E9EDF7" fontSize="12px">
                       Net worth
                     </Text>
-                    <Text color="#fff" fontWeight="bold" fontSize="24px">
-                      €{numberWithCommas(getTotalNetWorth())}
+                    <Text color="#fff" fontWeight="bold" fontSize="xl">
+                      €{numberWithCommas(totalNetWorth)}
                     </Text>
                   </Flex>
                   <Flex direction="column">
@@ -165,7 +190,7 @@ function Portfolio() {
                       // color="#fff"
                       fontWeight="bold"
                       color={diffPerc < 0 ? "red.400" : "green.400"}
-                      fontSize="18px"
+                      fontSize="xs"
                     >
                       {diffPerc}%
                     </Text>
@@ -188,11 +213,11 @@ function Portfolio() {
                     </Button>
                     <GraphIcon w='60px' h='18px' />
                   </Flex> */}
-                </Flex>
-                <Flex
+                </Box>
+                <Box
                   justify="space-between"
                   p="22px"
-                  // mb='18px'
+                  // mb="18px"
                   bg="linear-gradient(127.09deg, rgba(34, 41, 78, 0.94) 19.41%, rgba(10, 14, 35, 0.49) 76.65%)"
                   borderRadius="18px"
                 >
@@ -200,7 +225,7 @@ function Portfolio() {
                     <Text color="#E9EDF7" fontSize="12px">
                       Cash
                     </Text>
-                    <Text color="#fff" fontWeight="bold" fontSize="24px">
+                    <Text color="#fff" fontWeight="bold" fontSize="xl">
                       €{numberWithCommas(user.portfolio.cash)}
                     </Text>
                   </Flex>
@@ -222,7 +247,7 @@ function Portfolio() {
                     </Button>
                     <GraphIcon w='60px' h='18px' />
                   </Flex> */}
-                </Flex>
+                </Box>
                 {/* <Text fontSize='10px' color='gray.400' mb='8px'>
                   NEWEST
                 </Text>
@@ -249,7 +274,7 @@ function Portfolio() {
                     -$154.50
                   </Text>
                 </Flex> */}
-              </Flex>
+              </Grid>
             </Card>
           </Grid>
           {/* Payment Method */}
@@ -375,6 +400,13 @@ function Portfolio() {
           </CardBody>
         </Card> */}
       </Grid>
+      <Button
+        colorScheme={"teal"}
+        mt="1.5rem"
+        onClick={() => history.push("/admin/marketplace")}
+      >
+        Buy Stocks
+      </Button>
       <Grid templateColumns={{ sm: "1fr", lg: "100%" }}>
         {/* Billing Information */}
         <Card
