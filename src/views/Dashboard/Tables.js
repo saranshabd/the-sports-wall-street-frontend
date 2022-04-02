@@ -439,7 +439,7 @@ function Tables() {
                   </Text>
                 </Flex>
                 <Button
-                  my="1rem"
+                  mt="1rem"
                   borderRadius="12px"
                   colorScheme="blackAlpha"
                   onClick={async () => {
@@ -476,9 +476,15 @@ function Tables() {
                     history.push("/admin/portfolio");
                   }}
                   isLoading={isBuyLoading}
+                  disabled={selectedClub.teamInfo.isLocked}
                 >
-                  Buy
+                  {selectedClub.teamInfo.isLocked ? "Match is underway" : "Buy"}
                 </Button>
+                {selectedClub.teamInfo.isLocked && (
+                  <Text fontSize="sm" color="red.400">
+                    You cannot buy stocks while the team match is underway.
+                  </Text>
+                )}
               </Flex>
             </Flex>
           </CardBody>

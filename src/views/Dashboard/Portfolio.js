@@ -418,9 +418,14 @@ function Portfolio() {
         >
           <Flex direction="column">
             <CardHeader py="12px">
-              <Text color="#fff" fontSize="lg" fontWeight="bold">
-                Investments
-              </Text>
+              <Flex direction={"column"}>
+                <Text color="#fff" fontSize="xl" fontWeight="bold">
+                  Investments
+                </Text>
+                <Text fontSize="sm" color="red.400">
+                  You cannot sell stocks while the team match is underway.
+                </Text>
+              </Flex>
             </CardHeader>
             <CardBody>
               <Table variant="simple" color="#fff">
@@ -516,6 +521,7 @@ function Portfolio() {
                           queryClient.invalidateQueries("portfolio"); // clear portfolio cache
                           queryClient.invalidateQueries("user"); // clear portfolio cache
                         }}
+                        isLocked={row.teamId.isLocked}
                       />
                     );
                   })}

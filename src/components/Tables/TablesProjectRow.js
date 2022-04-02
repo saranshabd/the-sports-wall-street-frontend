@@ -51,6 +51,7 @@ function DashboardTableRow(props) {
     showPosition,
     buyingPrice,
     goalDifference,
+    isLocked,
   } = props;
 
   const textColor = useColorModeValue("gray.700", "white");
@@ -181,6 +182,7 @@ function DashboardTableRow(props) {
               await onClick();
               setIsLoading(false);
             }}
+            disabled={isLocked}
           >
             {/* <Icon as={FaEllipsisV} color='gray.400' cursor='pointer' /> */}
             Cash out
