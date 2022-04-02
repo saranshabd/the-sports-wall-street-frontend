@@ -471,6 +471,7 @@ function Tables() {
                       selectedClub.stockPrice.value
                     );
                     queryClient.invalidateQueries("portfolio"); // clear portfolio cache
+                    queryClient.invalidateQueries("user"); // clear portfolio cache
                     setIsBuyLoading(false);
                     history.push("/admin/portfolio");
                   }}

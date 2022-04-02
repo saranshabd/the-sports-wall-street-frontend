@@ -514,6 +514,7 @@ function Portfolio() {
                           const teamIdToSell = row.teamId.teamId;
                           await portfolioUtils.sellAll(teamIdToSell);
                           queryClient.invalidateQueries("portfolio"); // clear portfolio cache
+                          queryClient.invalidateQueries("user"); // clear portfolio cache
                         }}
                       />
                     );
