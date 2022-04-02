@@ -449,7 +449,7 @@ function Tables() {
                       selectedStockCount * selectedClub.stockPrice.value
                     ) {
                       setErrorMessage(
-                        "Sorry! You do not have enough cash to buy these stocks."
+                        "Sorry! You do not have enough cash to buy these stocks. Try reducing the quantity."
                       );
                       setTimeout(() => setErrorMessage(""), 5000);
                       window.scrollTo(0, 0);
