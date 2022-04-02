@@ -50,6 +50,7 @@ function DashboardTableRow(props) {
     showProgressionColor,
     showPosition,
     buyingPrice,
+    goalDifference,
   } = props;
 
   const textColor = useColorModeValue("gray.700", "white");
@@ -68,7 +69,7 @@ function DashboardTableRow(props) {
         </Td>
       )}
       <Td
-        // minWidth={{ sm: '125px' }}
+        // minWidth={{ sm: "125px" }}
         ps="0px"
         borderBottomColor="#56577A"
         border={lastItem ? "none" : null}
@@ -105,6 +106,13 @@ function DashboardTableRow(props) {
         <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
           <Text fontSize="sm" color={statusColor} fontWeight="bold">
             {status}
+          </Text>
+        </Td>
+      )}
+      {goalDifference && (
+        <Td borderBottomColor="#56577A" border={lastItem ? "none" : null}>
+          <Text fontSize="sm" color="white" fontWeight="bold">
+            {goalDifference}
           </Text>
         </Td>
       )}

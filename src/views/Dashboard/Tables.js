@@ -603,7 +603,14 @@ function Tables() {
                   fontFamily="Plus Jakarta Display"
                   borderBottomColor="#56577A"
                 >
-                  Games Played
+                  Played
+                </Th>
+                <Th
+                  color="gray.400"
+                  fontFamily="Plus Jakarta Display"
+                  borderBottomColor="#56577A"
+                >
+                  GD
                 </Th>
                 <Th
                   color="gray.400"
@@ -642,6 +649,7 @@ function Tables() {
                     progression={winPerc}
                     lastItem={index === arr.length - 1 ? true : false}
                     maxGamesPlayed={maxGamesPlayed}
+                    goalDifference={row.goalDifference}
                     rowOnClick={() => {
                       const teamName = row.teamInfo.shortName
                         .split(" ")
