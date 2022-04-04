@@ -19,6 +19,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useQueryClient } from "react-query";
+import qs from "qs";
 
 // Chakra imports
 import {
@@ -78,11 +79,6 @@ import * as portfolioUtils from "utils/portfolio";
 
 function StockPriceChart(props) {
   const history = useHistory();
-
-  // Update the title of the page
-  useEffect(() => {
-    document.title = "Sports Wall St. | Marketplace";
-  }, []);
 
   const stockPricesResp = useStockPrices(props.teamInfo.teamId);
 
@@ -217,6 +213,11 @@ function UpcomingFixtures({ teamInfo }) {
   );
 }
 
+function setPositionQueryParam(position) {
+  const newURL = `${window.location.protocol}//${window.location.host}${window.location.pathname}?position=${position}`;
+  window.history.pushState({ path: newURL }, "", newURL);
+}
+
 function Tables() {
   const history = useHistory();
   const queryClient = useQueryClient();
@@ -225,6 +226,23 @@ function Tables() {
   const [selectedClubIndex, setSelectedClubIndex] = useState(0);
   const [selectedStockCount, setSelectedStocksCount] = useState(15);
   const [isBuyLoading, setIsBuyLoading] = useState(false);
+
+  // Update the title of the page
+  useEffect(() => {
+    document.title = "Sports Wall St. | Marketplace";
+    const { position } = qs.parse(window.location.search, {
+      ignoreQueryPrefix: true,
+    });
+    if (!position || isNaN(position)) {
+      setPositionQueryParam(selectedClubIndex);
+      return;
+    }
+    setSelectedClubIndex(parseInt(position));
+  }, []);
+
+  useEffect(() => {
+    setPositionQueryParam(selectedClubIndex);
+  }, [selectedClubIndex]);
 
   // const {
   //   status,
