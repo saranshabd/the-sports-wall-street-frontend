@@ -18,7 +18,17 @@
 import React, { useEffect } from "react";
 
 // Chakra imports
-import { Box, Button, Flex, Text, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Text,
+  useToast,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  AlertIcon,
+} from "@chakra-ui/react";
 
 // Styles for the circular progressbar
 import "react-circular-progressbar/dist/styles.css";
@@ -86,7 +96,7 @@ export default function ExtraCash() {
             <Text color="white" w="100%" align={"center"} mt={4}>
               Bring a friend along and we will award you with an extra{" "}
               <Text as="span" fontSize="lg" fontWeight="bold">
-                €10,000
+                €5,000
               </Text>{" "}
               cash.
             </Text>
@@ -109,6 +119,20 @@ export default function ExtraCash() {
           </Flex>
         </CardBody>
       </Card>
+      <br />
+      <Box w="100%" align="center">
+        <Alert status="error" rounded="2xl" w="40rem" maxW="100%">
+          <Flex direction="column" w="100%">
+            <AlertTitle mr={2} color="red.500">
+              Note!
+            </AlertTitle>
+            <AlertDescription>
+              Global Rankings might take 10-15 mins to reflect your added extra
+              cash.
+            </AlertDescription>
+          </Flex>
+        </Alert>
+      </Box>
     </Flex>
   );
 }
