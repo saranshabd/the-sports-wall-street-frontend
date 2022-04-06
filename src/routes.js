@@ -18,6 +18,7 @@
 
 // import
 import Dashboard from "views/Dashboard/Dashboard.js";
+import ExtraCash from "views/Dashboard/ExtraCash.js";
 import Tables from "views/Dashboard/Tables.js";
 import GlobalRankings from "views/Dashboard/GlobalRankings.js";
 import Portfolio from "views/Dashboard/Portfolio.js";
@@ -33,13 +34,13 @@ import {
   DocumentIcon,
   RocketIcon,
   SupportIcon,
+  WalletIcon,
 } from "components/Icons/Icons";
 
 var dashRoutes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    rtlName: "لوحة القيادة",
     icon: <HomeIcon color="inherit" />,
     component: Portfolio,
     layout: "/admin",
@@ -47,7 +48,6 @@ var dashRoutes = [
   {
     path: "/marketplace",
     name: "Marketplace",
-    rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
     component: Tables,
     layout: "/admin",
@@ -55,7 +55,6 @@ var dashRoutes = [
   {
     path: "/global-rankings",
     name: "Global Rankings",
-    rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
     component: GlobalRankings,
     layout: "/admin",
@@ -69,9 +68,15 @@ var dashRoutes = [
   //   layout: "/admin",
   // },
   {
+    path: "/extra-cash",
+    name: "✨ Extra Cash ✨",
+    icon: <WalletIcon color="inherit" />,
+    component: ExtraCash,
+    layout: "/admin",
+  },
+  {
     path: "/signin",
     name: "Sign Out",
-    rtlName: "لوحة القيادة",
     icon: <DocumentIcon color="inherit" />,
     component: SignIn,
     layout: "/auth",
