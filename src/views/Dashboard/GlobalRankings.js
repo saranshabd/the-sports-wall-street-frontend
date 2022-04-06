@@ -43,6 +43,10 @@ import {
   AlertDescription,
   AlertIcon,
   Image,
+  Stat,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
 } from "@chakra-ui/react";
 
 // Custom components
@@ -52,6 +56,7 @@ import CardBody from "components/Card/CardBody.js";
 import LineChart from "components/Charts/LineChart";
 import Loader from "components/Loader";
 import Prizes from "components/Prizes";
+import IconBox from "components/Icons/IconBox";
 
 // Table Components
 import TablesProjectRow from "components/Tables/TablesProjectRow";
@@ -96,13 +101,32 @@ function GlobalRankings() {
   }
 
   const user = userResp.data;
-  const globalRankings = globalRankingsResp.data;
+  const {
+    globalRankings,
+    message: userRankMessage,
+    userRank,
+  } = globalRankingsResp.data;
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   function getStockPriceValue(x) {
     return `€${numberWithCommas(x)}`;
+  }
+
+  function ordinalSuffixOf(i) {
+    var j = i % 10,
+      k = i % 100;
+    if (j == 1 && k != 11) {
+      return i + "st";
+    }
+    if (j == 2 && k != 12) {
+      return i + "nd";
+    }
+    if (j == 3 && k != 13) {
+      return i + "rd";
+    }
+    return i + "th";
   }
 
   return (
@@ -114,8 +138,66 @@ function GlobalRankings() {
         </Alert>
       )}
       <CardHeader>
-        <Prizes />
+        <Grid
+          templateColumns={{ sm: "1fr", md: "2fr 1fr" }}
+          width="100%"
+          gap={6}
+        >
+          <Prizes />
+          <Card>
+            <CardBody>
+              <Flex
+                flexDirection="row"
+                align="center"
+                justify="center"
+                justifyContent={"center"}
+                w="100%"
+                h="100%"
+              >
+                <Stat me="auto">
+                  <StatLabel
+                    fontSize="xl"
+                    color="gray.400"
+                    fontWeight="bold"
+                    pb="2px"
+                    align="center"
+                  >
+                    You are <Text as="u">{ordinalSuffixOf(userRank.rank)}</Text>{" "}
+                    ranked!
+                  </StatLabel>
+                  {/* <Flex> */}
+
+                  <StatNumber fontSize="4xl" color="#fff" align="center">
+                    €{numberWithCommas(userRank.netWorth)}
+                  </StatNumber>
+                  {/* </Flex> */}
+                  <StatHelpText
+                    alignSelf="flex-end"
+                    justifySelf="flex-end"
+                    m="0px"
+                    color={userRank.returns < 0 ? "red.400" : "green.400"}
+                    fontWeight="bold"
+                    // ps="3px"
+                    // ml="5px"
+                    fontSize="lg"
+                    align="center"
+                  >
+                    {userRank.returns}%
+                  </StatHelpText>
+                </Stat>
+                {/* <IconBox as="box" h={"45px"} w={"45px"} bg="brand.200">
+                <GlobeIcon h={"24px"} w={"24px"} color="#fff" />
+              </IconBox> */}
+              </Flex>
+            </CardBody>
+          </Card>
+        </Grid>
       </CardHeader>
+      <br />
+      <Alert status="info" rounded={"2xl"}>
+        <AlertIcon />
+        {userRankMessage}
+      </Alert>
       {/* Authors Table */}
       {/* <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
         <CardHeader p='6px 0px 22px 0px'>
