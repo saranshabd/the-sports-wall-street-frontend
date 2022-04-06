@@ -16,80 +16,21 @@
 
 */
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 // Chakra imports
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Icon,
-  Progress,
-  SimpleGrid,
-  Spacer,
-  Stack,
-  Stat,
-  StatHelpText,
-  StatLabel,
-  StatNumber,
-  Table,
-  Tbody,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  Spinner,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Text, useToast } from "@chakra-ui/react";
 
 // Styles for the circular progressbar
 import "react-circular-progressbar/dist/styles.css";
-import medusa from "assets/img/background-body-admin.png";
+
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
-import BarChart from "components/Charts/BarChart";
-import LineChart from "components/Charts/LineChart";
-import IconBox from "components/Icons/IconBox";
-import DashboardTableRow from "components/Tables/DashboardTableRow";
-import TimelineRow from "components/Tables/TimelineRow";
-import * as GradientProgress from "@delowar/react-circle-progressbar";
 import Loader from "components/Loader";
 
-// Icons
-import {
-  CartIcon,
-  DocumentIcon,
-  GlobeIcon,
-  RocketIcon,
-  StatsIcon,
-  WalletIcon,
-} from "components/Icons/Icons.js";
-import Prizes from "components/Prizes";
-import { BsArrowRight } from "react-icons/bs";
-import {
-  IoCheckmarkDoneCircleSharp,
-  IoEllipsisHorizontal,
-} from "react-icons/io5";
-import { BiHappy } from "react-icons/bi";
-import { AiFillCheckCircle } from "react-icons/ai";
-
-// Data
-import {
-  barChartDataDashboard,
-  barChartOptionsDashboard,
-  lineChartDataDashboard,
-  lineChartOptionsDashboard,
-} from "variables/charts";
-import { dashboardTableData, timelineData } from "variables/general";
-
 // query
-import { useLeagueStandings } from "query/leagueStandings";
-import { useUpcomingMatches } from "query/matches";
 import { useUser } from "query/user";
-import { usePortfolio } from "query/portfolio";
 
 export default function ExtraCash() {
   const userResp = useUser();
