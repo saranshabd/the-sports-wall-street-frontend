@@ -16,7 +16,7 @@
 
 */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Chakra imports
 import {
   Box,
@@ -31,6 +31,7 @@ import {
   Text,
   DarkMode,
 } from "@chakra-ui/react";
+import qs from "qs";
 
 // Assets
 import signInImage from "assets/img/signInImage.png";
@@ -51,11 +52,24 @@ import { useHistory } from "react-router-dom";
 
 function SignIn() {
   const history = useHistory();
+  const [referredBy, setReferredBy] = useState(undefined);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [isFacebookLoading, setIsFacebookLoading] = useState(false);
 
   const titleColor = "white";
   const textColor = "gray.400";
 
-  const { status, data, error, isFetching } = useUser();
+  useEffect(() => {
+    const { referredBy } = qs.parse(window.location.search, {
+      ignoreQueryPrefix: true,
+    });
+    if (!referredBy) {
+      return;
+    }
+    setReferredBy(referredBy);
+  }, []);
+
+  const { error, isFetching } = useUser();
   if (isFetching) {
     return <Loader />;
   }
@@ -64,24 +78,39 @@ function SignIn() {
     history.push("/admin");
   }
 
+  async function signIn(firebaseProviderResp) {
+    const { uid: userId } = firebaseProviderResp.user.multiFactor.user;
+    await auth.signIn(userId, referredBy);
+  }
+
   function signInWithGoogle() {
+    setIsGoogleLoading(true);
     const googleProvider = new GoogleAuthProvider();
-    firebaseAuth.signInWithPopup(googleProvider).then(async (resp) => {
-      const userId = resp.user.multiFactor.user.uid;
-      await auth.signIn(userId);
-      window.gtag("event", "login", { method: "Google" }); // Google Analytics
-      history.push("/admin");
-    });
+    firebaseAuth
+      .signInWithPopup(googleProvider)
+      .then(async (resp) => {
+        await signIn(resp);
+        window.gtag("event", "login", { method: "Google" }); // Google Analytics
+        history.push("/admin");
+      })
+      .finally(() => {
+        setIsGoogleLoading(false);
+      });
   }
 
   function signInWithFacebook() {
+    setIsFacebookLoading(true);
     const facebookProvider = new FacebookAuthProvider();
-    firebaseAuth.signInWithPopup(facebookProvider).then(async (resp) => {
-      const userId = resp.user.multiFactor.user.uid;
-      await auth.signIn(userId);
-      window.gtag("event", "login", { method: "Facebook" }); // Google Analytics
-      history.push("/admin");
-    });
+    firebaseAuth
+      .signInWithPopup(facebookProvider)
+      .then(async (resp) => {
+        await signIn(resp);
+        window.gtag("event", "login", { method: "Facebook" }); // Google Analytics
+        history.push("/admin");
+      })
+      .finally(() => {
+        setIsFacebookLoading(false);
+      });
   }
 
   return (
@@ -190,7 +219,13 @@ function SignIn() {
               </FormLabel>
             </FormControl> */}
 
-            <Button fontWeight="medium" onClick={signInWithGoogle} mb={4}>
+            <Button
+              fontWeight="medium"
+              onClick={signInWithGoogle}
+              mb={4}
+              isLoading={isGoogleLoading}
+              isDisabled={isFacebookLoading}
+            >
               Sign in with Google
             </Button>
             <Button
@@ -198,6 +233,8 @@ function SignIn() {
               colorScheme="facebook"
               onClick={signInWithFacebook}
               mb={4}
+              isLoading={isFacebookLoading}
+              isDisabled={isGoogleLoading}
             >
               Sign in with Facebook
             </Button>

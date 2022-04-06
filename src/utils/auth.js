@@ -1,7 +1,7 @@
 import axios from "utils/axios";
 
-export function signIn(userId) {
-  return axios.post("/auth/signIn/", { userId });
+export function signIn(userId, referredBy) {
+  return axios.post("/auth/signIn/", { userId, referredBy });
 }
 
 export function signOut() {
