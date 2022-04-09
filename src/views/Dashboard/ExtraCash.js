@@ -96,7 +96,7 @@ export default function ExtraCash() {
             <Text color="white" w="100%" align={"center"} mt={4}>
               Bring a friend along and we will award you with an extra{" "}
               <Text as="span" fontSize="lg" fontWeight="bold">
-                €5,000
+                €1,000
               </Text>{" "}
               cash.
             </Text>
