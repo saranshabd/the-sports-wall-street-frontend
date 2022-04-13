@@ -88,7 +88,6 @@ import { dashboardTableData, timelineData } from "variables/general";
 import { useLeagueStandings } from "query/leagueStandings";
 import { useUpcomingMatches } from "query/matches";
 import { useUser } from "query/user";
-import { usePortfolio } from "query/portfolio";
 
 export default function Dashboard() {
   const history = useHistory();
@@ -96,7 +95,6 @@ export default function Dashboard() {
   const userResp = useUser();
   const leagueStandingsResp = useLeagueStandings();
   const upcomingMatchesResp = useUpcomingMatches();
-  const portfolioResp = usePortfolio();
 
   // Update the title of the page
   useEffect(() => {
@@ -106,8 +104,7 @@ export default function Dashboard() {
   if (
     leagueStandingsResp.isFetching ||
     upcomingMatchesResp.isFetching ||
-    userResp.isFetching ||
-    portfolioResp.isFetching
+    userResp.isFetching
   ) {
     return <Loader />;
   }
@@ -115,8 +112,7 @@ export default function Dashboard() {
   if (
     !!userResp.error ||
     !!leagueStandingsResp.error ||
-    !!upcomingMatchesResp.error ||
-    !!portfolioResp.error
+    !!upcomingMatchesResp.error
   ) {
     window.gtag("event", "false_auth_error"); // Google Analytics
     history.push("/");
@@ -126,7 +122,7 @@ export default function Dashboard() {
   const leagueStandings = leagueStandingsResp.data;
   const upcomingMatches = upcomingMatchesResp.data;
   const user = userResp.data;
-  const portfolio = portfolioResp.data;
+  const { investments: portfolio } = user.portfolio;
 
   const maxGamesPlayed = Math.max(
     ...leagueStandings.map((item) => item.playedGames)

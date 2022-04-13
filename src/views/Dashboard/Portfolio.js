@@ -75,7 +75,6 @@ import {
 import { tablesProjectData, tablesTableData } from "variables/general";
 
 import { useUser } from "query/user";
-import { usePortfolio } from "query/portfolio";
 import * as portfolioUtils from "utils/portfolio";
 
 function Portfolio() {
@@ -88,20 +87,19 @@ function Portfolio() {
   }, []);
 
   const userResp = useUser();
-  const portfolioResp = usePortfolio();
 
-  if (userResp.isFetching || portfolioResp.isFetching) {
+  if (userResp.isFetching) {
     return <Loader />;
   }
 
-  if (!!userResp.error || !!portfolioResp.error) {
+  if (!!userResp.error) {
     window.gtag("event", "false_auth_error"); // Google Analytics
     history.push("/");
     history.go(0); // reloads the page
   }
 
   const user = userResp.data;
-  const portfolio = portfolioResp.data;
+  const { investments: portfolio } = user.portfolio;
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
