@@ -74,8 +74,6 @@ import { AiFillCheckCircle } from "react-icons/ai";
 
 // query
 import { useGlobalRankings } from "query/globalRankings";
-import { useStockPrices } from "query/stockPrices";
-import { useUser } from "query/user";
 
 function GlobalRankings() {
   const history = useHistory();
@@ -89,18 +87,16 @@ function GlobalRankings() {
   //   isFetching,
   // } = useLeagueStandings()
 
-  const userResp = useUser();
   const globalRankingsResp = useGlobalRankings();
 
-  if (userResp.isFetching || globalRankingsResp.isFetching) {
+  if (globalRankingsResp.isFetching) {
     return <Loader />;
   }
-  if (!!userResp.error || !!globalRankingsResp.error) {
+  if (!!globalRankingsResp.error) {
     history.push("/");
     history.go(0); // reloads the page
   }
 
-  const user = userResp.data;
   const {
     globalRankings,
     message: userRankMessage,
