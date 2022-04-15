@@ -77,10 +77,10 @@ import { useUpcomingMatchesOfTeam } from "query/matches";
 
 import * as portfolioUtils from "utils/portfolio";
 
-function StockPriceChart(props) {
+function StockPriceChart({ teamInfo }) {
   const history = useHistory();
 
-  const stockPricesResp = useStockPrices(props.teamInfo.teamId);
+  const stockPricesResp = useStockPrices(teamInfo.teamId);
 
   if (stockPricesResp.isFetching) {
     return <Loader />;
@@ -164,7 +164,7 @@ function StockPriceChart(props) {
 
   return (
     <LineChart
-      lineChartData={[{ name: props.teamInfo.shortName, data: stockPrices }]}
+      lineChartData={[{ name: teamInfo.shortName, data: stockPrices }]}
       lineChartOptions={stockPricesChartOption}
     />
   );
