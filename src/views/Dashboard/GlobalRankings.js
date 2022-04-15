@@ -80,19 +80,13 @@ function GlobalRankings() {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  // const {
-  //   status,
-  //   data: leagueStandings,
-  //   error,
-  //   isFetching,
-  // } = useLeagueStandings()
-
   const globalRankingsResp = useGlobalRankings();
 
   if (globalRankingsResp.isFetching) {
     return <Loader />;
   }
   if (!!globalRankingsResp.error) {
+    window.gtag("event", "false_auth_error"); // Google Analytics
     history.push("/");
     history.go(0); // reloads the page
   }
