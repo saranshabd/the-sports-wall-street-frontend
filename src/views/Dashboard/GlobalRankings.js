@@ -75,6 +75,8 @@ import { AiFillCheckCircle } from "react-icons/ai";
 // query
 import { useGlobalRankings } from "query/globalRankings";
 
+import { isLoading } from "utils/auth";
+
 function GlobalRankings() {
   const history = useHistory();
 
@@ -82,7 +84,7 @@ function GlobalRankings() {
 
   const globalRankingsResp = useGlobalRankings();
 
-  if (globalRankingsResp.isFetching) {
+  if (isLoading(globalRankingsResp)) {
     return <Loader />;
   }
   if (!!globalRankingsResp.error) {

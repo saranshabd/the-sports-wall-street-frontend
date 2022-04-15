@@ -88,6 +88,7 @@ import { dashboardTableData, timelineData } from "variables/general";
 import { useLeagueStandings } from "query/leagueStandings";
 import { useUpcomingMatches } from "query/matches";
 import { useUser } from "query/user";
+import { isLoading } from "utils/auth";
 
 export default function Dashboard() {
   const history = useHistory();
@@ -102,9 +103,9 @@ export default function Dashboard() {
   }, []);
 
   if (
-    leagueStandingsResp.isFetching ||
-    upcomingMatchesResp.isFetching ||
-    userResp.isFetching
+    isLoading(leagueStandingsResp) ||
+    isLoading(upcomingMatchesResp) ||
+    isLoading(userResp)
   ) {
     return <Loader />;
   }

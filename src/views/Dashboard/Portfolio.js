@@ -76,6 +76,7 @@ import { tablesProjectData, tablesTableData } from "variables/general";
 
 import { useUser } from "query/user";
 import * as portfolioUtils from "utils/portfolio";
+import { isLoading } from "utils/auth";
 
 function Portfolio() {
   const history = useHistory();
@@ -88,7 +89,7 @@ function Portfolio() {
 
   const userResp = useUser();
 
-  if (userResp.isFetching) {
+  if (isLoading(userResp)) {
     return <Loader />;
   }
 

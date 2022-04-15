@@ -76,13 +76,14 @@ import { useUser } from "query/user";
 import { useUpcomingMatchesOfTeam } from "query/matches";
 
 import * as portfolioUtils from "utils/portfolio";
+import { isLoading } from "utils/auth";
 
 function StockPriceChart({ teamInfo }) {
   const history = useHistory();
 
   const stockPricesResp = useStockPrices(teamInfo.teamId);
 
-  if (stockPricesResp.isFetching) {
+  if (isLoading(stockPricesResp)) {
     return <Loader />;
   }
 
@@ -173,7 +174,7 @@ function StockPriceChart({ teamInfo }) {
 function UpcomingFixtures({ teamInfo }) {
   const upcomingMatchesResp = useUpcomingMatchesOfTeam(teamInfo.teamId);
 
-  if (upcomingMatchesResp.isFetching) {
+  if (isLoading(upcomingMatchesResp)) {
     return <Loader />;
   }
   if (!!upcomingMatchesResp.error) {
@@ -254,7 +255,7 @@ function Tables() {
   const userResp = useUser();
   const leagueStandingsResp = useLeagueStandings();
 
-  if (userResp.isFetching || leagueStandingsResp.isFetching) {
+  if (isLoading(userResp) || isLoading(leagueStandingsResp)) {
     return <Loader />;
   }
   if (!!userResp.error || !!leagueStandingsResp.error) {

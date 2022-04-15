@@ -42,6 +42,8 @@ import Loader from "components/Loader";
 // query
 import { useUser } from "query/user";
 
+import { isLoading } from "utils/auth";
+
 export default function ExtraCash() {
   const userResp = useUser();
   const chakraToast = useToast();
@@ -51,7 +53,7 @@ export default function ExtraCash() {
     document.title = "Sports Wall St. | Extra Cash";
   }, []);
 
-  if (userResp.isFetching) {
+  if (isLoading(userResp)) {
     return <Loader />;
   }
 
