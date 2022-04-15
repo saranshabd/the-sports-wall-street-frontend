@@ -36,6 +36,7 @@
     "react-icons": "^4.2.0",
     "react-jvectormap": "0.0.16",
     "react-leaflet-semicircle": "^3.0.3",
+    "react-lottie": "^1.2.3",
     "react-progressbar-semicircle": "^1.2.1",
     "react-query": "^3.34.16",
     "react-router-dom": "5.2.0",
