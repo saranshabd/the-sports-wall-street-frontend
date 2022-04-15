@@ -164,14 +164,15 @@ function Sidebar(props) {
               _focus={{
                 boxShadow: "none",
               }}
-              onClick={async () => {
+              onClick={() => {
                 if ("Sign Out" !== prop.name) {
                   window.gtag("event", `sidenav_${prop.name}_click`); // Google Analytics
                   return;
                 }
-                await authUtils.signOut();
-                queryClient.clear(); // clear all cache
-                history.push("/");
+                authUtils.signOut().then(() => {
+                  queryClient.clear(); // clear all cache
+                  history.push("/");
+                });
               }}
             >
               <Flex>
@@ -276,6 +277,8 @@ function Sidebar(props) {
 export function SidebarResponsive(props) {
   // to check for active links and opened collapses
   let location = useLocation();
+  const queryClient = useQueryClient();
+  const history = useHistory();
   // this is for the rest of the collapses
   const [state, setState] = React.useState({});
   const mainPanel = React.useRef();
@@ -401,14 +404,15 @@ export function SidebarResponsive(props) {
               _focus={{
                 boxShadow: "none",
               }}
-              onClick={async () => {
+              onClick={() => {
                 if ("Sign Out" !== prop.name) {
                   window.gtag("event", `sidenav_${prop.name}_click`); // Google Analytics
                   return;
                 }
-                await authUtils.signOut();
-                queryClient.clear(); // clear all cache
-                history.push("/");
+                authUtils.signOut().then(() => {
+                  queryClient.clear(); // clear all cache
+                  history.push("/");
+                });
               }}
             >
               <Flex>
