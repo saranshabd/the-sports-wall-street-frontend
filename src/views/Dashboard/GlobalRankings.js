@@ -83,13 +83,18 @@ function GlobalRankings() {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Update the title of the page
+  useEffect(() => {
+    document.title = "Sports Wall St. | Leaderboard";
+  }, []);
+
   const globalRankingsResp = useGlobalRankings();
   const userResp = useUser();
 
   if (isLoading(userResp) || isLoading(globalRankingsResp)) {
     return <Loader />;
   }
-  if (!!globalRankingsResp.error) {
+  if (!!userResp.error || !!globalRankingsResp.error) {
     window.gtag("event", "false_auth_error"); // Google Analytics
     history.push("/");
     history.go(0); // reloads the page

@@ -22,7 +22,7 @@ import ExtraCash from "views/Dashboard/ExtraCash.js";
 import Tables from "views/Dashboard/Tables.js";
 import GlobalRankings from "views/Dashboard/GlobalRankings.js";
 import Portfolio from "views/Dashboard/Portfolio.js";
-import Profile from "views/Dashboard/Profile.js";
+import Settings from "views/Dashboard/Settings.js";
 import SignIn from "views/Pages/SignIn.js";
 import SignUp from "views/Pages/SignUp.js";
 
@@ -59,19 +59,19 @@ var dashRoutes = [
     component: GlobalRankings,
     layout: "/admin",
   },
-  // {
-  //   path: "/portfolio",
-  //   name: "Portfolio",
-  //   rtlName: "لوحة القيادة",
-  //   icon: <CreditIcon color="inherit" />,
-  //   component: Portfolio,
-  //   layout: "/admin",
-  // },
   {
     path: "/extra-cash",
     name: "✨ Extra Cash ✨",
     icon: <WalletIcon color="inherit" />,
     component: ExtraCash,
+    layout: "/admin",
+  },
+  {
+    path: "/settings",
+    name: "Settings",
+    rtlName: "لوحة القيادة",
+    icon: <SupportIcon color="inherit" />,
+    component: Settings,
     layout: "/admin",
   },
   {
