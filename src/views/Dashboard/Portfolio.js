@@ -144,7 +144,7 @@ function Portfolio() {
                       Welcome back,
                     </Text>
                     <Text color="#fff" fontWeight="bold" fontSize="xl">
-                      {user.name}
+                      {user.username || user.name}
                     </Text>
                   </Flex>
                   {/* <Flex direction='column'>

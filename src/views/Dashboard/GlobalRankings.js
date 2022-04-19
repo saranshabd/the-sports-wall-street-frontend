@@ -74,6 +74,7 @@ import { AiFillCheckCircle } from "react-icons/ai";
 
 // query
 import { useGlobalRankings } from "query/globalRankings";
+import { useUser } from "query/user";
 
 import { isLoading } from "utils/auth";
 
@@ -83,8 +84,9 @@ function GlobalRankings() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const globalRankingsResp = useGlobalRankings();
+  const userResp = useUser();
 
-  if (isLoading(globalRankingsResp)) {
+  if (isLoading(userResp) || isLoading(globalRankingsResp)) {
     return <Loader />;
   }
   if (!!globalRankingsResp.error) {
@@ -98,6 +100,7 @@ function GlobalRankings() {
     message: userRankMessage,
     userRank,
   } = globalRankingsResp.data;
+  const user = userResp.data;
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -298,7 +301,7 @@ function GlobalRankings() {
                 return (
                   <TablesProjectRow
                     position={index < 3 ? "👑" : index < 10 ? "⚔️" : index + 1}
-                    name={row.user.name}
+                    name={row.user.username || row.user.name}
                     // upNextName={getStockPriceValue(row.stockPrice.value)}
                     // stockPriceDiff={row.stockPrice.diff}
                     // status={row.playedGames}
@@ -315,7 +318,7 @@ function GlobalRankings() {
                     //   setSelectedStocksCount(15);
                     //   window.scrollTo(0, 0);
                     // }}
-                    // isSelected={index == selectedClubIndex}
+                    isSelected={user.username === row.user.username}
                     showPosition={true}
                   />
                 );
