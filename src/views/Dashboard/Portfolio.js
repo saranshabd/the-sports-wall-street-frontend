@@ -53,6 +53,7 @@ import InvoicesRow from "components/Tables/InvoicesRow";
 import TransactionRow from "components/Tables/TransactionRow";
 import Loader from "components/Loader";
 import Prizes from "components/Prizes";
+import TimelineRow from "components/Tables/TimelineRow";
 
 // Icons
 import { FaPencilAlt, FaRegCalendarAlt } from "react-icons/fa";
@@ -77,6 +78,50 @@ import { tablesProjectData, tablesTableData } from "variables/general";
 import { useUser } from "query/user";
 import * as portfolioUtils from "utils/portfolio";
 import { isLoading } from "utils/auth";
+import { useUpcomingMatches } from "query/matches";
+
+function UpcomingFixtures() {
+  const upcomingMatchesResp = useUpcomingMatches();
+
+  if (isLoading(upcomingMatchesResp)) {
+    return <Loader />;
+  }
+  if (!!upcomingMatchesResp.error) {
+    window.gtag("event", "false_auth_error"); // Google Analytics
+    history.push("/");
+    history.go(0); // reloads the page
+  }
+
+  const upcomingMatches = upcomingMatchesResp.data;
+
+  return (
+    <Card w="100%" maxW="25rem">
+      <CardHeader mb="32px">
+        <Flex direction="column">
+          <Text fontSize="lg" color="#fff" fontWeight="bold" mb="6px">
+            Upcoming Fixtures
+          </Text>
+        </Flex>
+      </CardHeader>
+      <CardBody>
+        <Flex direction="column" lineHeight="21px">
+          {upcomingMatches.map((row, index, arr) => {
+            return (
+              <TimelineRow
+                logo={row.logo}
+                title={`${row.homeTeam} vs ${row.awayTeam}`}
+                date={row.utcDate}
+                color={row.color}
+                index={index}
+                arrLength={arr.length}
+              />
+            );
+          })}
+        </Flex>
+      </CardBody>
+    </Card>
+  );
+}
 
 function Portfolio() {
   const history = useHistory();
@@ -541,6 +586,7 @@ function Portfolio() {
             </CardBody>
           </Flex>
         </Card>
+        <UpcomingFixtures />
         {/* Transactions List */}
         {/* <Card my='24px' ms={{ lg: "24px" }}>
           <CardHeader mb='12px'>
