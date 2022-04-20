@@ -5,7 +5,9 @@ import {
   AlertTitle,
   AlertDescription,
   Image,
+  Link,
 } from "@chakra-ui/react";
+import { InfoIcon } from "@chakra-ui/icons";
 
 function Prizes({ maxWidth }) {
   return (
@@ -41,6 +43,18 @@ function Prizes({ maxWidth }) {
           ⚔️ Rest Top 10
         </Text>{" "}
         - Favorite Club's Goodies
+        <br />
+        <Text as="span" fontWeight="bold">
+          <Link
+            target="_blank"
+            href="https://twitter.com/TheSportsWallSt/status/1515986687372906499"
+            textDecoration="underline"
+            color="blue.500"
+          >
+            <InfoIcon color="blue.500" /> Lucky 3
+          </Link>
+        </Text>{" "}
+        - NMFC Official Football
       </AlertDescription>
     </Alert>
   );
