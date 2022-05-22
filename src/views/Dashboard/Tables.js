@@ -495,9 +495,13 @@ function Tables() {
                     history.push("/admin/portfolio");
                   }}
                   isLoading={isBuyLoading}
-                  disabled={selectedClub.teamInfo.isLocked}
+                  disabled={true || selectedClub.teamInfo.isLocked}
                 >
-                  {selectedClub.teamInfo.isLocked ? "Match is underway" : "Buy"}
+                  {/**
+                   * ------ SUSPEND TRADING TEAM STOCKS ------
+                   */}
+                  Stock Locked!
+                  {/* {selectedClub.teamInfo.isLocked ? "Match is underway" : "Buy"} */}
                 </Button>
                 {selectedClub.teamInfo.isLocked && (
                   <Text fontSize="sm" color="red.400">
