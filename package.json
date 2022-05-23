@@ -1,6 +1,6 @@
 {
   "name": "the-sports-wall-street-frontend",
-  "version": "1.4.13",
+  "version": "1.4.14",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^1.0.14",
