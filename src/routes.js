@@ -45,13 +45,13 @@ var dashRoutes = [
     component: Portfolio,
     layout: "/admin",
   },
-  {
-    path: "/marketplace",
-    name: "Marketplace",
-    icon: <CreditIcon color="inherit" />,
-    component: Tables,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/marketplace",
+  //   name: "Marketplace",
+  //   icon: <CreditIcon color="inherit" />,
+  //   component: Tables,
+  //   layout: "/admin",
+  // },
   {
     path: "/global-rankings",
     name: "Global Rankings",
