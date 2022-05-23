@@ -129,6 +129,13 @@ function GlobalRankings() {
     return i + "th";
   }
 
+  const winnersMessage = (() => {
+    if (userRank.rank > 10) {
+      return "Thanks for participating. Better luck next season! Keep in touch by following us on Twitter (@TheSportsWallSt) and Instagram (@thesportswallstreet).";
+    }
+    return `Ping us on Twitter (@TheSportsWallSt) or Instagram (@thesportswallstreet) with the confirmation code (${user._id}) by May 28th 2022, to confirm your win!`;
+  })();
+
   return (
     <Flex direction="column" pt={{ base: "0px", md: "0px" }}>
       {"" !== errorMessage && (
@@ -196,7 +203,7 @@ function GlobalRankings() {
       <br />
       <Alert status="info" rounded={"2xl"}>
         <AlertIcon />
-        {userRankMessage}
+        {winnersMessage}
       </Alert>
       {/* Authors Table */}
       {/* <Card overflowX={{ sm: "scroll", xl: "hidden" }} pb='0px'>
